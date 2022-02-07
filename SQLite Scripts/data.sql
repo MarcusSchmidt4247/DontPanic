@@ -1,4 +1,4 @@
--- MS: 2/4/22
+-- MS: 2/4/22 - wrote script
 
 INSERT INTO User (Name) VALUES ("John");
 

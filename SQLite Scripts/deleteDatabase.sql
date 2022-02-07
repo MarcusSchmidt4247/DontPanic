@@ -1,4 +1,4 @@
--- MS: 2/4/22
+-- MS: 2/4/22 - wrote script
 
 DROP TABLE IF EXISTS User;
 DROP TABLE IF EXISTS Module;

@@ -1,4 +1,4 @@
--- MS: 2/4/22
+-- MS: 2/4/22 - copied SQL statements from design document and fixed syntax errors
 
 CREATE TABLE IF NOT EXISTS User (
     ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -22,8 +22,9 @@ CREATE TABLE IF NOT EXISTS ModuleSequence (
     ID INTEGER PRIMARY KEY AUTOINCREMENT,
     Name VARCHAR(30) UNIQUE);
 
+-- MS: 2/7/22 - fixed primary key
 CREATE TABLE IF NOT EXISTS SequenceOrder (
     seqID INTEGER REFERENCES ModuleSequence(ID) ON DELETE CASCADE,
     modID INTEGER REFERENCES Module(ID) ON DELETE CASCADE,
     modOrder INTEGER NOT NULL,
-    PRIMARY KEY (seqID, modID));
+    PRIMARY KEY (seqID, modOrder));
