@@ -1,8 +1,10 @@
 // MS: 2/4/22 - began work on Database class
 // MS: 2/7/22 - improved class safety
+// MS: 2/9/22 - added return values, static list of module names, and new functions
 
 package com.dontpanic;
 
+// SQLite imports
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
@@ -10,11 +12,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.DriverManager;
 
+// Miscellaneous imports
+import java.util.ArrayList;
+
 /* The class is final with a private constructor and only defines static member functions in order to
    mimic a top-level static class, which for some reason is not allowed in Java. */
 public final class Database
 {
     private Database() { }
+
+    //*****************************
+    // General database functions *
+    //*****************************
 
     /* Although the database never has to be manually initiated, this disconnect function does have
        to be called when the app is shutting down. Can't be done in the destructor because there's
@@ -35,6 +44,36 @@ public final class Database
         }
         
         return true;
+    }
+
+    // Returns the name of a module from its ID, or null if it fails
+    public static String GetModuleName(int modID)
+    {
+        // If the list of module names haven't already been placed into a list, do so now
+        if (moduleNames == null)
+        {
+            // Build a new list
+            moduleNames = new ArrayList<String>();
+            try
+            {
+                // Query the database for its module names and add it to the list in order of their ID
+                Statement stmt = db.createStatement();
+                ResultSet results = stmt.executeQuery("SELECT Name FROM Module ORDER BY ID ASC");
+                while (results.next())
+                    moduleNames.add(results.getString("Name"));
+                results.close();
+                stmt.close();
+            }
+            catch (SQLException e)
+            {
+                System.out.println(e.getMessage());
+                return null;
+            }
+        }
+
+        /* The index of a module's name is one less than its ID due to the disparity between SQLite autoincrement
+           and this ArrayList's zero based indexing. */
+        return moduleNames.get(modID - 1);
     }
 
     //****************************************************
@@ -69,38 +108,41 @@ public final class Database
     // Functions that have to do with modules inside of a module sequence *
     //*********************************************************************
 
-    public static void GetModulesInSequence(int seqID)
+    // Returns a List of the sequence's module ID's in order, or null on failure
+    public static ArrayList<Integer> GetModulesInSequence(int seqID)
     {
+        // Ensure that there is a valid connection to the database
         Connection db = GetConnection();
         if (db == null)
-            return;
-
+            return null;
+        
+        ArrayList<Integer> sequence = new ArrayList<Integer>();
         try
         {
+            // Query the modID column and add each result to 'sequence'
             Statement stmt = db.createStatement();
-            String sql = "SELECT Name, modOrder FROM SequenceOrder JOIN Module ON modID = ID WHERE seqID = " + seqID + " ORDER BY modOrder ASC";
+            String sql = "SELECT modID FROM SequenceOrder WHERE seqID = " + seqID + " ORDER BY modOrder ASC";
             ResultSet results = stmt.executeQuery(sql);
             while (results.next())
-            {
-                String name = results.getString("Name");
-                int order = results.getInt("modOrder");
-
-                System.out.println(name + ", " + order);
-            }
+                sequence.add(results.getInt("modID"));
             results.close();
             stmt.close();
+            return sequence;
         }
         catch (SQLException e)
         {
             System.out.println(e.getMessage());
+            return null;
         }
     }
 
-    public static void InsertModuleIntoSequence(int seqID, int modID, int index)
+    // Return the success of the module insertion
+    public static boolean InsertModuleIntoSequence(int seqID, int modID, int index)
     {
+        // Ensure that there is a valid connection to the database
         Connection db = GetConnection();
         if (db == null)
-            return;
+            return false;
 
         // If the order of all of the modules beyond the point this module should go were successfully incremented
         if (PushBackSequenceOrder(seqID, index))
@@ -112,17 +154,50 @@ public final class Database
                 String sql = "INSERT INTO SequenceOrder(seqID, modID, modOrder) VALUES (" + seqID + "," + modID + "," + index + ")";
                 stmt.executeUpdate(sql);
                 stmt.close();
+                return true;
             }
             catch (SQLException e)
             {
                 System.out.println(e.getMessage());
             }
         }
+
+        return false;
     }
 
-    public static void AppendModuleToSequence()
+    // Return the success of appending a module
+    public static boolean AppendModuleToSequence(int seqID, int modID)
     {
+        // Ensure that there is a valid connection to the database
+        Connection db = GetConnection();
+        if (db == null)
+            return false;
 
+        try
+        {
+            // Find the highest order in the sequence
+            int order;
+            String sql = "SELECT modOrder FROM SequenceOrder WHERE seqID = " + seqID + " ORDER BY modOrder DESC LIMIT 1";
+            Statement stmt = db.createStatement();
+            ResultSet results = stmt.executeQuery(sql);
+            // If an order was returned, set this module to have an order one greater
+            if (results.next())
+                order = results.getInt("modOrder") + 1;
+            // If there were no results, there are no modules in this sequence yet, so the order is 1 (as though autoincremented)
+            else
+                order = 1;
+            results.close();
+
+            sql = "INSERT INTO SequenceOrder(seqID, modID, modOrder) VALUES (" + seqID + "," + modID + "," + order + ")";
+            stmt.executeUpdate(sql);
+            stmt.close();
+            return true;
+        }
+        catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
     public static void MoveModuleInSequence()
@@ -140,6 +215,7 @@ public final class Database
     //************************************************************************
 
     private static Connection db = null;
+    private static ArrayList<String> moduleNames = null;
 
     /* Return the connection to the database, or create one if it doesn't exist.
        Might return null in the case of an error.
