@@ -1,6 +1,7 @@
 // MS: 2/4/22 - began work on Database class
 // MS: 2/7/22 - improved class safety
 // MS: 2/9/22 - added return values, static list of module names, and new functions
+// MS: 2/10/22 - reworked how the database connection is handled, added new functions
 
 package com.dontpanic;
 
@@ -80,9 +81,24 @@ public final class Database
     // Functions that have to do with users and settings *
     //****************************************************
 
-    public static void CreateUser()
+    public static boolean CreateUser(String name)
     {
-
+        if (!DatabaseConnected())
+            return false;
+        
+        try
+        {
+            Statement stmt = db.createStatement();
+            String sql = "INSERT INTO User (Name) VALUES ('" + name + "')";
+            stmt.executeUpdate(sql);
+            stmt.close();
+            return true;
+        }
+        catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
     public static void DeleteUser()
@@ -94,14 +110,46 @@ public final class Database
     // Functions that have to do with module sequences *
     //**************************************************
 
-    public static void CreateSequence()
+    // Return the success of creating a new sequence
+    public static boolean CreateSequence(int usrID, String name)
     {
+        if (!DatabaseConnected())
+            return false;
 
+        try
+        {
+            Statement stmt = db.createStatement();
+            String sql = "INSERT INTO ModuleSequence (usrID, Name) VALUES (" + usrID + ",'" + name + "')";
+            stmt.executeUpdate(sql);
+            stmt.close();
+            return true;
+        }
+        catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
-    public static void DeleteSequence()
+    // Return the success of deleting a sequence
+    public static boolean DeleteSequence(int usrID, int seqID)
     {
+        if (!DatabaseConnected())
+            return false;
 
+        try
+        {
+            Statement stmt = db.createStatement();
+            String sql = "DELETE FROM ModuleSequence WHERE usrID = " + usrID + " AND ID = " + seqID;
+            stmt.executeUpdate(sql);
+            stmt.close();
+            return true;
+        }
+        catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
     //*********************************************************************
@@ -112,8 +160,7 @@ public final class Database
     public static ArrayList<Integer> GetModulesInSequence(int seqID)
     {
         // Ensure that there is a valid connection to the database
-        Connection db = GetConnection();
-        if (db == null)
+        if (!DatabaseConnected())
             return null;
         
         ArrayList<Integer> sequence = new ArrayList<Integer>();
@@ -140,8 +187,7 @@ public final class Database
     public static boolean InsertModuleIntoSequence(int seqID, int modID, int index)
     {
         // Ensure that there is a valid connection to the database
-        Connection db = GetConnection();
-        if (db == null)
+        if (!DatabaseConnected())
             return false;
 
         // If the order of all of the modules beyond the point this module should go were successfully incremented
@@ -169,8 +215,7 @@ public final class Database
     public static boolean AppendModuleToSequence(int seqID, int modID)
     {
         // Ensure that there is a valid connection to the database
-        Connection db = GetConnection();
-        if (db == null)
+        if (!DatabaseConnected())
             return false;
 
         try
@@ -200,9 +245,10 @@ public final class Database
         }
     }
 
-    public static void MoveModuleInSequence()
+    // Return the success of moving a module from one index to another.
+    public static boolean MoveModuleInSequence(int seqID, int startIndex, int endIndex)
     {
-
+        return false;
     }
 
     public static void DeleteModuleFromSequence()
@@ -217,19 +263,19 @@ public final class Database
     private static Connection db = null;
     private static ArrayList<String> moduleNames = null;
 
-    /* Return the connection to the database, or create one if it doesn't exist.
-       Might return null in the case of an error.
+    /* Return whether or not there is a valid connection to the database in the variable 'db'
        Source: https://www.sqlitetutorial.net/sqlite-java/sqlite-jdbc-driver/ */
-    private static Connection GetConnection()
+    private static boolean DatabaseConnected()
     {
         if (db != null)
-            return db;
+            return true;
 
         try
         {
             Class.forName("org.sqlite.JDBC");
             String url = "jdbc:sqlite:test.db";
             db = DriverManager.getConnection(url);
+            return true;
         }
         catch (SQLException e)
         {
@@ -240,15 +286,14 @@ public final class Database
             System.out.println("Failed to locate JDBC driver");
         }
 
-        return db;
+        return false;
     }
 
     /* Given an index of 3, this function will increment the order of each module in the sequence greater than or equal to 3
        and return the success of the operation */
     private static boolean PushBackSequenceOrder(int seqID, int index)
     {
-        Connection db = GetConnection();
-        if (db == null)
+        if (!DatabaseConnected())
             return false;
 
         try
