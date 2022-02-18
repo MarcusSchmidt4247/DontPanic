@@ -2,18 +2,20 @@
 // MS: 2/7/22 - improved class safety
 // MS: 2/9/22 - added return values, static list of module names, and new functions
 // MS: 2/10/22 - reworked how the database connection is handled, added new functions
+// MS: 2/17/22 - converted to Android specific libraries, added database creation
+// MS: 2/18/22 - create functions now return the ID of the new entity rather than a boolean
 
 package com.dontpanic;
 
 // SQLite imports
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.DriverManager;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.SQLException;
+import android.database.sqlite.*;
+import android.util.Log;
 
 // Miscellaneous imports
+import java.io.File;
 import java.util.ArrayList;
 
 /* The class is final with a private constructor and only defines static member functions in order to
@@ -27,7 +29,7 @@ public final class Database
     //*****************************
 
     /* Although the database never has to be manually initiated, this disconnect function does have
-       to be called when the app is shutting down. Can't be done in the destructor because there's
+       to be called when the app or activity is done. Can't be done in the destructor because there's
        no instance to be destroyed. */
     public static boolean Disconnect()
     {
@@ -39,12 +41,35 @@ public final class Database
             }
             catch (SQLException e)
             {
-                System.out.println(e.getMessage());
+                Log.e("Database Error", e.getMessage());
                 return false;
             }
         }
         
         return true;
+    }
+
+    /* Returns whether or not a database exists on this device. If not, create one.
+       This function is intended to be called immediately when the app launches. */
+    public static boolean DatabaseExists(Context context)
+    {
+        // Save the absolute path to the database for use when we no longer have the application context
+        ABSOLUTE_DATABASE_PATH = context.getDatabasePath(DATABASE_NAME).getAbsolutePath();
+
+        // Reference: https://stackoverflow.com/questions/3386667
+        File file = context.getDatabasePath(DATABASE_NAME);
+        if (!file.exists())
+        {
+            if (DatabaseConnected())
+                // If the database did not already exist but was successfully created in DatabaseConnected(), create its tables
+                CreateTables();
+
+            // Return false because the database did not already exist
+            return false;
+        }
+        else
+            // Return true because the database already existed
+            return true;
     }
 
     // Returns the name of a module from its ID, or null if it fails
@@ -54,20 +79,18 @@ public final class Database
         if (moduleNames == null)
         {
             // Build a new list
-            moduleNames = new ArrayList<String>();
+            moduleNames = new ArrayList<>();
             try
             {
                 // Query the database for its module names and add it to the list in order of their ID
-                Statement stmt = db.createStatement();
-                ResultSet results = stmt.executeQuery("SELECT Name FROM Module ORDER BY ID ASC");
-                while (results.next())
-                    moduleNames.add(results.getString("Name"));
+                SQLiteCursor results = (SQLiteCursor) db.rawQuery("SELECT Name FROM Module ORDER BY ID ASC", null);
+                while (results.moveToNext())
+                    moduleNames.add(results.getString(0));
                 results.close();
-                stmt.close();
             }
             catch (SQLException e)
             {
-                System.out.println(e.getMessage());
+                Log.e("Database Error", e.getMessage());
                 return null;
             }
         }
@@ -81,23 +104,33 @@ public final class Database
     // Functions that have to do with users and settings *
     //****************************************************
 
-    public static boolean CreateUser(String name)
+    // Returns the new user's ID, or -1 if unable to create
+    public static int CreateUser(String name)
     {
         if (!DatabaseConnected())
-            return false;
+            return -1;
         
         try
         {
-            Statement stmt = db.createStatement();
-            String sql = "INSERT INTO User (Name) VALUES ('" + name + "')";
-            stmt.executeUpdate(sql);
-            stmt.close();
-            return true;
+            // Insert a new user with the provided name into the User table
+            ContentValues cv = new ContentValues();
+            cv.put("Name", name);
+            db.insert("User", null, cv);
+
+            // Query the table to retrieve the automatically assigned ID for this user and return it (or -1 if it cannot be found)
+            SQLiteCursor result = (SQLiteCursor) db.rawQuery("SELECT ID FROM User WHERE Name = ?", new String[] { name });
+            int id = -1;
+            if (result.moveToNext())
+            {
+                id = result.getInt(0);
+            }
+            result.close();
+            return id;
         }
         catch (SQLException e)
         {
-            System.out.println(e.getMessage());
-            return false;
+            Log.e("Database Error", e.getMessage());
+            return -1;
         }
     }
 
@@ -110,24 +143,34 @@ public final class Database
     // Functions that have to do with module sequences *
     //**************************************************
 
-    // Return the success of creating a new sequence
-    public static boolean CreateSequence(int usrID, String name)
+    // Return the new sequence's ID, or -1 if it failed to create
+    public static int CreateSequence(int usrID, String name)
     {
         if (!DatabaseConnected())
-            return false;
+            return -1;
 
         try
         {
-            Statement stmt = db.createStatement();
-            String sql = "INSERT INTO ModuleSequence (usrID, Name) VALUES (" + usrID + ",'" + name + "')";
-            stmt.executeUpdate(sql);
-            stmt.close();
-            return true;
+            // Insert a new sequence into the ModuleSequence table with the provided usrID and name
+            ContentValues cv = new ContentValues();
+            cv.put("usrID", usrID);
+            cv.put("Name", name);
+            db.insert("ModuleSequence", null, cv);
+
+            // Query the table to retrieve the automatically assigned ID for this sequence and return it (or -1 if it cannot be found)
+            SQLiteCursor result = (SQLiteCursor) db.rawQuery("SELECT ID FROM ModuleSequence WHERE usrID = ? AND Name = ?", new String[] { String.valueOf(usrID), name });
+            int id = -1;
+            if (result.moveToNext())
+            {
+                id = result.getInt(0);
+            }
+            result.close();
+            return id;
         }
         catch (SQLException e)
         {
-            System.out.println(e.getMessage());
-            return false;
+            Log.e("Database Error", e.getMessage());
+            return -1;
         }
     }
 
@@ -139,15 +182,13 @@ public final class Database
 
         try
         {
-            Statement stmt = db.createStatement();
-            String sql = "DELETE FROM ModuleSequence WHERE usrID = " + usrID + " AND ID = " + seqID;
-            stmt.executeUpdate(sql);
-            stmt.close();
+            db.delete("ModuleSequence", "usrID = ? AND ID = ?",
+                    new String[] { String.valueOf(usrID), String.valueOf(seqID) });
             return true;
         }
         catch (SQLException e)
         {
-            System.out.println(e.getMessage());
+            Log.e("Database Error", e.getMessage());
             return false;
         }
     }
@@ -167,18 +208,15 @@ public final class Database
         try
         {
             // Query the modID column and add each result to 'sequence'
-            Statement stmt = db.createStatement();
-            String sql = "SELECT modID FROM SequenceOrder WHERE seqID = " + seqID + " ORDER BY modOrder ASC";
-            ResultSet results = stmt.executeQuery(sql);
-            while (results.next())
-                sequence.add(results.getInt("modID"));
+            SQLiteCursor results = (SQLiteCursor) db.rawQuery("SELECT modID FROM SequenceOrder WHERE seqID = ? ORDER BY modOrder ASC", new String[] { String.valueOf(seqID) });
+            while (results.moveToNext())
+                sequence.add(results.getInt(results.getColumnIndex("modID")));
             results.close();
-            stmt.close();
             return sequence;
         }
         catch (SQLException e)
         {
-            System.out.println(e.getMessage());
+            Log.e("Database Error", e.getMessage());
             return null;
         }
     }
@@ -190,21 +228,24 @@ public final class Database
         if (!DatabaseConnected())
             return false;
 
+        // Increment index to convert from Java's 0-based index to SQLite's 1-based index
+        index++;
+
         // If the order of all of the modules beyond the point this module should go were successfully incremented
         if (PushBackSequenceOrder(seqID, index))
         {
             // Insert the new module in the vacant spot
             try
             {
-                Statement stmt = db.createStatement();
-                String sql = "INSERT INTO SequenceOrder(seqID, modID, modOrder) VALUES (" + seqID + "," + modID + "," + index + ")";
-                stmt.executeUpdate(sql);
-                stmt.close();
-                return true;
+                ContentValues cv = new ContentValues();
+                cv.put("seqID", seqID);
+                cv.put("modID", modID);
+                cv.put("modOrder", index);
+                db.insert("SequenceOrder", null, cv);
             }
             catch (SQLException e)
             {
-                System.out.println(e.getMessage());
+                Log.e("Database Error", e.getMessage());
             }
         }
 
@@ -222,25 +263,25 @@ public final class Database
         {
             // Find the highest order in the sequence
             int order;
-            String sql = "SELECT modOrder FROM SequenceOrder WHERE seqID = " + seqID + " ORDER BY modOrder DESC LIMIT 1";
-            Statement stmt = db.createStatement();
-            ResultSet results = stmt.executeQuery(sql);
+            SQLiteCursor results = (SQLiteCursor) db.rawQuery("SELECT modOrder FROM SequenceOrder WHERE seqID = ? ORDER BY modOrder DESC LIMIT 1", new String[] { String.valueOf(seqID) } );
             // If an order was returned, set this module to have an order one greater
-            if (results.next())
-                order = results.getInt("modOrder") + 1;
+            if (results.moveToNext())
+                order = results.getInt(0) + 1;
             // If there were no results, there are no modules in this sequence yet, so the order is 1 (as though autoincremented)
             else
                 order = 1;
             results.close();
 
-            sql = "INSERT INTO SequenceOrder(seqID, modID, modOrder) VALUES (" + seqID + "," + modID + "," + order + ")";
-            stmt.executeUpdate(sql);
-            stmt.close();
+            ContentValues cv = new ContentValues();
+            cv.put("seqID", seqID);
+            cv.put("modID", modID);
+            cv.put("modOrder", order);
+            db.insert("SequenceOrder", null, cv);
             return true;
         }
         catch (SQLException e)
         {
-            System.out.println(e.getMessage());
+            Log.e("Database Error", e.getMessage());
             return false;
         }
     }
@@ -260,37 +301,33 @@ public final class Database
     // Private functions and variables that are used by the public functions *
     //************************************************************************
 
-    private static Connection db = null;
+    private static final String DATABASE_NAME = "app_data.db";
+    private static String ABSOLUTE_DATABASE_PATH;
+    private static SQLiteDatabase db = null;
     private static ArrayList<String> moduleNames = null;
 
     /* Return whether or not there is a valid connection to the database in the variable 'db'
        Source: https://www.sqlitetutorial.net/sqlite-java/sqlite-jdbc-driver/ */
     private static boolean DatabaseConnected()
     {
-        if (db != null)
+        if (db != null && db.isOpen())
             return true;
 
         try
         {
-            Class.forName("org.sqlite.JDBC");
-            String url = "jdbc:sqlite:test.db";
-            db = DriverManager.getConnection(url);
+            db = SQLiteDatabase.openOrCreateDatabase(ABSOLUTE_DATABASE_PATH, null);
             return true;
         }
         catch (SQLException e)
         {
-            System.out.println(e.getMessage());
+            Log.e("Database Error", e.getMessage());
+            return false;
         }
-        catch (ClassNotFoundException e)
-        {
-            System.out.println("Failed to locate JDBC driver");
-        }
-
-        return false;
     }
 
     /* Given an index of 3, this function will increment the order of each module in the sequence greater than or equal to 3
-       and return the success of the operation */
+       and return the success of the operation.
+       NOTE: index is expected to be a 1-based */
     private static boolean PushBackSequenceOrder(int seqID, int index)
     {
         if (!DatabaseConnected())
@@ -298,28 +335,76 @@ public final class Database
 
         try
         {
-            PreparedStatement sqlUpdate = db.prepareStatement("UPDATE SequenceOrder SET modOrder = ? WHERE modOrder = ?");
-            
-            Statement stmt = db.createStatement();
-            ResultSet results = stmt.executeQuery("SELECT modOrder FROM SequenceOrder WHERE seqID = " + seqID + " ORDER BY modOrder DESC");
-            while (results.next())
+            SQLiteCursor results = (SQLiteCursor) db.rawQuery("SELECT modOrder FROM SequenceOrder WHERE seqID = ? ORDER BY modOrder DESC", new String[] { String.valueOf(seqID) });
+            while(results.moveToNext())
             {
-                int order = results.getInt("modOrder");
+                int order = results.getInt(results.getColumnIndex("modOrder"));
 
                 if (order >= index)
                 {
-                    sqlUpdate.setInt(1, order + 1);
-                    sqlUpdate.setInt(2, order);
-                    sqlUpdate.executeUpdate();
+                    ContentValues cv = new ContentValues();
+                    cv.put("modOrder", order + 1);
+                    db.update("SequenceOrder", cv, "modOrder = ?", new String[] { String.valueOf(order) });
                 }
             }
 
+            results.close();
             return true;
         }
         catch (SQLException e)
         {
-            System.out.println(e.getMessage());
+            Log.e("Database Error", e.getMessage());
             return false;
+        }
+    }
+
+    private static void CreateTables()
+    {
+        if (DatabaseConnected())
+        {
+            try
+            {
+                db.execSQL("CREATE TABLE IF NOT EXISTS User (" +
+                        "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "Name VARCHAR(30) UNIQUE," +
+                        "setting_1 INTEGER NOT NULL DEFAULT 0," +
+                        "setting_n INTEGER NOT NULL DEFAULT 0)");
+
+                db.execSQL("CREATE TABLE IF NOT EXISTS Module (" +
+                        "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "Name text)");
+
+                // Fill the Module table with the default values (should not be user-generated)
+                String[] modules = { "Meditation", "Haptics", "Exercises", "Reflection" };
+                for (String module : modules)
+                {
+                    ContentValues cv = new ContentValues();
+                    cv.put("Name", module);
+                    db.insert("Module", null, cv);
+                }
+
+                db.execSQL("CREATE TABLE IF NOT EXISTS CompletedModule (" +
+                        "usrID INTEGER REFERENCES User(ID) ON DELETE CASCADE," +
+                        "modID INTEGER REFERENCES Module(ID)," +
+                        "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "Rating INTEGER," +
+                        "Date TEXT NOT NULL DEFAULT CURRENT_DATE)");
+
+                db.execSQL("CREATE TABLE IF NOT EXISTS ModuleSequence (" +
+                        "usrID INTEGER REFERENCES User(ID) ON DELETE CASCADE," +
+                        "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "Name VARCHAR(30) UNIQUE)");
+
+                db.execSQL("CREATE TABLE IF NOT EXISTS SequenceOrder (" +
+                        "seqID INTEGER REFERENCES ModuleSequence(ID) ON DELETE CASCADE," +
+                        "modID INTEGER REFERENCES Module(ID) ON DELETE CASCADE," +
+                        "modOrder INTEGER NOT NULL," +
+                        "PRIMARY KEY (seqID, modOrder))");
+            }
+            catch (SQLException e)
+            {
+                Log.e("Database Error", e.getMessage());
+            }
         }
     }
 }
