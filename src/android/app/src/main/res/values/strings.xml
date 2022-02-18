@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DontPanic</string>
+    <string name="emegencyLabel">Emergency, Left Side of Screen</string>
+    <string name="generalLabel">General, Right Side of Screen</string>
 </resources>
