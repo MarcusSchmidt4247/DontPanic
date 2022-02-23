@@ -4,6 +4,7 @@
 // MS: 2/10/22 - reworked how the database connection is handled, added new functions
 // MS: 2/17/22 - converted to Android specific libraries, added database creation
 // MS: 2/18/22 - create functions now return the ID of the new entity rather than a boolean
+// MS: 2/22/22 - made Module an enum and Preferences a static class with generic GetPreferences() function
 
 package com.example.dontpanic;
 
@@ -12,6 +13,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.*;
+import android.provider.ContactsContract;
 import android.util.Log;
 
 // Miscellaneous imports
@@ -23,6 +25,11 @@ import java.util.ArrayList;
 public final class Database
 {
     private Database() { }
+
+    public static class Preferences
+    {
+        public static final String BREATHING_DURATION_FLOAT = "setting_breath_duration";
+    }
 
     //*****************************
     // General database functions *
@@ -72,32 +79,36 @@ public final class Database
             return true;
     }
 
-    // Returns the name of a module from its ID, or null if it fails
-    public static String GetModuleName(int modID)
+    // Returns an Object that can be cast to the preference's correct primitive data type wrapper (e.g. Integer or Float rather than int or float)
+    public static Object GetPreference(int usrID, String preference)
     {
-        // If the list of module names haven't already been placed into a list, do so now
-        if (moduleNames == null)
+        if (!DatabaseConnected())
+            return null;
+
+        // Check if this preference is any of the ones with float values
+        if (preference.equals(Preferences.BREATHING_DURATION_FLOAT)) // || preference.equals(Preferences.SOME_OTHER_FLOAT))
         {
-            // Build a new list
-            moduleNames = new ArrayList<>();
             try
             {
-                // Query the database for its module names and add it to the list in order of their ID
-                SQLiteCursor results = (SQLiteCursor) db.rawQuery("SELECT Name FROM Module ORDER BY ID ASC", null);
-                while (results.moveToNext())
-                    moduleNames.add(results.getString(0));
-                results.close();
+                // If so, query the User table for this preference and return the float value
+                SQLiteCursor result = (SQLiteCursor) db.rawQuery("SELECT ? FROM User WHERE usrID = ?", new String[] { preference, String.valueOf(usrID) });
+                float val = -1;
+                if (result.moveToNext())
+                {
+                    val = result.getFloat(0);
+                }
+                result.close();
+                return val;
             }
             catch (SQLException e)
             {
                 Log.e("Database Error", e.getMessage());
-                return null;
+                return -1;
             }
         }
-
-        /* The index of a module's name is one less than its ID due to the disparity between SQLite autoincrement
-           and this ArrayList's zero based indexing. */
-        return moduleNames.get(modID - 1);
+        // If this preference is not a recognized value, return null
+        else
+            return null;
     }
 
     //****************************************************
@@ -304,7 +315,6 @@ public final class Database
     private static final String DATABASE_NAME = "app_data.db";
     private static String ABSOLUTE_DATABASE_PATH;
     private static SQLiteDatabase db = null;
-    private static ArrayList<String> moduleNames = null;
 
     /* Return whether or not there is a valid connection to the database in the variable 'db'
        Source: https://www.sqlitetutorial.net/sqlite-java/sqlite-jdbc-driver/ */
@@ -367,19 +377,19 @@ public final class Database
                 db.execSQL("CREATE TABLE IF NOT EXISTS User (" +
                         "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                         "Name VARCHAR(30) UNIQUE," +
-                        "setting_1 INTEGER NOT NULL DEFAULT 0," +
+                        Preferences.BREATHING_DURATION_FLOAT + " REAL NOT NULL DEFAULT 3.0," +
                         "setting_n INTEGER NOT NULL DEFAULT 0)");
 
                 db.execSQL("CREATE TABLE IF NOT EXISTS Module (" +
-                        "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "ID INTEGER PRIMARY KEY," +
                         "Name text)");
 
                 // Fill the Module table with the default values (should not be user-generated)
-                String[] modules = { "Meditation", "Haptics", "Exercises", "Reflection" };
-                for (String module : modules)
+                for (Module module : Module.values())
                 {
                     ContentValues cv = new ContentValues();
-                    cv.put("Name", module);
+                    cv.put("ID", module.id);
+                    cv.put("Name", module.name);
                     db.insert("Module", null, cv);
                 }
 
