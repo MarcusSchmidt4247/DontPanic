@@ -5,6 +5,7 @@
 // MS: 2/17/22 - converted to Android specific libraries, added database creation
 // MS: 2/18/22 - create functions now return the ID of the new entity rather than a boolean
 // MS: 2/22/22 - made Module an enum and Preferences a static class with generic GetPreferences() function
+// MS: 2/23/22 - added more preference handling and moved the class to its own file
 
 package com.example.dontpanic;
 
@@ -25,11 +26,6 @@ import java.util.ArrayList;
 public final class Database
 {
     private Database() { }
-
-    public static class Preferences
-    {
-        public static final String BREATHING_DURATION_FLOAT = "setting_breath_duration";
-    }
 
     //*****************************
     // General database functions *
@@ -79,19 +75,33 @@ public final class Database
             return true;
     }
 
-    // Returns an Object that can be cast to the preference's correct primitive data type wrapper (e.g. Integer or Float rather than int or float)
+    /* Returns an Object that can be cast to the preference's correct primitive data type wrapper (e.g. Integer or Float rather than int or float),
+       or null in the case of a failure. */
     public static Object GetPreference(int usrID, String preference)
     {
         if (!DatabaseConnected())
             return null;
 
-        // Check if this preference is any of the ones with float values
-        if (preference.equals(Preferences.BREATHING_DURATION_FLOAT)) // || preference.equals(Preferences.SOME_OTHER_FLOAT))
+        try
         {
-            try
+            // Check if this preference is any of the ones with integer values
+            if (preference.equals(Preferences.LAUNCH_SEQUENCE_INT))
+            {
+                // If so, query the User table for this preference and return the integer value
+                SQLiteCursor result = (SQLiteCursor) db.rawQuery("SELECT ? FROM User WHERE usrID = ?", new String[]{preference, String.valueOf(usrID)});
+                int val = -1;
+                if (result.moveToNext())
+                {
+                    val = result.getInt(0);
+                }
+                result.close();
+                return val;
+            }
+            // Check if this preference is any of the ones with float values
+            else if (preference.equals(Preferences.HAPTIC_STRENGTH_FLOAT) || preference.equals(Preferences.AUDIO_VOLUME_FLOAT) || preference.equals(Preferences.BREATHING_DURATION_FLOAT))
             {
                 // If so, query the User table for this preference and return the float value
-                SQLiteCursor result = (SQLiteCursor) db.rawQuery("SELECT ? FROM User WHERE usrID = ?", new String[] { preference, String.valueOf(usrID) });
+                SQLiteCursor result = (SQLiteCursor) db.rawQuery("SELECT ? FROM User WHERE usrID = ?", new String[]{preference, String.valueOf(usrID)});
                 float val = -1;
                 if (result.moveToNext())
                 {
@@ -100,15 +110,29 @@ public final class Database
                 result.close();
                 return val;
             }
-            catch (SQLException e)
+            // Check if this preference is any of the ones with boolean values (which are stored in the database as integers)
+            else if (preference.equals(Preferences.HAPTICS_ENABLED_BOOLEAN) || preference.equals(Preferences.BREATHING_AUDIO_ENABLED_BOOLEAN))
             {
-                Log.e("Database Error", e.getMessage());
-                return -1;
+                // If so, query the User table for this preference and return the boolean value
+                SQLiteCursor result = (SQLiteCursor) db.rawQuery("SELECT ? FROM User WHERE usrID = ?", new String[]{preference, String.valueOf(usrID)});
+                int val = 0;
+                if (result.moveToNext())
+                {
+                    val = result.getInt(0);
+                }
+                result.close();
+                // Return true if the result is greater than zero (should be 1), otherwise false
+                return (val > 0);
             }
+            // If this preference is not a recognized value, return null
+            else
+                return null;
         }
-        // If this preference is not a recognized value, return null
-        else
+        catch (SQLException e)
+        {
+            Log.e("Database Error", e.getMessage());
             return null;
+        }
     }
 
     //****************************************************
@@ -377,8 +401,12 @@ public final class Database
                 db.execSQL("CREATE TABLE IF NOT EXISTS User (" +
                         "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                         "Name VARCHAR(30) UNIQUE," +
+                        Preferences.HAPTICS_ENABLED_BOOLEAN + " INTEGER NOT NULL DEFAULT 1," +
+                        Preferences.HAPTIC_STRENGTH_FLOAT + " REAL NOT NULL DEFAULT 1.0," +
+                        Preferences.AUDIO_VOLUME_FLOAT + " REAL NOT NULL DEFAULT 1.0," +
+                        Preferences.LAUNCH_SEQUENCE_INT + " INTEGER DEFAULT NULL," +
                         Preferences.BREATHING_DURATION_FLOAT + " REAL NOT NULL DEFAULT 3.0," +
-                        "setting_n INTEGER NOT NULL DEFAULT 0)");
+                        Preferences.BREATHING_AUDIO_ENABLED_BOOLEAN + " INTEGER NOT NULL DEFAULT 0)");
 
                 db.execSQL("CREATE TABLE IF NOT EXISTS Module (" +
                         "ID INTEGER PRIMARY KEY," +
