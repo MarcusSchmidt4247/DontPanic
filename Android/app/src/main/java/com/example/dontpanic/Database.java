@@ -5,7 +5,7 @@
 // MS: 2/17/22 - converted to Android specific libraries, added database creation
 // MS: 2/18/22 - create functions now return the ID of the new entity rather than a boolean
 // MS: 2/22/22 - made Module an enum and Preferences a static class with generic GetPreferences() function
-// MS: 2/23/22 - added more preference handling and moved the class to its own file
+// MS: 2/23/22 - added more preference handling, rewrote GetModulesInSequence() to return new type Module
 
 package com.example.dontpanic;
 
@@ -233,19 +233,25 @@ public final class Database
     //*********************************************************************
 
     // Returns a List of the sequence's module ID's in order, or null on failure
-    public static ArrayList<Integer> GetModulesInSequence(int seqID)
+    public static ArrayList<Module> GetModulesInSequence(int seqID)
     {
         // Ensure that there is a valid connection to the database
         if (!DatabaseConnected())
             return null;
         
-        ArrayList<Integer> sequence = new ArrayList<Integer>();
+        ArrayList<Module> sequence = new ArrayList<>();
         try
         {
             // Query the modID column and add each result to 'sequence'
             SQLiteCursor results = (SQLiteCursor) db.rawQuery("SELECT modID FROM SequenceOrder WHERE seqID = ? ORDER BY modOrder ASC", new String[] { String.valueOf(seqID) });
+            int modID;
             while (results.moveToNext())
-                sequence.add(results.getInt(results.getColumnIndex("modID")));
+            {
+                // Extract the ID of the next module in the sequence
+                modID = results.getInt(results.getColumnIndex("modID"));
+                // Then add an instance of this type of module to the sequence
+                sequence.add(Module.InstanceOf(modID));
+            }
             results.close();
             return sequence;
         }

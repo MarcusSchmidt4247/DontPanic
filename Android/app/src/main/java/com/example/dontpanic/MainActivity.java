@@ -48,17 +48,20 @@ public class MainActivity extends AppCompatActivity {
             Database.InsertModuleIntoSequence(seqID, 1, 1);
             setContentView(R.layout.first_screen);
         } else {
-            //Check if Database exists; if not, launch first page screen
+            //If Database already exists, launch first page screen
             setContentView(R.layout.activity_main);
         }
 
         // Print the list of module names in the sequence with ID 1
-        ArrayList<Integer> sequence = Database.GetModulesInSequence(1);
+        // MS: 2/23/22 - rewrote to use new Module enum
+        ArrayList<Module> sequence = Database.GetModulesInSequence(1);
         if (sequence != null)
         {
-            for (int i = 0; i < sequence.size(); i++)
+            int count = 1;
+            for (Module module : sequence)
             {
-                Log.i("Module " + (i + 1), Database.GetModuleName(sequence.get(i)));
+                Log.i("Module " + count, module.name);
+                count++;
             }
         }
         else
