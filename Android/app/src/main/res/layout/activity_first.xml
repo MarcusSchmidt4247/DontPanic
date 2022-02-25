@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_purple"
+    tools:context=".FirstActivity">
+
+
+    <!--
+    The "android:contentDescription" exists to create a title for Screen Readers without
+    actually showing text on the buttons themselves.  This leaves creative room for non-screen
+    reader users, in regards to physical appearance of the main screen
+
+    Buttons will autoscale depending on the screen's height and width already, theoretically-->
+    <!--
+    <Button
+        android:id="@+id/emerB"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="@string/emergencyLabel" />
+
+
+
+    <Button
+        android:contentDescription="@string/generalLabel"
+        android:id="@+id/genB"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground"
+        />
+        -->
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="286dp"
+
+        android:layout_marginEnd="92dp"
+        android:layout_marginBottom="394dp"
+        android:fontFamily="sans-serif-black"
+        android:text="DON'T PANIC"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="800"
+        android:textSize="100px" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="549dp"
+        android:layout_height="86dp"
+        android:layout_alignTop="@+id/textView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+
+        android:layout_marginStart="91dp"
+
+        android:layout_marginTop="66dp"
+        android:layout_marginEnd="90dp"
+        android:layout_marginBottom="270dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Everyone experiences times of anxiety in their life."
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="500"
+        android:textSize="40px" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="190dp"
+        android:layout_height="63dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="110dp"
+        android:layout_marginEnd="111dp"
+
+        android:layout_marginBottom="152dp"
+        android:background="@drawable/round_btn"
+        android:fontFamily="sans-serif-light"
+        android:text="Let's Get Started"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="35px" />
+
+</RelativeLayout>
