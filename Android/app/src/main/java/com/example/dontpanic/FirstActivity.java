@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 public class FirstActivity extends AppCompatActivity {
 
-    Button emergencyButton;
-    Button generalButton;
+    //Button emergencyButton;
+    //Button generalButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,26 +31,9 @@ public class FirstActivity extends AppCompatActivity {
          * has already been done, and will be seen from then on (unless the User clears cache data)
          */
 
-        // Initialize the database
-        if (!Database.DatabaseExists(getApplicationContext()))
-        {
-            /* If this is the first time launching the app (the database didn't already exist),
-               then add some sample data */
-            Log.i("First Time Launch", "Creating sample data");
-            int usrID = Database.CreateUser("John");
-            Database.currentUserID = usrID;
-            int seqID = Database.CreateSequence(usrID, "Main Sequence");
-            Database.AppendModuleToSequence(seqID, 2);
-            Database.AppendModuleToSequence(seqID, 3);
-            Database.InsertModuleIntoSequence(seqID, 1, 1);
-            //setContentView(R.layout.first_screen);
-        } else {
-            Database.currentUserID = 1;
-            //If Database already exists, launch first page screen
-            //setContentView(R.layout.activity_first);
-        }
         setContentView(R.layout.activity_first);
 
+        /*
         // Print the list of module names in the sequence with ID 1
         // MS: 2/23/22 - rewrote to use new Module enum
         ArrayList<Module> sequence = Database.GetModulesInSequence(1);
@@ -64,6 +47,7 @@ public class FirstActivity extends AppCompatActivity {
             }
         } else
             Log.e("Sequence Error", "Sequence is null");
+         */
 
         /*
         //Stephen - may port over to a MainActivityController.java
