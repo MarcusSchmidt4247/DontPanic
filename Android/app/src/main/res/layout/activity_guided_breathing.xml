@@ -12,7 +12,7 @@
         android:id="@+id/breathVisual"
         android:layout_width="178dp"
         android:layout_height="178dp"
-        app:tint="@color/teal_200"
+        app:tint="#16A583"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
