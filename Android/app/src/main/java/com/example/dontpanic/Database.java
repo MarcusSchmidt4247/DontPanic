@@ -6,6 +6,7 @@
 // MS: 2/18/22 - create functions now return the ID of the new entity rather than a boolean
 // MS: 2/22/22 - made Module an enum and Preferences a static class with generic GetPreferences() function
 // MS: 2/23/22 - added more preference handling, rewrote GetModulesInSequence() to return new type Module
+// MS: /2/27/22 - a few minor improvements to safety and/or efficiency, wrote PrintTable() function for testing purposes
 
 package com.example.dontpanic;
 
@@ -14,7 +15,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.*;
-import android.provider.ContactsContract;
 import android.util.Log;
 
 // Miscellaneous imports
@@ -30,6 +30,44 @@ public final class Database
     //*****************************
     // General database functions *
     //*****************************
+
+    // For testing purposes ONLY! Otherwise, this exposes way too much data. Comment out when not needed.
+    /* public static void PrintTable(String table)
+    {
+        if (DatabaseConnected())
+        {
+            try
+            {
+                String query = "SELECT * FROM " + table;
+                SQLiteCursor results = (SQLiteCursor) db.rawQuery(query, null);
+                int row = 1;
+                while (results.moveToNext())
+                {
+                    Log.i(table, "Row " + row + " of " + results.getCount());
+                    for (int i = 0; i < results.getColumnCount(); i++)
+                    {
+                        int type = results.getType(i);
+                        if (type == Cursor.FIELD_TYPE_INTEGER)
+                            Log.i(results.getColumnName(i), String.valueOf(results.getInt(i)));
+                        else if (type == Cursor.FIELD_TYPE_FLOAT)
+                            Log.i(results.getColumnName(i), String.valueOf(results.getFloat(i)));
+                        else if (type == Cursor.FIELD_TYPE_STRING)
+                            Log.i(results.getColumnName(i), results.getString(i));
+                        else if (type == Cursor.FIELD_TYPE_BLOB)
+                            Log.i(results.getColumnName(i), Arrays.toString(results.getBlob(i)));
+                        else
+                            Log.i(results.getColumnName(i), "NULL");
+                    }
+                    row++;
+                }
+                results.close();
+            }
+            catch (SQLException e)
+            {
+                Log.i("Database Error", e.getMessage());
+            }
+        }
+    } */
 
     /* Although the database never has to be manually initiated, this disconnect function does have
        to be called when the app or activity is done. Can't be done in the destructor because there's
@@ -75,12 +113,15 @@ public final class Database
             return true;
     }
 
-    /* Returns an Object that can be cast to the preference's correct primitive data type wrapper (e.g. Integer or Float rather than int or float),
-       or null in the case of a failure. */
-    public static Object GetPreference(int usrID, String preference)
+    /* Returns the wrapper to each preference's primitive data type (e.g. Integer rather than int), or
+       null in the case of failure. */
+    public static Object GetPreference(String preference)
     {
-        if (!DatabaseConnected())
+        if (!DatabaseConnected() || currentUserID == -1)
             return null;
+
+        // selectionArgs only works in the WHERE clause, so construct this query manually
+        String query = "SELECT " + preference + " FROM User WHERE ID = " + currentUserID;
 
         try
         {
@@ -88,8 +129,8 @@ public final class Database
             if (preference.equals(Preferences.LAUNCH_SEQUENCE_INT))
             {
                 // If so, query the User table for this preference and return the integer value
-                SQLiteCursor result = (SQLiteCursor) db.rawQuery("SELECT ? FROM User WHERE usrID = ?", new String[]{preference, String.valueOf(usrID)});
-                int val = -1;
+                SQLiteCursor result = (SQLiteCursor) db.rawQuery(query, null);
+                Integer val = -1;
                 if (result.moveToNext())
                 {
                     val = result.getInt(0);
@@ -101,8 +142,8 @@ public final class Database
             else if (preference.equals(Preferences.HAPTIC_STRENGTH_FLOAT) || preference.equals(Preferences.AUDIO_VOLUME_FLOAT) || preference.equals(Preferences.BREATHING_DURATION_FLOAT))
             {
                 // If so, query the User table for this preference and return the float value
-                SQLiteCursor result = (SQLiteCursor) db.rawQuery("SELECT ? FROM User WHERE usrID = ?", new String[]{preference, String.valueOf(usrID)});
-                float val = -1;
+                SQLiteCursor result = (SQLiteCursor) db.rawQuery(query, null);
+                Float val = -1.0f;
                 if (result.moveToNext())
                 {
                     val = result.getFloat(0);
@@ -114,8 +155,8 @@ public final class Database
             else if (preference.equals(Preferences.HAPTICS_ENABLED_BOOLEAN) || preference.equals(Preferences.BREATHING_AUDIO_ENABLED_BOOLEAN))
             {
                 // If so, query the User table for this preference and return the boolean value
-                SQLiteCursor result = (SQLiteCursor) db.rawQuery("SELECT ? FROM User WHERE usrID = ?", new String[]{preference, String.valueOf(usrID)});
-                int val = 0;
+                SQLiteCursor result = (SQLiteCursor) db.rawQuery(query, null);
+                Integer val = 0;
                 if (result.moveToNext())
                 {
                     val = result.getInt(0);
@@ -139,6 +180,9 @@ public final class Database
     // Functions that have to do with users and settings *
     //****************************************************
 
+    // The ID of the user who is currently logged in, or -1 if no one is
+    public static int currentUserID = -1;
+
     // Returns the new user's ID, or -1 if unable to create
     public static int CreateUser(String name)
     {
@@ -147,20 +191,10 @@ public final class Database
         
         try
         {
-            // Insert a new user with the provided name into the User table
+            // Insert a new user with the provided name into the User table and return its row ID (which will equal the auto-incremented ID column)
             ContentValues cv = new ContentValues();
             cv.put("Name", name);
-            db.insert("User", null, cv);
-
-            // Query the table to retrieve the automatically assigned ID for this user and return it (or -1 if it cannot be found)
-            SQLiteCursor result = (SQLiteCursor) db.rawQuery("SELECT ID FROM User WHERE Name = ?", new String[] { name });
-            int id = -1;
-            if (result.moveToNext())
-            {
-                id = result.getInt(0);
-            }
-            result.close();
-            return id;
+            return (int) db.insert("User", null, cv);
         }
         catch (SQLException e)
         {
@@ -356,6 +390,7 @@ public final class Database
         try
         {
             db = SQLiteDatabase.openOrCreateDatabase(ABSOLUTE_DATABASE_PATH, null);
+            db.execSQL("PRAGMA foreign_keys=ON");
             return true;
         }
         catch (SQLException e)
@@ -411,7 +446,7 @@ public final class Database
                         Preferences.HAPTIC_STRENGTH_FLOAT + " REAL NOT NULL DEFAULT 1.0," +
                         Preferences.AUDIO_VOLUME_FLOAT + " REAL NOT NULL DEFAULT 1.0," +
                         Preferences.LAUNCH_SEQUENCE_INT + " INTEGER DEFAULT NULL," +
-                        Preferences.BREATHING_DURATION_FLOAT + " REAL NOT NULL DEFAULT 3.0," +
+                        Preferences.BREATHING_DURATION_FLOAT + " REAL NOT NULL DEFAULT 6.5," +
                         Preferences.BREATHING_AUDIO_ENABLED_BOOLEAN + " INTEGER NOT NULL DEFAULT 0)");
 
                 db.execSQL("CREATE TABLE IF NOT EXISTS Module (" +

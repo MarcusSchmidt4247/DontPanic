@@ -35,19 +35,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         // Initialize the database
         if (!Database.DatabaseExists(getApplicationContext()))
         {
-        /* If this is the first time launching the app (the database didn't already exist),
-           then add some sample data */
+         /* If this is the first time launching the app (the database didn't already exist),
+            then add some sample data */
             Log.i("First Time Launch", "Creating sample data");
             int usrID = Database.CreateUser("John");
+            Database.currentUserID = usrID;
             int seqID = Database.CreateSequence(usrID, "Main Sequence");
             Database.AppendModuleToSequence(seqID, 2);
             Database.AppendModuleToSequence(seqID, 3);
             Database.InsertModuleIntoSequence(seqID, 1, 1);
             setContentView(R.layout.first_screen);
         } else {
+            Database.currentUserID = 1;
             //If Database already exists, launch first page screen
             setContentView(R.layout.activity_main);
         }
