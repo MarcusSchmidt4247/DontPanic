@@ -7,7 +7,7 @@
 // MS: 2/22/22 - made Module an enum and Preferences a static class with generic GetPreferences() function
 // MS: 2/23/22 - added more preference handling, rewrote GetModulesInSequence() to return new type Module
 // MS: 2/27/22 - a few minor improvements to safety and/or efficiency, wrote PrintTable() function for testing purposes
-// MS: 2/28/22 - two new preferences and SetPreference() functions
+// MS: 2/28/22 - added two new preferences, SetPreference(), and UserExists()
 
 package com.example.dontpanic;
 
@@ -240,6 +240,18 @@ public final class Database
 
     // The ID of the user who is currently logged in, or -1 if no one is
     public static int currentUserID = -1;
+
+    // Return whether or not at least one user exists in the database
+    public static boolean UserExists()
+    {
+        if (!DatabaseConnected())
+            return false;
+
+        SQLiteCursor result = (SQLiteCursor) db.rawQuery("SELECT ID FROM User", null);
+        int count = result.getCount();
+        result.close();
+        return (count > 0);
+    }
 
     // Returns the new user's ID, or -1 if unable to create
     public static int CreateUser(String name)

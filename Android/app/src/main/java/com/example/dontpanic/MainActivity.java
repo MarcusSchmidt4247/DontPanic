@@ -25,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
         Intent destinationIntent;
 
         // Initialize the database
-        if (!Database.DatabaseExists(getApplicationContext()))
+        if (!Database.DatabaseExists(getApplicationContext()) || !Database.UserExists())
         {
-            /* If this is the first time launching the app (the database didn't already exist),
+            /* If this is the first time launching the app (the database didn't already exist or there are no user accounts),
                then add some sample data */
             Log.i("First Time Launch", "Creating sample data");
             int usrID = Database.CreateUser("John");
