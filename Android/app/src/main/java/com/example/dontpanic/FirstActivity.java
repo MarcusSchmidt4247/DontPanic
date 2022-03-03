@@ -18,7 +18,7 @@ public class FirstActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
 
-        Intent intent = new Intent(FirstActivity.this, MainActivity.class);
+        Intent intent = new Intent(FirstActivity.this, SplashActivity.class);
         startActivity(intent);
         finish();
 
