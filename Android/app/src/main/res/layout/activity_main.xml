@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/light_blue"
-    android:weightSum="2"
-    tools:context=".MainActivity">
+    android:weightSum="2">
 
-    <ImageView
-        android:id="@+id/imageSplashScreen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        app:srcCompat="@drawable/icon" />
-</RelativeLayout>
+    <!--
+    The "android:contentDescription" exists to create a title for Screen Readers without
+    actually showing text on the buttons themselves.  This leaves creative room for non-screen
+    reader users, in regards to physical appearance of the main screen
+
+    Buttons will autoscale depending on the screen's height and width already, theoretically-->
+
+    <Button
+        android:id="@+id/emerB"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="@string/emergencyLabel" />
+
+    <Button
+        android:id="@+id/genB"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="@string/generalLabel"
+        />
+</LinearLayout>
