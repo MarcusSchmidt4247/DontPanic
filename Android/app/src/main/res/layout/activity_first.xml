@@ -12,7 +12,6 @@
     The "android:contentDescription" exists to create a title for Screen Readers without
     actually showing text on the buttons themselves.  This leaves creative room for non-screen
     reader users, in regards to physical appearance of the main screen
-
     Buttons will autoscale depending on the screen's height and width already, theoretically-->
     <!--
     <Button
@@ -22,9 +21,6 @@
         android:layout_weight="1"
         android:background="?android:attr/selectableItemBackground"
         android:contentDescription="@string/emergencyLabel" />
-
-
-
     <Button
         android:contentDescription="@string/generalLabel"
         android:id="@+id/genB"
@@ -36,7 +32,7 @@
         -->
 
     <TextView
-        android:id="@+id/firstView"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -44,11 +40,11 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
 
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="388dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="344dp"
 
-        android:layout_marginEnd="90dp"
-        android:layout_marginBottom="292dp"
+        android:layout_marginEnd="92dp"
+        android:layout_marginBottom="336dp"
         android:fontFamily="sans-serif-black"
         android:text="DON'T PANIC"
         android:textAlignment="center"
@@ -57,18 +53,19 @@
         android:textSize="100px" />
 
     <TextView
-        android:id="@+id/firstView2"
+        android:id="@+id/textView2"
         android:layout_width="549dp"
         android:layout_height="86dp"
+        android:layout_alignTop="@+id/textView"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
 
         android:layout_marginStart="91dp"
 
-        android:layout_marginTop="66dp"
+        android:layout_marginTop="81dp"
         android:layout_marginEnd="90dp"
-        android:layout_marginBottom="351dp"
+        android:layout_marginBottom="255dp"
         android:fontFamily="sans-serif-black"
         android:text="Everyone experiences times of anxiety in their life."
         android:textAlignment="center"
@@ -77,17 +74,17 @@
         android:textSize="40px" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/firstButton"
+        android:id="@+id/button2"
         android:layout_width="190dp"
         android:layout_height="63dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
 
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="111dp"
-        android:layout_marginEnd="110dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginEnd="111dp"
 
-        android:layout_marginBottom="240dp"
+        android:layout_marginBottom="181dp"
         android:background="@drawable/round_btn"
         android:fontFamily="sans-serif-light"
         android:text="Let's Get Started"

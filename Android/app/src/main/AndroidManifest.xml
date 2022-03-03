@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dontpanic">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,6 +13,13 @@
         <activity
             android:name=".FirstActivity"
             android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GuidedBreathing"
+            android:exported="false"
+            />
         <activity
             android:name=".SplashActivity"
             android:exported="true">

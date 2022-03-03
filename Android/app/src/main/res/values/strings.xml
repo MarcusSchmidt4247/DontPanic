@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">DontPanic</string>
+    <string name="app_name">Don\'t Panic!</string>
     <string name="emergencyLabel">Emergency, Left Side of Screen</string>
     <string name="generalLabel">General, Right Side of Screen</string>
+    <string name="breatheInstructionIn">breathe in</string>
+    <string name="breatheInstructionOut">breathe out</string>
 </resources>

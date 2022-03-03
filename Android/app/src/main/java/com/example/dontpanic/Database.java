@@ -4,6 +4,10 @@
 // MS: 2/10/22 - reworked how the database connection is handled, added new functions
 // MS: 2/17/22 - converted to Android specific libraries, added database creation
 // MS: 2/18/22 - create functions now return the ID of the new entity rather than a boolean
+// MS: 2/22/22 - made Module an enum and Preferences a static class with generic GetPreferences() function
+// MS: 2/23/22 - added more preference handling, rewrote GetModulesInSequence() to return new type Module
+// MS: 2/27/22 - a few minor improvements to safety and/or efficiency, wrote PrintTable() function for testing purposes
+// MS: 2/28/22 - two new preferences and SetPreference() functions
 
 package com.example.dontpanic;
 
@@ -27,6 +31,44 @@ public final class Database
     //*****************************
     // General database functions *
     //*****************************
+
+    // For testing purposes ONLY! Otherwise, this exposes way too much data. Comment out when not needed.
+    /* public static void PrintTable(String table)
+    {
+        if (DatabaseConnected())
+        {
+            try
+            {
+                String query = "SELECT * FROM " + table;
+                SQLiteCursor results = (SQLiteCursor) db.rawQuery(query, null);
+                int row = 1;
+                while (results.moveToNext())
+                {
+                    Log.i(table, "Row " + row + " of " + results.getCount());
+                    for (int i = 0; i < results.getColumnCount(); i++)
+                    {
+                        int type = results.getType(i);
+                        if (type == Cursor.FIELD_TYPE_INTEGER)
+                            Log.i(results.getColumnName(i), String.valueOf(results.getInt(i)));
+                        else if (type == Cursor.FIELD_TYPE_FLOAT)
+                            Log.i(results.getColumnName(i), String.valueOf(results.getFloat(i)));
+                        else if (type == Cursor.FIELD_TYPE_STRING)
+                            Log.i(results.getColumnName(i), results.getString(i));
+                        else if (type == Cursor.FIELD_TYPE_BLOB)
+                            Log.i(results.getColumnName(i), Arrays.toString(results.getBlob(i)));
+                        else
+                            Log.i(results.getColumnName(i), "NULL");
+                    }
+                    row++;
+                }
+                results.close();
+            }
+            catch (SQLException e)
+            {
+                Log.i("Database Error", e.getMessage());
+            }
+        }
+    } */
 
     /* Although the database never has to be manually initiated, this disconnect function does have
        to be called when the app or activity is done. Can't be done in the destructor because there's
@@ -72,37 +114,132 @@ public final class Database
             return true;
     }
 
-    // Returns the name of a module from its ID, or null if it fails
-    public static String GetModuleName(int modID)
-    {
-        // If the list of module names haven't already been placed into a list, do so now
-        if (moduleNames == null)
-        {
-            // Build a new list
-            moduleNames = new ArrayList<>();
-            try
-            {
-                // Query the database for its module names and add it to the list in order of their ID
-                SQLiteCursor results = (SQLiteCursor) db.rawQuery("SELECT Name FROM Module ORDER BY ID ASC", null);
-                while (results.moveToNext())
-                    moduleNames.add(results.getString(0));
-                results.close();
-            }
-            catch (SQLException e)
-            {
-                Log.e("Database Error", e.getMessage());
-                return null;
-            }
-        }
+    //**********************************************************
+    // Functions to get and set the current user's preferences *
+    //**********************************************************
 
-        /* The index of a module's name is one less than its ID due to the disparity between SQLite autoincrement
-           and this ArrayList's zero based indexing. */
-        return moduleNames.get(modID - 1);
+    /* Returns the wrapper to each preference's primitive data type (e.g. Integer rather than int), or
+       null in the case of failure. */
+    public static Object GetPreference(String preference)
+    {
+        if (!DatabaseConnected() || currentUserID == -1)
+            return null;
+
+        // selectionArgs only works in the WHERE clause, so construct this query manually
+        String query = "SELECT " + preference + " FROM User WHERE ID = " + currentUserID;
+
+        try
+        {
+            // Check if this preference is any of the ones with integer values
+            if (preference.equals(Preferences.LAUNCH_SEQUENCE_INT) || preference.equals(Preferences.BREATHING_CYCLES_INT))
+            {
+                // If so, query the User table for this preference and return the integer value
+                SQLiteCursor result = (SQLiteCursor) db.rawQuery(query, null);
+                Integer val = -1;
+                if (result.moveToNext())
+                {
+                    val = result.getInt(0);
+                }
+                result.close();
+                return val;
+            }
+            // Check if this preference is any of the ones with float values
+            else if (preference.equals(Preferences.HAPTIC_STRENGTH_FLOAT) || preference.equals(Preferences.AUDIO_VOLUME_FLOAT) ||
+                     preference.equals(Preferences.BREATHING_DURATION_FLOAT) || preference.equals(Preferences.TEXT_SCALING_FLOAT))
+            {
+                // If so, query the User table for this preference and return the float value
+                SQLiteCursor result = (SQLiteCursor) db.rawQuery(query, null);
+                Float val = -1.0f;
+                if (result.moveToNext())
+                {
+                    val = result.getFloat(0);
+                }
+                result.close();
+                return val;
+            }
+            // Check if this preference is any of the ones with boolean values (which are stored in the database as integers)
+            else if (preference.equals(Preferences.HAPTICS_ENABLED_BOOLEAN) || preference.equals(Preferences.BREATHING_AUDIO_ENABLED_BOOLEAN))
+            {
+                // If so, query the User table for this preference and return the boolean value
+                SQLiteCursor result = (SQLiteCursor) db.rawQuery(query, null);
+                Integer val = 0;
+                if (result.moveToNext())
+                {
+                    val = result.getInt(0);
+                }
+                result.close();
+                // Return true if the result is greater than zero (should be 1), otherwise false
+                return (val > 0);
+            }
+            // If this preference is not a recognized value, return null
+            else
+                return null;
+        }
+        catch (SQLException e)
+        {
+            Log.e("Database Error", e.getMessage());
+            return null;
+        }
+    }
+
+    public static boolean SetPreference(String preference, int value)
+    {
+        if (!DatabaseConnected() || currentUserID == -1)
+            return false;
+
+        // Verify this is a valid preference to receive an int
+        if (preference.equals(Preferences.LAUNCH_SEQUENCE_INT) || preference.equals(Preferences.BREATHING_CYCLES_INT))
+        {
+            ContentValues cv = new ContentValues();
+            cv.put(preference, value);
+            int updatedRows = db.update("User", cv, "ID = ?", new String[] { String.valueOf(currentUserID) });
+            return (updatedRows > 0);
+        }
+        else
+            return false;
+    }
+
+    public static boolean SetPreference(String preference, float value)
+    {
+        if (!DatabaseConnected() || currentUserID == -1)
+            return false;
+
+        // Verify this is a valid preference to receive a float
+        if (preference.equals(Preferences.HAPTIC_STRENGTH_FLOAT) || preference.equals(Preferences.AUDIO_VOLUME_FLOAT) ||
+            preference.equals(Preferences.BREATHING_DURATION_FLOAT) || preference.equals(Preferences.TEXT_SCALING_FLOAT))
+        {
+            ContentValues cv = new ContentValues();
+            cv.put(preference, value);
+            int updatedRows = db.update("User", cv, "ID = ?", new String[] { String.valueOf(currentUserID) });
+            return (updatedRows > 0);
+        }
+        else
+            return false;
+    }
+
+    public static boolean SetPreference(String preference, boolean value)
+    {
+        if (!DatabaseConnected() || currentUserID == -1)
+            return false;
+
+        // Verify this is a valid preference to receive a boolean
+        if (preference.equals(Preferences.HAPTICS_ENABLED_BOOLEAN) || preference.equals(Preferences.BREATHING_AUDIO_ENABLED_BOOLEAN))
+        {
+            ContentValues cv = new ContentValues();
+            cv.put(preference, value);
+            int updatedRows = db.update("User", cv, "ID = ?", new String[] { String.valueOf(currentUserID) });
+            return (updatedRows > 0);
+        }
+        else
+            return false;
     }
 
     //****************************************************
     // Functions that have to do with users and settings *
     //****************************************************
+
+    // The ID of the user who is currently logged in, or -1 if no one is
+    public static int currentUserID = -1;
 
     // Returns the new user's ID, or -1 if unable to create
     public static int CreateUser(String name)
@@ -112,20 +249,10 @@ public final class Database
         
         try
         {
-            // Insert a new user with the provided name into the User table
+            // Insert a new user with the provided name into the User table and return its row ID (which will equal the auto-incremented ID column)
             ContentValues cv = new ContentValues();
             cv.put("Name", name);
-            db.insert("User", null, cv);
-
-            // Query the table to retrieve the automatically assigned ID for this user and return it (or -1 if it cannot be found)
-            SQLiteCursor result = (SQLiteCursor) db.rawQuery("SELECT ID FROM User WHERE Name = ?", new String[] { name });
-            int id = -1;
-            if (result.moveToNext())
-            {
-                id = result.getInt(0);
-            }
-            result.close();
-            return id;
+            return (int) db.insert("User", null, cv);
         }
         catch (SQLException e)
         {
@@ -198,19 +325,25 @@ public final class Database
     //*********************************************************************
 
     // Returns a List of the sequence's module ID's in order, or null on failure
-    public static ArrayList<Integer> GetModulesInSequence(int seqID)
+    public static ArrayList<Module> GetModulesInSequence(int seqID)
     {
         // Ensure that there is a valid connection to the database
         if (!DatabaseConnected())
             return null;
         
-        ArrayList<Integer> sequence = new ArrayList<Integer>();
+        ArrayList<Module> sequence = new ArrayList<>();
         try
         {
             // Query the modID column and add each result to 'sequence'
             SQLiteCursor results = (SQLiteCursor) db.rawQuery("SELECT modID FROM SequenceOrder WHERE seqID = ? ORDER BY modOrder ASC", new String[] { String.valueOf(seqID) });
+            int modID;
             while (results.moveToNext())
-                sequence.add(results.getInt(results.getColumnIndex("modID")));
+            {
+                // Extract the ID of the next module in the sequence
+                modID = results.getInt(results.getColumnIndex("modID"));
+                // Then add an instance of this type of module to the sequence
+                sequence.add(Module.InstanceOf(modID));
+            }
             results.close();
             return sequence;
         }
@@ -304,7 +437,6 @@ public final class Database
     private static final String DATABASE_NAME = "app_data.db";
     private static String ABSOLUTE_DATABASE_PATH;
     private static SQLiteDatabase db = null;
-    private static ArrayList<String> moduleNames = null;
 
     /* Return whether or not there is a valid connection to the database in the variable 'db'
        Source: https://www.sqlitetutorial.net/sqlite-java/sqlite-jdbc-driver/ */
@@ -316,6 +448,7 @@ public final class Database
         try
         {
             db = SQLiteDatabase.openOrCreateDatabase(ABSOLUTE_DATABASE_PATH, null);
+            db.execSQL("PRAGMA foreign_keys=ON");
             return true;
         }
         catch (SQLException e)
@@ -367,19 +500,25 @@ public final class Database
                 db.execSQL("CREATE TABLE IF NOT EXISTS User (" +
                         "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                         "Name VARCHAR(30) UNIQUE," +
-                        "setting_1 INTEGER NOT NULL DEFAULT 0," +
-                        "setting_n INTEGER NOT NULL DEFAULT 0)");
+                        Preferences.HAPTICS_ENABLED_BOOLEAN + " INTEGER NOT NULL DEFAULT 1," +
+                        Preferences.HAPTIC_STRENGTH_FLOAT + " REAL NOT NULL DEFAULT 1.0," +
+                        Preferences.AUDIO_VOLUME_FLOAT + " REAL NOT NULL DEFAULT 1.0," +
+                        Preferences.LAUNCH_SEQUENCE_INT + " INTEGER DEFAULT NULL," +
+                        Preferences.TEXT_SCALING_FLOAT + " INTEGER DEFAULT 1.0," +
+                        Preferences.BREATHING_DURATION_FLOAT + " REAL NOT NULL DEFAULT 6.5," +
+                        Preferences.BREATHING_AUDIO_ENABLED_BOOLEAN + " INTEGER NOT NULL DEFAULT 0," +
+                        Preferences.BREATHING_CYCLES_INT + " INTEGER DEFAULT NULL)");
 
                 db.execSQL("CREATE TABLE IF NOT EXISTS Module (" +
-                        "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "ID INTEGER PRIMARY KEY," +
                         "Name text)");
 
                 // Fill the Module table with the default values (should not be user-generated)
-                String[] modules = { "Meditation", "Haptics", "Exercises", "Reflection" };
-                for (String module : modules)
+                for (Module module : Module.values())
                 {
                     ContentValues cv = new ContentValues();
-                    cv.put("Name", module);
+                    cv.put("ID", module.id);
+                    cv.put("Name", module.name);
                     db.insert("Module", null, cv);
                 }
 

@@ -60,8 +60,9 @@
         android:layout_marginBottom="482dp"
         android:background="@drawable/rectangle_btn"
         android:fontFamily="sans-serif-light"
-        android:paddingLeft="80px"
-        android:paddingTop="1px"
+        android:paddingLeft="100px"
+        android:paddingTop="120px"
+        android:gravity="left"
         android:text="The building blocks of \nwellbeing"
         android:textAlignment="viewStart"
         android:textColor="@color/white"
@@ -99,7 +100,7 @@
         android:layout_marginStart="211dp"
         android:layout_marginEnd="24dp"
 
-        android:layout_marginBottom="372dp"
+        android:layout_marginBottom="371dp"
         android:background="@drawable/rectangle_btn"
         android:fontFamily="sans-serif-light"
         android:text="Guided Breathing"
@@ -159,7 +160,7 @@
         android:layout_marginStart="211dp"
         android:layout_marginEnd="24dp"
 
-        android:layout_marginBottom="276dp"
+        android:layout_marginBottom="281dp"
         android:background="@drawable/rectangle_btn"
         android:fontFamily="sans-serif-light"
         android:text="Self-Reflection"
@@ -188,5 +189,29 @@
         android:textFontWeight="300"
         android:textSize="25px" />
 
+
+    <!--
+    The "android:contentDescription" exists to create a title for Screen Readers without
+    actually showing text on the buttons themselves.  This leaves creative room for non-screen
+    reader users, in regards to physical appearance of the main screen
+
+    Buttons will autoscale depending on the screen's height and width already, theoretically-->
+
+    <Button
+        android:id="@+id/emerB"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="@string/emergencyLabel" />
+
+    <Button
+        android:id="@+id/genB"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="@string/generalLabel"
+        />
 
 </RelativeLayout>
