@@ -19,9 +19,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageView imageSplashScreen = (ImageView) findViewById(R.id.imageSplashScreen);
-        imageSplashScreen.setImageResource(R.drawable.icon);
-
         Intent destinationIntent;
 
         // Initialize the database
