@@ -1,35 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="2"
-    android:background="@color/dark_purple"
     tools:context=".MainActivity">
 
     <!--
     The "android:contentDescription" exists to create a title for Screen Readers without
     actually showing text on the buttons themselves.  This leaves creative room for non-screen
     reader users, in regards to physical appearance of the main screen
-
     Buttons will autoscale depending on the screen's height and width already, theoretically-->
-
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/emerB"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:backgroundTint="#780000"
+        android:backgroundTint="@color/light_purple"
         android:contentDescription="@string/emergencyLabel"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif"
+        android:textSize="55px"
         android:text="Emergency" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/genB"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:backgroundTint="#060078"
+        android:backgroundTint="@color/dark_purple"
         android:contentDescription="@string/generalLabel"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif"
+        android:textSize="55px"
         android:text="General Use" />
 </LinearLayout>
