@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="2"
+    android:background="@color/dark_purple"
+    tools:context=".GeneralUseActivity">
 
     <TextView
         android:id="@+id/MainView"
@@ -57,10 +62,10 @@
         android:background="@drawable/rectangle_btn"
         android:fontFamily="sans-serif-light"
         android:paddingLeft="100px"
-        android:paddingTop="120px"
-        android:gravity="left"
+        android:paddingTop="1px"
+        android:gravity="left|center_vertical"
         android:text="The building blocks of \nwellbeing"
-        android:textAlignment="viewStart"
+
         android:textColor="@color/white"
         android:textFontWeight="300"
         android:textSize="40px" />
