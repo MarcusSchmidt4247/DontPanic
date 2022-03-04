@@ -1,20 +1,26 @@
 // MS: 2/27/22 - initial code
 // MS: 2/28/22 - added very basic haptic effect
+// MS: 3/4/22 - added audio instructions, text scaling, and basic lifecycle persistence
 
 package com.example.dontpanic;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
+
+import java.io.IOException;
 
 public class GuidedBreathing extends AppCompatActivity
 {
@@ -22,8 +28,9 @@ public class GuidedBreathing extends AppCompatActivity
     private boolean haptics;
     private float hapticStrength;
     private boolean audio;
-    private float breathDuration;
+    private float volume;
 
+    private MediaPlayer audioInstruction;
     private boolean breatheIn;
 
     @Override
@@ -34,11 +41,12 @@ public class GuidedBreathing extends AppCompatActivity
 
         // Retrieve and set the user's preference for how long each breath will last
         Object preference = Database.GetPreference(Preferences.BREATHING_DURATION_FLOAT);
+        float breathDuration;
         if (preference == null)
         {
             // Error handling
             Log.e("Database Error", "Preference returned null");
-            breathDuration = -1;
+            breathDuration = 6.0f;
         }
         else
             breathDuration = (Float) preference;
@@ -76,24 +84,43 @@ public class GuidedBreathing extends AppCompatActivity
         else
             audio = (Boolean) preference;
 
-        ImageView imageView = (ImageView) findViewById(R.id.breathVisual);
+        preference = Database.GetPreference(Preferences.AUDIO_VOLUME_FLOAT);
+        if (preference == null)
+        {
+            Log.e("Database Error", "Preference returned null");
+            volume = 1.0f;
+        }
+        else
+            volume = (Float) preference;
+
+        float textScale;
+        preference = Database.GetPreference(Preferences.TEXT_SCALING_FLOAT);
+        if (preference == null)
+        {
+            Log.e("Database Error", "Preference returned null");
+            textScale = 1.0f;
+        }
+        else
+            textScale = (Float) preference;
+
+        // Scale the text on the screen according to the user's preference
         TextView textView = (TextView) findViewById(R.id.breathInstruction);
+        textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,textView.getTextSize() * textScale);
+
+        // Also for the button
+        Button button = (Button) findViewById(R.id.back_button);
+        button.setTextSize(TypedValue.COMPLEX_UNIT_PX, button.getTextSize() * textScale);
 
         // Prepare the breathing animation
         Animation breathAnim = AnimationUtils.loadAnimation(this, R.anim.breath_anim);
         // Convert the breath duration from seconds to milliseconds
         breathAnim.setDuration((long) breathDuration * 1000);
+        // Initialize it to the correct text
+        textView.setText(R.string.breatheInstructionIn);
         // Set up the handler for events during the animation
         breathAnim.setAnimationListener(new Animation.AnimationListener()
         {
-            // When it first starts, synchronize the boolean state with the text being displayed
-            @Override
-            public void onAnimationStart(Animation animation)
-            {
-                breatheIn = true;
-                textView.setText(R.string.breatheInstructionIn);
-            }
-
             // Whenever the animation repeats, toggle the state and text
             @Override
             public void onAnimationRepeat(Animation animation)
@@ -104,17 +131,10 @@ public class GuidedBreathing extends AppCompatActivity
                 // Initiate the animated transition to the new text
                 int stringID = (breatheIn) ? R.string.breatheInstructionIn : R.string.breatheInstructionOut;
                 fadeSwapTextView(textView, getString(stringID));
-
-                /*
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
-                {
-                    int effect = (breatheIn) ? VibrationEffect.EFFECT_TICK : VibrationEffect.EFFECT_HEAVY_CLICK;
-                    ((Vibrator) getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createPredefined(effect));
-                }
-                else
-                    Log.e("API level too low", "Can't test clicks");
-                 */
             }
+
+            @Override
+            public void onAnimationStart(Animation animation) { }
 
             @Override public void onAnimationEnd(Animation animation) { }
         });
@@ -165,14 +185,48 @@ public class GuidedBreathing extends AppCompatActivity
                 Log.e("Haptics Unsupported", "Device does not have amplitude control.");
         }
 
+        breatheIn = true;
+
         // Finally, start the breathing animation
-        imageView.startAnimation(breathAnim);
+        findViewById(R.id.breathVisual).startAnimation(breathAnim);
+        // And start the audio (it handles the user preference)
+        playAudio();
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        if (audioInstruction != null)
+        {
+            audioInstruction.release();
+            audioInstruction = null;
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("breatheIn", breatheIn);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState)
+    {
+        super.onRestoreInstanceState(savedInstanceState);
+        breatheIn = savedInstanceState.getBoolean("breatheIn");
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        playAudio();
     }
 
     public void onBack(View view)
     {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
         finish();
     }
 
@@ -190,15 +244,56 @@ public class GuidedBreathing extends AppCompatActivity
             @Override
             public void onAnimationRepeat(Animation animation) { }
 
-            // When the animation ends, change the text and start the animation to fade back in
+            // When the animation ends, change the text, start the animation to fade back in, and play the next audio cue
             @Override
             public void onAnimationEnd(Animation animation)
             {
                 textView.setText(text);
                 textView.startAnimation(fadeIn);
+                playAudio();
             }
         });
 
         textView.startAnimation(fadeOut);
+    }
+
+    private void playAudio()
+    {
+        // Only do something if the audio is enabled by the user
+        if (audio)
+        {
+            // Make sure any previous audio object is released to avoid memory leaks
+            if (audioInstruction != null)
+            {
+                audioInstruction.release();
+                audioInstruction = null;
+            }
+
+            // Load the correct audio file (either to breathe in or out)
+            int resourceID = (breatheIn) ? R.raw.breath_in : R.raw.breathe_out;
+            Uri path = Uri.parse("android.resource://" + getPackageName() + "/" + resourceID);
+            try
+            {
+                audioInstruction = new MediaPlayer();
+                audioInstruction.setDataSource(getApplicationContext(), path);
+            }
+            catch (IOException e)
+            {
+                Log.e("GuidedBreathing setMediaPlayer() exception", e.getMessage());
+                return;
+            }
+
+            // Then set the audio file to play as soon as it's prepared in another thread
+            audioInstruction.setOnPreparedListener(new MediaPlayer.OnPreparedListener()
+            {
+                @Override
+                public void onPrepared(MediaPlayer mp)
+                {
+                    audioInstruction.setVolume(0.5f * volume, 0.5f * volume);
+                    audioInstruction.start();
+                }
+            });
+            audioInstruction.prepareAsync();
+        }
     }
 }

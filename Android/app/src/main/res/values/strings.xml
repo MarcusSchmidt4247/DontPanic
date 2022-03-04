@@ -2,6 +2,10 @@
     <string name="app_name">Don\'t Panic!</string>
     <string name="emergencyLabel">Emergency, Left Side of Screen</string>
     <string name="generalLabel">General, Right Side of Screen</string>
+    <string name="backButtonLabel">Back</string>
+
+    <!-- String resources for the guided breathing module -->
     <string name="breatheInstructionIn">breathe in</string>
     <string name="breatheInstructionOut">breathe out</string>
+    <string name="guidedBreathingVisualDescription">Circle that expands and shrinks with each breath</string>
 </resources>
