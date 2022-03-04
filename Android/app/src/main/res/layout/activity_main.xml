@@ -61,10 +61,10 @@
         android:background="@drawable/rectangle_btn"
         android:fontFamily="sans-serif-light"
         android:paddingLeft="100px"
-        android:paddingTop="120px"
-        android:gravity="left"
+        android:paddingTop="1px"
+        android:gravity="left|center_vertical"
         android:text="The building blocks of \nwellbeing"
-        android:textAlignment="viewStart"
+
         android:textColor="@color/white"
         android:textFontWeight="300"
         android:textSize="40px" />
