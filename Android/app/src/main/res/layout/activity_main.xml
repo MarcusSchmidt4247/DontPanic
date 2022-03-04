@@ -18,10 +18,12 @@
         android:layout_weight="1"
         android:backgroundTint="@color/light_purple"
         android:contentDescription="@string/emergencyLabel"
-        android:textColor="@color/white"
         android:fontFamily="sans-serif"
-        android:textSize="55px"
-        android:text="Emergency" />
+        android:onClick="switchToEmergencyMode"
+        android:text="Emergency"
+        android:textColor="@color/white"
+        android:textSize="55px" />
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/genB"
@@ -30,8 +32,10 @@
         android:layout_weight="1"
         android:backgroundTint="@color/dark_purple"
         android:contentDescription="@string/generalLabel"
-        android:textColor="@color/white"
         android:fontFamily="sans-serif"
-        android:textSize="55px"
-        android:text="General Use" />
+        android:onClick="switchToGeneralUse"
+        android:text="General Use"
+        android:textColor="@color/white"
+        android:textSize="55px" />
+
 </LinearLayout>
