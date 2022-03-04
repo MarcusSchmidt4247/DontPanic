@@ -11,13 +11,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 
 
 public class MainActivity extends AppCompatActivity {
-    Button emergencyButton;
-    Button generalButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,17 +42,14 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Database.currentUserID = 1;
         }
-        emergencyButton = findViewById(R.id.emerB);
-        generalButton = findViewById(R.id.genB);
-        emergencyButton.setOnClickListener(v -> {       //this takes the main screen to the emergency screen/fragment
-            // Because the user has used the app before, send them to the main screen (for now the guided breathing app)
-            destinationIntent[0] = new Intent(this, GuidedBreathing.class);
-            startActivity(destinationIntent[0]);
-        });
-        generalButton.setOnClickListener(v -> {         //this takes the main screen to the general screen/fragment
-            // Future case, this will be redirected to the GeneralUseActivity
-            destinationIntent[0] = new Intent(this, GeneralUseActivity.class);
-            startActivity(destinationIntent[0]);
-        });
+    }
+
+    public void switchToEmergencyMode(View view) {
+        Intent intent = new Intent(this, GuidedBreathing.class);
+        startActivity(intent);
+    }
+    public void switchToGeneralUse(View view) {
+        Intent intent = new Intent(this, GeneralUseActivity.class);
+        startActivity(intent);
     }
 }

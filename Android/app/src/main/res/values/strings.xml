@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Don\'t Panic!</string>
-    <string name="emergencyLabel">Emergency, Left Side of Screen</string>
-    <string name="generalLabel">General, Right Side of Screen</string>
+    <string name="emergencyLabel">Emergency</string>
+    <string name="generalLabel">General</string>
     <string name="backButtonLabel">Back</string>
 
     <!-- String resources for the guided breathing module -->
