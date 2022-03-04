@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:weightSum="2"
     android:background="@color/dark_purple"
     tools:context=".MainActivity">
 
@@ -189,7 +190,6 @@
         android:textFontWeight="300"
         android:textSize="25px" />
 
-
     <!--
     The "android:contentDescription" exists to create a title for Screen Readers without
     actually showing text on the buttons themselves.  This leaves creative room for non-screen
@@ -202,16 +202,17 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="?android:attr/selectableItemBackground"
-        android:contentDescription="@string/emergencyLabel" />
+        android:backgroundTint="#780000"
+        android:contentDescription="@string/emergencyLabel"
+        android:onClick="GuidedBreathing"
+        android:text="Emergency" />
 
     <Button
         android:id="@+id/genB"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="?android:attr/selectableItemBackground"
+        android:backgroundTint="#060078"
         android:contentDescription="@string/generalLabel"
-        />
-
+        android:text="General Use" />
 </RelativeLayout>

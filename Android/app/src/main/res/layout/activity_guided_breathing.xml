@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:keepScreenOn="true"
     tools:context=".GuidedBreathing">
 
     <ImageView
@@ -17,7 +18,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/circle" />
+        app:srcCompat="@drawable/circle"
+        android:contentDescription="@string/guidedBreathingVisualDescription" />
 
     <Button
         android:id="@+id/back_button"
@@ -26,12 +28,16 @@
         android:layout_marginStart="24dp"
         android:layout_marginBottom="24dp"
         android:onClick="onBack"
-        android:text="Back"
+        android:text="@string/backButtonLabel"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
 
+    <!-- The text instruction is marked unimportant for accessibility because
+         the instruction to breathe in or out changes regularly and needs to be
+         communicated some other way than a content description (likely either audio
+         or haptics), so for consistency it's disabled. -->
     <TextView
         android:id="@+id/breathInstruction"
         android:layout_width="wrap_content"
@@ -41,5 +47,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:importantForAccessibility="no" />
 </androidx.constraintlayout.widget.ConstraintLayout>

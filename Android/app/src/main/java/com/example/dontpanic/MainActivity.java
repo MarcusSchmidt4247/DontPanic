@@ -10,11 +10,8 @@ package com.example.dontpanic;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-//import android.os.Handler;
 import android.util.Log;
 import android.widget.Button;
-//import android.widget.ImageView;
-import androidx.appcompat.app.AppCompatActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -24,14 +21,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_main);
 
         final Intent[] destinationIntent = new Intent[1];
 
         // Initialize the database
-        if (!Database.DatabaseExists(getApplicationContext()))
+        if (!Database.DatabaseExists(getApplicationContext()) || !Database.UserExists())
         {
-            /* If this is the first time launching the app (the database didn't already exist),
+            /* If this is the first time launching the app (the database didn't already exist or there are no user accounts),
                then add some sample data */
             Log.i("First Time Launch", "Creating sample data");
             int usrID = Database.CreateUser("John");
@@ -46,35 +43,18 @@ public class MainActivity extends AppCompatActivity {
             startActivity(destinationIntent[0]);
         } else {
             Database.currentUserID = 1;
-            setContentView(R.layout.activity_main);
-
-            emergencyButton = findViewById(R.id.emerB);
-            generalButton = findViewById(R.id.genB);
-            emergencyButton.setOnClickListener(v -> {       //this takes the main screen to the emergency screen/fragment
-                // Because the user has used the app before, send them to the main screen (for now the guided breathing app)
-                destinationIntent[0] = new Intent(this, GuidedBreathing.class);
-                startActivity(destinationIntent[0]);
-            });
-            generalButton.setOnClickListener(v -> {         //this takes the main screen to the general screen/fragment
-                // Future case, this will be redirected to the GeneralUseActivity
-                destinationIntent[0] = new Intent(this, GeneralUseActivity.class);
-                startActivity(destinationIntent[0]);
-
-            });
         }
-
-
-
-        /*
-        // Wait three seconds on the splash screen and then launch the intent to go to the next screen
-        // Source: https://stackoverflow.com/questions/17237287
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                startActivity(destinationIntent);
-                finish();
-            }
-        }, 3000);
-        */
+        emergencyButton = findViewById(R.id.emerB);
+        generalButton = findViewById(R.id.genB);
+        emergencyButton.setOnClickListener(v -> {       //this takes the main screen to the emergency screen/fragment
+            // Because the user has used the app before, send them to the main screen (for now the guided breathing app)
+            destinationIntent[0] = new Intent(this, GuidedBreathing.class);
+            startActivity(destinationIntent[0]);
+        });
+        generalButton.setOnClickListener(v -> {         //this takes the main screen to the general screen/fragment
+            // Future case, this will be redirected to the GeneralUseActivity
+            destinationIntent[0] = new Intent(this, GeneralUseActivity.class);
+            startActivity(destinationIntent[0]);
+        });
     }
 }
