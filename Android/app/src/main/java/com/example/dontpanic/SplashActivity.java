@@ -5,7 +5,9 @@
 
 package com.example.dontpanic;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,5 +20,15 @@ public class SplashActivity extends AppCompatActivity {
         ImageView imageSplashScreen = (ImageView) findViewById(R.id.imageSplashScreen);
         imageSplashScreen.setImageResource(R.drawable.icon);
 
+        // Wait three seconds on the splash screen and then launch the intent to go to the next screen
+        // Source: https://stackoverflow.com/questions/17237287
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }, 3000);
     }
 }
