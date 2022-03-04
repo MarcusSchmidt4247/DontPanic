@@ -12,16 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DontPanic">
         <activity
-            android:name=".FirstActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".GuidedBreathing"
-            android:exported="false"
-            />
-        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -29,6 +19,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".FirstActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GuidedBreathing"
+            android:exported="false"
+            />
     </application>
 
 </manifest>

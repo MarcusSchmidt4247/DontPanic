@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_main);
 
         final Intent[] destinationIntent = new Intent[1];
 
@@ -43,21 +43,18 @@ public class MainActivity extends AppCompatActivity {
             startActivity(destinationIntent[0]);
         } else {
             Database.currentUserID = 1;
-            setContentView(R.layout.activity_main);
-
-            emergencyButton = findViewById(R.id.emerB);
-            generalButton = findViewById(R.id.genB);
-            emergencyButton.setOnClickListener(v -> {       //this takes the main screen to the emergency screen/fragment
-                // Because the user has used the app before, send them to the main screen (for now the guided breathing app)
-                destinationIntent[0] = new Intent(this, GuidedBreathing.class);
-                startActivity(destinationIntent[0]);
-            });
-            generalButton.setOnClickListener(v -> {         //this takes the main screen to the general screen/fragment
-                // Future case, this will be redirected to the GeneralUseActivity
-                destinationIntent[0] = new Intent(this, GeneralUseActivity.class);
-                startActivity(destinationIntent[0]);
-
-            });
         }
+        emergencyButton = findViewById(R.id.emerB);
+        generalButton = findViewById(R.id.genB);
+        emergencyButton.setOnClickListener(v -> {       //this takes the main screen to the emergency screen/fragment
+            // Because the user has used the app before, send them to the main screen (for now the guided breathing app)
+            destinationIntent[0] = new Intent(this, GuidedBreathing.class);
+            startActivity(destinationIntent[0]);
+        });
+        generalButton.setOnClickListener(v -> {         //this takes the main screen to the general screen/fragment
+            // Future case, this will be redirected to the GeneralUseActivity
+            destinationIntent[0] = new Intent(this, GeneralUseActivity.class);
+            startActivity(destinationIntent[0]);
+        });
     }
 }

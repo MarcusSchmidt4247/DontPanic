@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_purple"
-    tools:context=".MainActivity">
+    android:weightSum="2">
 
     <!--
     The "android:contentDescription" exists to create a title for Screen Readers without
@@ -19,15 +16,18 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="?android:attr/selectableItemBackground"
-        android:contentDescription="@string/emergencyLabel" />
+        android:backgroundTint="#780000"
+        android:contentDescription="@string/emergencyLabel"
+        android:onClick="GuidedBreathing"
+        android:text="Emergency" />
 
     <Button
         android:id="@+id/genB"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="?android:attr/selectableItemBackground"
+        android:backgroundTint="#060078"
         android:contentDescription="@string/generalLabel"
-        />
-</RelativeLayout>
+        android:text="General Use" />
+
+</LinearLayout>
