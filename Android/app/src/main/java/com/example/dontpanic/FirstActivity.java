@@ -21,6 +21,10 @@ public class FirstActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
 
+        Intent intent = new Intent(FirstActivity.this, SplashActivity.class);
+        startActivity(intent);
+        finish();
+
         /*
          * Returns the name of the main component registered from JavaScript. This is used to schedule
          * rendering of the component.
