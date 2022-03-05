@@ -1,192 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="2"
     android:background="@color/dark_purple"
     tools:context=".GeneralUseActivity">
 
+
     <TextView
         android:id="@+id/MainView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
+        android:layout_width="178dp"
+        android:layout_height="66dp"
 
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="146dp"
-
-        android:layout_marginEnd="155dp"
-        android:layout_marginBottom="534dp"
         android:fontFamily="sans-serif-black"
-        android:text="HELLO, THERE!"
+        android:text="DONT PANIC"
         android:textColor="@color/white"
         android:textFontWeight="800"
-        android:textSize="80px" />
+        android:textSize="80px"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.175"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.186" />
 
     <TextView
         android:id="@+id/MainView2"
-        android:layout_width="229dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
+        android:layout_width="212dp"
+        android:layout_height="101dp"
 
-        android:layout_marginStart="25dp"
-
-        android:layout_marginTop="55dp"
-        android:layout_marginEnd="157dp"
-        android:layout_marginBottom="666dp"
         android:fontFamily="sans-serif-black"
         android:text="THOUGHT OF THE DAY"
         android:textColor="@color/white"
         android:textFontWeight="500"
-        android:textSize="50px" />
+        android:textSize="50px"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.206"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.26" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/mainButton"
-        android:layout_width="356dp"
-        android:layout_height="170dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
+        android:layout_width="329dp"
+        android:layout_height="184dp"
 
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="26dp"
-        android:layout_marginEnd="28dp"
-
-        android:layout_marginBottom="482dp"
         android:background="@drawable/rectangle_btn"
         android:fontFamily="sans-serif-light"
+        android:gravity="left|center_vertical"
         android:paddingLeft="100px"
         android:paddingTop="1px"
-        android:gravity="left|center_vertical"
         android:text="The building blocks of \nwellbeing"
-
         android:textColor="@color/white"
         android:textFontWeight="300"
-        android:textSize="40px" />
+        android:textSize="40px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.366" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/mainButton2"
-        android:layout_width="176dp"
-        android:layout_height="76dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
+        android:layout_width="124dp"
+        android:layout_height="37dp"
 
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="22dp"
-        android:layout_marginEnd="213dp"
-
-        android:layout_marginBottom="371dp"
-        android:background="@drawable/rectangle_btn"
-        android:fontFamily="sans-serif-light"
-        android:text="Modules"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textFontWeight="300"
-        android:textSize="32px" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/mainButton3"
-        android:layout_width="176dp"
-        android:layout_height="76dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="211dp"
-        android:layout_marginEnd="24dp"
-
-        android:layout_marginBottom="371dp"
-        android:background="@drawable/rectangle_btn"
-        android:fontFamily="sans-serif-light"
-        android:text="Guided Breathing"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textFontWeight="300"
-        android:textSize="32px" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/mainButton4"
-        android:layout_width="176dp"
-        android:layout_height="76dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="215dp"
-
-        android:layout_marginBottom="279dp"
-        android:background="@drawable/rectangle_btn"
-        android:fontFamily="sans-serif-light"
-        android:text="Mental Excercises"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textFontWeight="300"
-        android:textSize="32px" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/mainButton5"
-        android:layout_width="176dp"
-        android:layout_height="76dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="215dp"
-
-        android:layout_marginBottom="187dp"
-        android:background="@drawable/rectangle_btn"
-        android:fontFamily="sans-serif-light"
-        android:text="App Excercises"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textFontWeight="300"
-        android:textSize="32px" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/mainButton6"
-        android:layout_width="176dp"
-        android:layout_height="76dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="211dp"
-        android:layout_marginEnd="24dp"
-
-        android:layout_marginBottom="281dp"
-        android:background="@drawable/rectangle_btn"
-        android:fontFamily="sans-serif-light"
-        android:text="Self-Reflection"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textFontWeight="300"
-        android:textSize="32px" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/mainButton7"
-        android:layout_width="100dp"
-        android:layout_height="36dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="247dp"
-        android:layout_marginEnd="64dp"
-
-        android:layout_marginBottom="509dp"
         android:background="@drawable/roundblack_btn"
         android:fontFamily="sans-serif-light"
         android:text="Read more"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textFontWeight="300"
-        android:textSize="25px" />
-</RelativeLayout>
+        android:textSize="25px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.745"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.451" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/mainButton3"
+        android:layout_width="163dp"
+        android:layout_height="69dp"
+
+        android:background="@drawable/rectangle_btn"
+        android:fontFamily="sans-serif-light"
+        android:text="MODULES"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="32px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.143"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.581" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/mainButton4"
+        android:layout_width="163dp"
+        android:layout_height="69dp"
+
+        android:background="@drawable/rectangle_btn"
+        android:fontFamily="sans-serif-light"
+        android:text="SETTINGS"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="32px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.862"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.581" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/mainButton5"
+        android:layout_width="163dp"
+        android:layout_height="69dp"
+
+        android:background="@drawable/rectangle_btn"
+        android:fontFamily="sans-serif-light"
+        android:text="NOTIFICATIONS"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="32px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.145"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.695" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/mainButton6"
+        android:layout_width="163dp"
+        android:layout_height="69dp"
+
+        android:background="@drawable/rectangle_btn"
+        android:fontFamily="sans-serif-light"
+        android:text="HELP"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="32px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.862"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.694" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
