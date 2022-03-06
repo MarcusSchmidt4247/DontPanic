@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- MS: 3/6/22 - first design pass -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_purple"
+    tools:context=".SettingsActivity">
+
+    <TextView
+        android:id="@+id/settingsHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="APP SETTINGS"
+        android:theme="@style/HeaderLevelOne"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--
+    General settings items
+    -->
+
+    <TextView
+        android:id="@+id/generalSettingsHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="GENERAL"
+        android:theme="@style/HeaderLevelTwo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settingsHeader" />
+
+    <LinearLayout
+        android:id="@+id/volumeLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/generalSettingsHeader"
+        app:layout_constraintTop_toBottomOf="@+id/generalSettingsHeader">
+
+        <TextView
+            android:id="@+id/volumeLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Master Volume"
+            android:textAlignment="textStart"
+            android:theme="@style/BodyText" />
+
+        <SeekBar
+            android:id="@+id/VolumeBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:max="10"
+            android:progress="5"
+            android:theme="@style/SeekBarDark" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="sans-serif-light"
+        android:maxWidth="300dp"
+        android:text="Enable Haptics"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:theme="@style/SwitchDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/generalSettingsHeader"
+        app:layout_constraintTop_toBottomOf="@+id/volumeLayout" />
+
+    <LinearLayout
+        android:id="@+id/hapticStrengthLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/switch2"
+        app:layout_constraintTop_toBottomOf="@+id/switch2">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Haptic Strength"
+            android:textAlignment="textStart"
+            android:theme="@style/BodyText" />
+
+        <SeekBar
+            android:id="@+id/HapticStrengthBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:max="10"
+            android:progress="5"
+            android:theme="@style/SeekBarDark" />
+    </LinearLayout>
+
+    <!--
+    Accessibility settings items
+    -->
+
+    <TextView
+        android:id="@+id/accessibilitySettingsHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="ACCESSIBILITY"
+        android:theme="@style/HeaderLevelTwo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hapticStrengthLayout" />
+
+    <LinearLayout
+        android:id="@+id/textSizeLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/accessibilitySettingsHeader"
+        app:layout_constraintTop_toBottomOf="@+id/accessibilitySettingsHeader">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Text Scale"
+            android:textAlignment="textStart"
+            android:theme="@style/BodyText" />
+
+        <SeekBar
+            android:id="@+id/TextScaleBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:max="10"
+            android:progress="5"
+            android:theme="@style/SeekBarDark" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
