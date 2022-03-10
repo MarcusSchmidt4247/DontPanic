@@ -113,6 +113,7 @@
 
         android:background="@drawable/rectangle_btn"
         android:fontFamily="sans-serif-light"
+        android:onClick="switchToSettingsActivity"
         android:text="SETTINGS"
         android:textAlignment="center"
         android:textColor="@color/white"
