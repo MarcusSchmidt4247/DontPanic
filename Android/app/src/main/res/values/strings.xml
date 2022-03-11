@@ -25,10 +25,15 @@
     <string name="deleteButton">Delete</string>
     <string name="sellAllSequencesButton">Sell All Sequences</string>
 
-
-
     <!-- String resources for the General Use Screen -->
     <string name="title">DON\'T PANIC</string>
+    <string name="thought">THOUGHT OF THE DAY</string>
+    <string name="wellBeing">The building blocks of \nwellbeing</string>
+    <string name="readMore">Read more</string>
+    <string name="modulesGeneral">MODULES</string>
+    <string name="settingsButton">SETTINGS</string>
+    <string name="notificationsButton">NOTIFICATIONS</string>
+    <string name="helpButton">HELP</string>
 
     <!-- String resources for Settings -->
     <string name="appSettings">SETTINGS</string>
