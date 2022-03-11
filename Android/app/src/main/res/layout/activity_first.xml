@@ -13,7 +13,7 @@
         android:layout_height="178dp"
 
         android:fontFamily="sans-serif-black"
-        android:text="DON'T PANIC"
+        android:text="@string/title"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textFontWeight="800"
@@ -30,7 +30,7 @@
         android:layout_height="86dp"
 
         android:fontFamily="sans-serif-black"
-        android:text="Everyone experiences times of anxiety in their life."
+        android:text="@string/description1"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textFontWeight="500"
@@ -49,7 +49,7 @@
 
         android:background="@drawable/round_btn"
         android:fontFamily="sans-serif-light"
-        android:text="Let's Get Started"
+        android:text="@string/description2"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textFontWeight="300"

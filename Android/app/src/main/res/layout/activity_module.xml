@@ -14,7 +14,7 @@
         android:layout_height="47dp"
 
         android:fontFamily="sans-serif-black"
-        android:text="MODULES"
+        android:text="@string/modulesButton"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textFontWeight="800"
@@ -36,7 +36,7 @@
         android:paddingLeft="100px"
         android:paddingRight="100px"
         android:paddingBottom="70px"
-        android:text="Last Completed Module: \nHaptic Heartbeat"
+        android:text="@string/lastCompletedModuleButton"
         android:textColor="@color/white"
         android:textFontWeight="300"
         android:textSize="42px"
@@ -54,7 +54,7 @@
 
         android:background="@drawable/roundblack_btn"
         android:fontFamily="sans-serif-light"
-        android:text="Launch"
+        android:text="@string/launchModuleButton"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textFontWeight="300"
@@ -74,7 +74,7 @@
 
         android:background="@drawable/rectangle_btn"
         android:fontFamily="sans-serif-light"
-        android:text="Sell All Modules"
+        android:text="@string/sellAllModulesButton"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textFontWeight="300"
@@ -92,7 +92,7 @@
         android:layout_height="84dp"
 
         android:fontFamily="sans-serif-black"
-        android:text="MODULES SEQUENCES"
+        android:text="@string/moduleSequencesButton"
         android:textAlignment="center"
         android:textColor="@color/white"
 
@@ -116,7 +116,7 @@
         android:paddingLeft="100px"
         android:paddingRight="100px"
         android:paddingBottom="70px"
-        android:text="Last Completed Sequences: \nMy Favorite Sequence"
+        android:text="@string/lastCompletedSequenceButton"
         android:textColor="@color/white"
         android:textFontWeight="300"
         android:textSize="42px"
@@ -135,7 +135,7 @@
 
         android:background="@drawable/roundblack_btn"
         android:fontFamily="sans-serif-light"
-        android:text="Launch"
+        android:text="@string/launchModuleSequencesButton"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textFontWeight="300"
@@ -155,7 +155,7 @@
 
         android:background="@drawable/roundblack_btn"
         android:fontFamily="sans-serif-light"
-        android:text="Edit"
+        android:text="@string/editButton"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textFontWeight="300"
@@ -175,7 +175,7 @@
 
         android:background="@drawable/roundblack_btn"
         android:fontFamily="sans-serif-light"
-        android:text="Delete"
+        android:text="@string/deleteButton"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textFontWeight="300"
@@ -195,7 +195,7 @@
 
         android:background="@drawable/rectangle_btn"
         android:fontFamily="sans-serif-light"
-        android:text="Sell All Sequences"
+        android:text="@string/sellAllSequencesButton"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textFontWeight="300"
