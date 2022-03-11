@@ -58,7 +58,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:max="10"
-            android:progress="5"
             android:theme="@style/SeekBarDark" />
     </LinearLayout>
 
@@ -104,7 +103,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:max="10"
-            android:progress="5"
             android:theme="@style/SeekBarDark" />
     </LinearLayout>
 

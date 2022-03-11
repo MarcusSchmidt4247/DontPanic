@@ -1,4 +1,5 @@
 // MS: 3/6/22 - initial code, plus setting sliders and switches to match database values
+// MS: 3/10/22 - SeekBar listener pushes new value to the database
 
 package com.example.dontpanic;
 
@@ -75,18 +76,15 @@ public class SettingsActivity extends AppCompatActivity
             hapticStrength.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
+                    if (b) {
+                        float val = (float) seekBar.getProgress() / (float) (seekBar.getMax() / 2);
+                        Database.SetPreference(Preferences.HAPTIC_STRENGTH_FLOAT, val);
+                    }
                 }
 
-                @Override
-                public void onStartTrackingTouch(SeekBar seekBar) {
+                @Override public void onStartTrackingTouch(SeekBar seekBar) { }
 
-                }
-
-                @Override
-                public void onStopTrackingTouch(SeekBar seekBar) {
-
-                }
+                @Override public void onStopTrackingTouch(SeekBar seekBar) { }
             });
         } catch (Exception e) {
             e.printStackTrace();
