@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_purple"
+    tools:context=".Module">
+
+
+    <TextView
+        android:id="@+id/ModuleView"
+        android:layout_width="155dp"
+        android:layout_height="47dp"
+
+        android:fontFamily="sans-serif-black"
+        android:text="MODULES"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="800"
+        android:textSize="80px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.14" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/moduleButton"
+        android:layout_width="329dp"
+        android:layout_height="184dp"
+
+        android:background="@drawable/rectangle_btn"
+        android:fontFamily="sans-serif-light"
+        android:paddingLeft="100px"
+        android:paddingRight="100px"
+        android:paddingBottom="70px"
+        android:text="Last Completed Module: \nHaptic Heartbeat"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="42px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.247" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/moduleButton2"
+        android:layout_width="124dp"
+        android:layout_height="37dp"
+
+        android:background="@drawable/roundblack_btn"
+        android:fontFamily="sans-serif-light"
+        android:text="Launch"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="30px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.352" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/moduleButton3"
+        android:layout_width="219dp"
+        android:layout_height="52dp"
+
+        android:background="@drawable/rectangle_btn"
+        android:fontFamily="sans-serif-light"
+        android:text="Sell All Modules"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="32px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.451" />
+
+    <TextView
+        android:id="@+id/ModuleView2"
+        android:layout_width="270dp"
+        android:layout_height="84dp"
+
+        android:fontFamily="sans-serif-black"
+        android:text="MODULES SEQUENCES"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+
+        android:textFontWeight="800"
+        android:textSize="80px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.574" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/moduleButton4"
+        android:layout_width="329dp"
+        android:layout_height="184dp"
+
+        android:background="@drawable/rectangle_btn"
+        android:fontFamily="sans-serif-light"
+        android:paddingLeft="100px"
+        android:paddingRight="100px"
+        android:paddingBottom="70px"
+        android:text="Last Completed Sequences: \nMy Favorite Sequence"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="42px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.787" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/moduleButton5"
+        android:layout_width="86dp"
+        android:layout_height="35dp"
+
+        android:background="@drawable/roundblack_btn"
+        android:fontFamily="sans-serif-light"
+        android:text="Launch"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="30px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.215"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.789" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/moduleButton6"
+        android:layout_width="86dp"
+        android:layout_height="35dp"
+
+        android:background="@drawable/roundblack_btn"
+        android:fontFamily="sans-serif-light"
+        android:text="Edit"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="30px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.789" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/moduleButton7"
+        android:layout_width="86dp"
+        android:layout_height="35dp"
+
+        android:background="@drawable/roundblack_btn"
+        android:fontFamily="sans-serif-light"
+        android:text="Delete"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="30px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.781"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.788" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/moduleButton8"
+        android:layout_width="219dp"
+        android:layout_height="52dp"
+
+        android:background="@drawable/rectangle_btn"
+        android:fontFamily="sans-serif-light"
+        android:text="Sell All Sequences"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="32px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.904" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
