@@ -10,8 +10,8 @@
 
     <TextView
         android:id="@+id/MainView"
-        android:layout_width="178dp"
-        android:layout_height="66dp"
+        android:layout_width="186dp"
+        android:layout_height="42dp"
 
         android:fontFamily="sans-serif-black"
         android:text="DONT PANIC"
@@ -21,15 +21,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.175"
+        app:layout_constraintHorizontal_bias="0.137"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.186" />
+        app:layout_constraintVertical_bias="0.2" />
 
     <TextView
         android:id="@+id/MainView2"
-        android:layout_width="212dp"
-        android:layout_height="101dp"
+        android:layout_width="189dp"
+        android:layout_height="47dp"
 
         android:fontFamily="sans-serif-black"
         android:text="THOUGHT OF THE DAY"
@@ -39,10 +39,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.206"
+        app:layout_constraintHorizontal_bias="0.138"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.26" />
+        app:layout_constraintVertical_bias="0.318" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/mainButton"
@@ -53,7 +53,7 @@
         android:fontFamily="sans-serif-light"
         android:gravity="left|center_vertical"
         android:paddingLeft="100px"
-        android:paddingTop="1px"
+        android:paddingTop="2px"
         android:text="The building blocks of \nwellbeing"
         android:textColor="@color/white"
         android:textFontWeight="300"
@@ -61,9 +61,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
 
+        app:layout_constraintHorizontal_bias="0.186"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.366" />
+        app:layout_constraintVertical_bias="0.775" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/mainButton2"
@@ -80,15 +81,16 @@
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.745"
+        app:layout_constraintHorizontal_bias="0.415"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.451" />
+        app:layout_constraintVertical_bias="0.796"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/mainButton3"
-        android:layout_width="163dp"
-        android:layout_height="69dp"
+        android:layout_width="116dp"
+        android:layout_height="52dp"
 
         android:background="@drawable/rectangle_btn"
         android:fontFamily="sans-serif-light"
@@ -100,16 +102,15 @@
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.143"
+        app:layout_constraintHorizontal_bias="0.681"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.581" />
-
+        app:layout_constraintVertical_bias="0.59" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/mainButton4"
-        android:layout_width="163dp"
-        android:layout_height="69dp"
+        android:layout_width="116dp"
+        android:layout_height="52dp"
 
         android:background="@drawable/rectangle_btn"
         android:fontFamily="sans-serif-light"
@@ -122,15 +123,15 @@
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.862"
+        app:layout_constraintHorizontal_bias="0.894"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.581" />
+        app:layout_constraintVertical_bias="0.59" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/mainButton5"
-        android:layout_width="163dp"
-        android:layout_height="69dp"
+        android:layout_width="116dp"
+        android:layout_height="52dp"
 
         android:background="@drawable/rectangle_btn"
         android:fontFamily="sans-serif-light"
@@ -142,15 +143,15 @@
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.145"
+        app:layout_constraintHorizontal_bias="0.681"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.695" />
+        app:layout_constraintVertical_bias="0.788" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/mainButton6"
-        android:layout_width="163dp"
-        android:layout_height="69dp"
+        android:layout_width="116dp"
+        android:layout_height="52dp"
 
         android:background="@drawable/rectangle_btn"
         android:fontFamily="sans-serif-light"
@@ -162,9 +163,9 @@
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.862"
+        app:layout_constraintHorizontal_bias="0.894"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.694" />
+        app:layout_constraintVertical_bias="0.788" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

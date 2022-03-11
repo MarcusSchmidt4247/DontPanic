@@ -8,4 +8,16 @@
     <string name="breatheInstructionIn">breathe in</string>
     <string name="breatheInstructionOut">breathe out</string>
     <string name="guidedBreathingVisualDescription">Circle that expands and shrinks with each breath</string>
+
+    <!-- String resources for Settings -->
+    <string name="appSettings">APP SETTINGS</string>
+
+    <string name="generalSettings">GENERAL</string>
+    <string name="volumeSettings">Master Volume</string>
+    <string name="hapticsSettings">Enable Haptics</string>
+    <string name="hapticsStrength">Haptic Strength</string>
+
+    <string name="accessibilitySettings">ACCESSIBILITY</string>
+    <string name="textScale">Text Scale</string>
+
 </resources>
