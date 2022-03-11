@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_purple"
+    tools:context=".Module">
+
+
+    <TextView
+        android:id="@+id/ModuleView"
+        android:layout_width="155dp"
+        android:layout_height="47dp"
+
+        android:fontFamily="sans-serif-black"
+        android:text="MODULES"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="800"
+        android:textSize="75px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.23"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/moduleButton"
+        android:layout_width="275dp"
+        android:layout_height="145dp"
+
+        android:background="@drawable/rectangle_btn"
+        android:fontFamily="sans-serif-light"
+        android:paddingLeft="100px"
+        android:paddingRight="100px"
+        android:paddingBottom="70px"
+        android:text="Last Completed Module: \nHaptic Heartbeat"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="32px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="0.164"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.59" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/moduleButton2"
+        android:layout_width="121dp"
+        android:layout_height="34dp"
+
+        android:background="@drawable/roundblack_btn"
+        android:fontFamily="sans-serif-light"
+        android:text="Launch"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="25px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.253"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.663" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/moduleButton3"
+        android:layout_width="219dp"
+        android:layout_height="52dp"
+
+        android:background="@drawable/rectangle_btn"
+        android:fontFamily="sans-serif-light"
+        android:text="Sell All Modules"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="32px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.207"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.894" />
+
+    <TextView
+        android:id="@+id/ModuleView2"
+        android:layout_width="270dp"
+        android:layout_height="84dp"
+
+        android:fontFamily="sans-serif-black"
+        android:text="MODULES SEQUENCES"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+
+        android:textFontWeight="800"
+        android:textSize="75px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.863"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.195" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/moduleButton4"
+        android:layout_width="275dp"
+        android:layout_height="145dp"
+
+        android:background="@drawable/rectangle_btn"
+        android:fontFamily="sans-serif-light"
+        android:paddingLeft="100px"
+        android:paddingRight="100px"
+        android:paddingBottom="70px"
+        android:text="Last Completed Sequences: \nMy Favorite Sequence"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="32px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="0.861"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.59" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/moduleButton5"
+        android:layout_width="76dp"
+        android:layout_height="28dp"
+
+        android:background="@drawable/roundblack_btn"
+        android:fontFamily="sans-serif-light"
+        android:text="Launch"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="25px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.621"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/moduleButton6"
+        android:layout_width="76dp"
+        android:layout_height="28dp"
+
+        android:background="@drawable/roundblack_btn"
+        android:fontFamily="sans-serif-light"
+        android:text="Edit"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="25px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.877"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/moduleButton7"
+        android:layout_width="76dp"
+        android:layout_height="28dp"
+
+        android:background="@drawable/roundblack_btn"
+        android:fontFamily="sans-serif-light"
+        android:text="Delete"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="25px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.749"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/moduleButton8"
+        android:layout_width="219dp"
+        android:layout_height="52dp"
+
+        android:background="@drawable/rectangle_btn"
+        android:fontFamily="sans-serif-light"
+        android:text="Sell All Sequences"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="32px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.812"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.894" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
