@@ -13,7 +13,7 @@
         android:layout_height="66dp"
 
         android:fontFamily="sans-serif-black"
-        android:text="DONT PANIC"
+        android:text="@string/title"
         android:textColor="@color/white"
         android:textFontWeight="800"
         android:textSize="80px"
@@ -85,7 +85,7 @@
         app:layout_constraintVertical_bias="0.451" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/mainButton3"
+        android:id="@+id/buttonModules"
         android:layout_width="163dp"
         android:layout_height="69dp"
 
@@ -106,7 +106,7 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/mainButton4"
+        android:id="@+id/buttonSettings"
         android:layout_width="163dp"
         android:layout_height="69dp"
 
@@ -127,7 +127,7 @@
         app:layout_constraintVertical_bias="0.581" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/mainButton5"
+        android:id="@+id/buttonNotifications"
         android:layout_width="163dp"
         android:layout_height="69dp"
 
@@ -147,7 +147,7 @@
         app:layout_constraintVertical_bias="0.695" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/mainButton6"
+        android:id="@+id/buttonHelp"
         android:layout_width="163dp"
         android:layout_height="69dp"
 

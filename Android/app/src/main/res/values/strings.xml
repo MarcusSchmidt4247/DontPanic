@@ -9,6 +9,15 @@
     <string name="breatheInstructionOut">breathe out</string>
     <string name="guidedBreathingVisualDescription">Circle that expands and shrinks with each breath</string>
 
+    <!-- String resources for the First View Screen -->
+
+
+    <!-- String resources for the Modules Screen -->
+
+
+    <!-- String resources for the General Use Screen -->
+    <string name="title">DONT PANIC</string>
+
     <!-- String resources for Settings -->
     <string name="appSettings">SETTINGS</string>
     <string name="settingsBack">Back to Settings</string>
