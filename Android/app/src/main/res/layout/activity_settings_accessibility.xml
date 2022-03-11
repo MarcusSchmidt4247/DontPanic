@@ -8,39 +8,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/settingsHeader"
+    <TextView
+        android:id="@+id/accessibilitySettingsHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:onClick="switchToAppSettings"
-        android:text="@string/appSettings"
+        android:text="@string/accessibilitySettings"
         android:theme="@style/HeaderLevelOne"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/accessibilitySettingsHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/accessibilitySettings"
-        android:theme="@style/HeaderLevelTwo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settingsHeader" />
-
     <LinearLayout
         android:id="@+id/textSizeLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/accessibilitySettingsHeader"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/accessibilitySettingsHeader">
 
         <TextView
@@ -60,5 +48,18 @@
             android:max="10"
             android:theme="@style/SeekBarDark" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/settingsHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/rectangle_btn"
+        android:onClick="switchToAppSettings"
+        android:text="@string/settingsBack"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

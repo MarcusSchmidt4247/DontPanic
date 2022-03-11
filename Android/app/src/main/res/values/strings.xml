@@ -10,7 +10,8 @@
     <string name="guidedBreathingVisualDescription">Circle that expands and shrinks with each breath</string>
 
     <!-- String resources for Settings -->
-    <string name="appSettings">APP SETTINGS</string>
+    <string name="appSettings">SETTINGS</string>
+    <string name="settingsBack">Back to Settings</string>
 
     <string name="generalSettings">GENERAL</string>
     <string name="volumeSettings">Master Volume</string>

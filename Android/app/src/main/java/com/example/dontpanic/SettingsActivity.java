@@ -75,16 +75,14 @@ public class SettingsActivity extends AppCompatActivity
         try {
             hapticStrength.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
-                public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                    if (b) {
-                        float val = (float) seekBar.getProgress() / (float) (seekBar.getMax() / 2);
-                        Database.SetPreference(Preferences.HAPTIC_STRENGTH_FLOAT, val);
-                    }
-                }
+                public void onProgressChanged(SeekBar seekBar, int i, boolean b) { }
 
                 @Override public void onStartTrackingTouch(SeekBar seekBar) { }
 
-                @Override public void onStopTrackingTouch(SeekBar seekBar) { }
+                @Override public void onStopTrackingTouch(SeekBar seekBar) {
+                    float val = (float) seekBar.getProgress() / (float) (seekBar.getMax() / 2);
+                    Database.SetPreference(Preferences.HAPTIC_STRENGTH_FLOAT, val);
+                }
             });
         } catch (Exception e) {
             e.printStackTrace();
