@@ -9,6 +9,16 @@
     <string name="breatheInstructionOut">breathe out</string>
     <string name="guidedBreathingVisualDescription">Circle that expands and shrinks with each breath</string>
 
+    <!-- String resources for Module Sequences -->
+    <string name="sequencesHeader">SEQUENCES</string>
+    <string name="mySequencesHeader">My Sequences:</string>
+    <string name="noSequencesText">No sequences. Create one below!</string>
+    <string name="defaultSequenceName">Default Sequence</string>
+    <string name="launchSequenceButton">Launch</string>
+    <string name="editSequenceButton">Edit</string>
+    <string name="deleteSequenceButton">Delete</string>
+    <string name="createSequenceButton">Create Sequence</string>
+
     <!-- String resources for Settings -->
     <string name="appSettings">SETTINGS</string>
     <string name="settingsBack">Back to Settings</string>

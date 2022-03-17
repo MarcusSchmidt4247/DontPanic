@@ -8,6 +8,7 @@
 // MS: 2/23/22 - added more preference handling, rewrote GetModulesInSequence() to return new type Module
 // MS: 2/27/22 - a few minor improvements to safety and/or efficiency, wrote PrintTable() function for testing purposes
 // MS: 2/28/22 - added two new preferences, SetPreference(), and UserExists()
+// MS: 3/17/22 - added GetUserSequenceIDs() and converted GetModulesInSequence() to GetSequence() using new Sequence object
 
 package com.example.dontpanic;
 
@@ -332,32 +333,25 @@ public final class Database
         }
     }
 
-    //*********************************************************************
-    // Functions that have to do with modules inside of a module sequence *
-    //*********************************************************************
-
-    // Returns a List of the sequence's module ID's in order, or null on failure
-    public static ArrayList<Module> GetModulesInSequence(int seqID)
+    // Return a list of all of the current user's sequence ID's
+    public static ArrayList<Integer> GetUserSequenceIDs()
     {
         // Ensure that there is a valid connection to the database
-        if (!DatabaseConnected())
+        if (!DatabaseConnected() || currentUserID == -1)
             return null;
-        
-        ArrayList<Module> sequence = new ArrayList<>();
+
+        ArrayList<Integer> sequences = new ArrayList<>();
         try
         {
-            // Query the modID column and add each result to 'sequence'
-            SQLiteCursor results = (SQLiteCursor) db.rawQuery("SELECT modID FROM SequenceOrder WHERE seqID = ? ORDER BY modOrder ASC", new String[] { String.valueOf(seqID) });
-            int modID;
+            SQLiteCursor results = (SQLiteCursor) db.rawQuery("SELECT ID FROM ModuleSequence WHERE usrID = ? ORDER BY ID ASC", new String[] { String.valueOf(currentUserID) });
+            int seqID;
             while (results.moveToNext())
             {
-                // Extract the ID of the next module in the sequence
-                modID = results.getInt(results.getColumnIndex("modID"));
-                // Then add an instance of this type of module to the sequence
-                sequence.add(Module.InstanceOf(modID));
+                seqID = results.getInt(results.getColumnIndex("ID"));
+                sequences.add(seqID);
             }
             results.close();
-            return sequence;
+            return sequences;
         }
         catch (SQLException e)
         {
@@ -365,6 +359,50 @@ public final class Database
             return null;
         }
     }
+
+    // Returns a Sequence object, or null on failure
+    public static Sequence GetSequence(int seqID)
+    {
+        // Ensure that there is a valid connection to the database
+        if (!DatabaseConnected())
+            return null;
+
+        ArrayList<Module> modules = new ArrayList<>();
+        try
+        {
+            // Query the database for the module ID's in the sequence, in order
+            SQLiteCursor results = (SQLiteCursor) db.rawQuery("SELECT modID FROM SequenceOrder WHERE seqID = ? ORDER BY modOrder ASC", new String[] { String.valueOf(seqID) });
+            int modID;
+            while (results.moveToNext())
+            {
+                // Extract the ID of the next module in the sequence
+                modID = results.getInt(results.getColumnIndex("modID"));
+                // Then add an instance of this type of module to the sequence
+                modules.add(Module.InstanceOf(modID));
+            }
+            results.close();
+
+            // Query the database for the name of the sequence
+            results = (SQLiteCursor) db.rawQuery("SELECT Name FROM ModuleSequence WHERE ID = ?", new String[] { String.valueOf(seqID) });
+            String name;
+            if (results.moveToNext())
+                name = results.getString(results.getColumnIndex("Name"));
+            else
+                return null;
+
+            // Return a Sequence object instantiated with the previously found values
+            return new Sequence(seqID, name, modules);
+        }
+        catch (SQLException e)
+        {
+            Log.e("Database Error", e.getMessage());
+            return null;
+        }
+    }
+
+    //*********************************************************************
+    // Functions that have to do with modules inside of a module sequence *
+    //*********************************************************************
 
     // Return the success of the module insertion
     public static boolean InsertModuleIntoSequence(int seqID, int modID, int index)

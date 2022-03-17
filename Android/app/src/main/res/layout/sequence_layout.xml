@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- MS: 3/17/22 - wrote first iteration on this layout -->
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rectangle_btn">
+
+    <TextView
+        android:id="@+id/sequenceName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/defaultSequenceName"
+        android:textColor="@color/black"
+        android:theme="@style/BodyText"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/launchSequenceButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/roundblack_btn"
+        android:text="@string/launchSequenceButton"
+        android:fontFamily="sans-serif-light"
+        android:textColor="@color/white"
+        android:minHeight="5dp"
+        android:textSize="17sp"
+        android:padding="2dp"
+        app:layout_constraintTop_toBottomOf="@id/sequenceName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/editSequenceButton" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/editSequenceButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/roundblack_btn"
+        android:text="@string/editSequenceButton"
+        android:fontFamily="sans-serif-light"
+        android:textColor="@color/white"
+        android:minHeight="5dp"
+        android:textSize="17sp"
+        android:padding="2dp"
+        app:layout_constraintTop_toTopOf="@id/launchSequenceButton"
+        app:layout_constraintStart_toEndOf="@id/launchSequenceButton"
+        app:layout_constraintEnd_toStartOf="@id/deleteSequenceButton" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/deleteSequenceButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/roundblack_btn"
+        android:text="@string/deleteSequenceButton"
+        android:fontFamily="sans-serif-light"
+        android:textColor="@color/white"
+        android:minHeight="5dp"
+        android:textSize="17sp"
+        android:padding="2dp"
+        app:layout_constraintTop_toTopOf="@id/launchSequenceButton"
+        app:layout_constraintStart_toEndOf="@id/editSequenceButton"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
