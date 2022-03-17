@@ -67,6 +67,7 @@ public class ModuleSequencesActivity extends AppCompatActivity
                     });
 
                     // Customize the layout's IDs and text to be unique to this sequence
+                    inflatedLayout.setId(100 + seqID);
                     TextView sequenceName = inflatedLayout.findViewById(R.id.sequenceName);
                     sequenceName.setText(sequence.GetName());
                     sequencesLayout.addView(inflatedLayout);
@@ -89,6 +90,13 @@ public class ModuleSequencesActivity extends AppCompatActivity
 
     public void onDelete(int seqID)
     {
-        Log.i("onDelete", "Called by " + seqID);
+        //*******************************************************************
+        // Should have a popup to get confirmation before actually deleting *
+        //*******************************************************************
+
+        if (Database.DeleteSequence(Database.currentUserID, seqID))
+            ((LinearLayout) findViewById(R.id.mySequencesLayout)).removeView(findViewById(100 + seqID));
+        else
+            Log.e("onDelete", "Could not delete sequence " + seqID);
     }
 }
