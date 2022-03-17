@@ -56,6 +56,14 @@ public class SettingsActivity extends AppCompatActivity
                 public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                     if (b) {
                         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, i, 0);
+                        /*
+                        Please double check this if this is correct - SC
+                        Feel free to delete these two comments when done
+
+                        float val = (float) seekBar.getProgress() / (float) (seekBar.getMax() / 2);
+                        Database.SetPreference(Preferences.AUDIO_VOLUME_FLOAT, val);  //needs to update the preference, rather than set (?) - SC
+
+                         */
                     }
                 }
 

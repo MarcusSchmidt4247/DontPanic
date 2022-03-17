@@ -9,6 +9,32 @@
     <string name="breatheInstructionOut">breathe out</string>
     <string name="guidedBreathingVisualDescription">Circle that expands and shrinks with each breath</string>
 
+    <!-- String resources for the First View Screen -->
+    <string name="description1">Everyone experiences times of anxiety in their life.</string>
+    <string name="description2">Let\'s Get Started</string>
+
+    <!-- String resources for the Modules Screen -->
+    <string name="modulesButton">MODULES</string>
+    <string name="lastCompletedModuleButton">Last Completed Module: \nHaptic Heartbeat</string>
+    <string name="launchModuleButton">Launch</string>
+    <string name="sellAllModulesButton">Sell All Modules</string>
+    <string name="moduleSequencesButton">MODULES SEQUENCES</string>
+    <string name="lastCompletedSequenceButton">Last Completed Sequences: \nMy Favorite Sequence</string>
+    <string name="launchModuleSequencesButton">Launch</string>
+    <string name="editButton">Edit</string>
+    <string name="deleteButton">Delete</string>
+    <string name="sellAllSequencesButton">Sell All Sequences</string>
+
+    <!-- String resources for the General Use Screen -->
+    <string name="title">DON\'T PANIC</string>
+    <string name="thought">THOUGHT OF THE DAY</string>
+    <string name="wellBeing">The building blocks of \nwellbeing</string>
+    <string name="readMore">Read more</string>
+    <string name="modulesGeneral">MODULES</string>
+    <string name="settingsButton">SETTINGS</string>
+    <string name="notificationsButton">NOTIFICATIONS</string>
+    <string name="helpButton">HELP</string>
+    
     <!-- String resources for Module Sequences -->
     <string name="sequencesHeader">SEQUENCES</string>
     <string name="mySequencesHeader">My Sequences:</string>

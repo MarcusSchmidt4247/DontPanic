@@ -88,7 +88,7 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/mainButton3"
+        android:id="@+id/buttonModules"
         android:layout_width="116dp"
         android:layout_height="52dp"
 
@@ -108,7 +108,7 @@
         app:layout_constraintVertical_bias="0.59" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/mainButton4"
+        android:id="@+id/buttonSettings"
         android:layout_width="116dp"
         android:layout_height="52dp"
 
@@ -129,7 +129,7 @@
         app:layout_constraintVertical_bias="0.59" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/mainButton5"
+        android:id="@+id/buttonNotifications"
         android:layout_width="116dp"
         android:layout_height="52dp"
 
@@ -149,7 +149,7 @@
         app:layout_constraintVertical_bias="0.788" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/mainButton6"
+        android:id="@+id/buttonHelp"
         android:layout_width="116dp"
         android:layout_height="52dp"
 
