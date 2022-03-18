@@ -9,8 +9,8 @@
 
     <TextView
         android:id="@+id/MainView"
-        android:layout_width="178dp"
-        android:layout_height="66dp"
+        android:layout_width="212dp"
+        android:layout_height="73dp"
 
         android:fontFamily="sans-serif-black"
         android:text="@string/title"
@@ -20,15 +20,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.175"
+        app:layout_constraintHorizontal_bias="0.206"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.186" />
+        app:layout_constraintVertical_bias="0.178" />
 
     <TextView
         android:id="@+id/MainView2"
-        android:layout_width="212dp"
-        android:layout_height="101dp"
+        android:layout_width="184dp"
+        android:layout_height="50dp"
 
         android:fontFamily="sans-serif-black"
         android:text="@string/thought"
@@ -38,10 +38,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.206"
+        app:layout_constraintHorizontal_bias="0.18"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.26" />
+        app:layout_constraintVertical_bias="0.237" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/mainButton"

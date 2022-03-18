@@ -21,7 +21,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.137"
+        app:layout_constraintHorizontal_bias="0.147"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.2" />
@@ -39,7 +39,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.138"
+        app:layout_constraintHorizontal_bias="0.149"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.318" />
@@ -81,7 +81,7 @@
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.415"
+        app:layout_constraintHorizontal_bias="0.384"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.796"
@@ -89,8 +89,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonModules"
-        android:layout_width="116dp"
-        android:layout_height="52dp"
+        android:layout_width="149dp"
+        android:layout_height="54dp"
 
         android:background="@drawable/rectangle_btn"
         android:fontFamily="sans-serif-light"
@@ -109,8 +109,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonSettings"
-        android:layout_width="116dp"
-        android:layout_height="52dp"
+        android:layout_width="149dp"
+        android:layout_height="54dp"
 
         android:background="@drawable/rectangle_btn"
         android:fontFamily="sans-serif-light"
@@ -130,8 +130,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonNotifications"
-        android:layout_width="116dp"
-        android:layout_height="52dp"
+        android:layout_width="149dp"
+        android:layout_height="54dp"
 
         android:background="@drawable/rectangle_btn"
         android:fontFamily="sans-serif-light"
@@ -150,8 +150,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonHelp"
-        android:layout_width="116dp"
-        android:layout_height="52dp"
+        android:layout_width="149dp"
+        android:layout_height="54dp"
 
         android:background="@drawable/rectangle_btn"
         android:fontFamily="sans-serif-light"

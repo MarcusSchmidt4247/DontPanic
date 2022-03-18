@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_purple"
+    tools:context=".MentalExerciseSelectionActivity">
+
+    <TextView
+        android:id="@+id/mentalView"
+        android:layout_width="317dp"
+        android:layout_height="64dp"
+
+        android:fontFamily="sans-serif-black"
+        android:text="Mental Exercises"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="800"
+        android:textSize="100px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.19" />
+
+    <TextView
+        android:id="@+id/mentalView2"
+        android:layout_width="265dp"
+        android:layout_height="59dp"
+
+        android:fontFamily="sans-serif-black"
+        android:text="Select from the list below to begin."
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="500"
+        android:textSize="40px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mentalView"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/mentalButton"
+        android:layout_width="252dp"
+        android:layout_height="79dp"
+
+        android:background="@drawable/round_btn"
+        android:fontFamily="sans-serif-light"
+        android:text="Task 1"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="35px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.217"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.584" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/mentalButton2"
+        android:layout_width="252dp"
+        android:layout_height="79dp"
+
+        android:background="@drawable/round_btn"
+        android:fontFamily="sans-serif-light"
+        android:text="Task 2"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="35px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.81"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.584" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/mentalButton3"
+        android:layout_width="252dp"
+        android:layout_height="79dp"
+
+        android:background="@drawable/round_btn"
+        android:fontFamily="sans-serif-light"
+        android:text="Task 3"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="35px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.217"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mentalButton"
+        app:layout_constraintVertical_bias="0.4" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/mentalButton4"
+        android:layout_width="252dp"
+        android:layout_height="79dp"
+
+        android:background="@drawable/round_btn"
+        android:fontFamily="sans-serif-light"
+        android:text="Task 4"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textFontWeight="300"
+        android:textSize="35px"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.81"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mentalButton2"
+        app:layout_constraintVertical_bias="0.384" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
