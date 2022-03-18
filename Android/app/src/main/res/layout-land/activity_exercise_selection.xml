@@ -50,7 +50,7 @@
 
         android:background="@drawable/round_btn"
         android:fontFamily="sans-serif-light"
-        android:text="Task 1"
+        android:text="Option 1"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textFontWeight="300"
@@ -70,7 +70,7 @@
 
         android:background="@drawable/round_btn"
         android:fontFamily="sans-serif-light"
-        android:text="Task 2"
+        android:text="Option 2"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textFontWeight="300"
@@ -90,7 +90,7 @@
 
         android:background="@drawable/round_btn"
         android:fontFamily="sans-serif-light"
-        android:text="Task 3"
+        android:text="Option 3"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textFontWeight="300"
@@ -110,7 +110,7 @@
 
         android:background="@drawable/round_btn"
         android:fontFamily="sans-serif-light"
-        android:text="Task 4"
+        android:text="Option 4"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textFontWeight="300"
