@@ -61,7 +61,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mentalView2"
-        app:layout_constraintVertical_bias="0.048" />
+        app:layout_constraintVertical_bias="0.019" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/mentalButton2"
@@ -81,7 +81,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mentalButton"
-        app:layout_constraintVertical_bias="0.043" />
+        app:layout_constraintVertical_bias="0.023" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/mentalButton3"
@@ -101,7 +101,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mentalButton2"
-        app:layout_constraintVertical_bias="0.065" />
+        app:layout_constraintVertical_bias="0.03" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/mentalButton4"
@@ -121,6 +121,6 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mentalButton3"
-        app:layout_constraintVertical_bias="0.094" />
+        app:layout_constraintVertical_bias="0.047" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
