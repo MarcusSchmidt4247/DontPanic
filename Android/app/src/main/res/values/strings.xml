@@ -4,6 +4,10 @@
     <string name="generalLabel">General</string>
     <string name="backButtonLabel">Back</string>
 
+    <!-- String resources for confirmation pop-up dialog -->
+    <string name="yesButton">Yes</string>
+    <string name="noButton">No</string>
+
     <!-- String resources for the guided breathing module -->
     <string name="breatheInstructionIn">breathe in</string>
     <string name="breatheInstructionOut">breathe out</string>

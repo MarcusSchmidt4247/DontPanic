@@ -1,10 +1,14 @@
 // MS: 3/17/22 - initial code with first GUI iteration and basic LayoutInflater
+// MS: 3/18/22 - onLaunch() starts first module in sequence, onDelete() launches confirmation popup
 
 package com.example.dontpanic;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +17,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ModuleSequencesActivity extends AppCompatActivity
+public class ModuleSequencesActivity extends AppCompatActivity implements ConfirmationDialog.ConfirmationDialogListener
 {
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -46,7 +50,7 @@ public class ModuleSequencesActivity extends AppCompatActivity
                         @Override
                         public void onClick(View v)
                         {
-                            onLaunch(seqID);
+                            onLaunch(sequence);
                         }
                     });
                     inflatedLayout.findViewById(R.id.editSequenceButton).setOnClickListener(new View.OnClickListener()
@@ -54,7 +58,7 @@ public class ModuleSequencesActivity extends AppCompatActivity
                         @Override
                         public void onClick(View v)
                         {
-                            onEdit(seqID);
+                            onEdit(sequence);
                         }
                     });
                     inflatedLayout.findViewById(R.id.deleteSequenceButton).setOnClickListener(new View.OnClickListener()
@@ -62,7 +66,7 @@ public class ModuleSequencesActivity extends AppCompatActivity
                         @Override
                         public void onClick(View v)
                         {
-                            onDelete(seqID);
+                            onDelete(sequence);
                         }
                     });
 
@@ -78,25 +82,47 @@ public class ModuleSequencesActivity extends AppCompatActivity
         }
     }
 
-    public void onLaunch(int seqID)
+    public void onLaunch(Sequence sequence)
     {
-        Log.i("onLaunch", "Called by " + seqID);
+        //**************************************************************************************************************************
+        // Needs to be replaced / augmented with a back-end control scheme for the sequence that goes from one module to the next. *
+        // This is just a very simply intent to launch whatever the first module in the sequence is, and then it's done.           *
+        //**************************************************************************************************************************
+        if (!sequence.GetModules().isEmpty())
+        {
+            Intent moduleIntent = new Intent(this, sequence.GetModules().get(0).GetClass());
+            startActivity(moduleIntent);
+            finish();
+        }
     }
 
-    public void onEdit(int seqID)
+    public void onEdit(Sequence sequence)
     {
-        Log.i("onEdit", "Called by " + seqID);
+        Log.i("onEdit", "Called by " + sequence.GetID());
     }
 
-    public void onDelete(int seqID)
+    public void onDelete(Sequence sequence)
     {
-        //*******************************************************************
-        // Should have a popup to get confirmation before actually deleting *
-        //*******************************************************************
+        ConfirmationDialog confirmationDialog = ConfirmationDialog.newInstance("Delete " + sequence.GetName() + "?", sequence.GetID());
+        confirmationDialog.show(getSupportFragmentManager(), "ConfirmationDialogFragment");
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog)
+    {
+        int seqID = -1;
+        if (dialog.getArguments() != null)
+            seqID = dialog.getArguments().getInt(ConfirmationDialog.EXTRA_INT_KEY);
 
         if (Database.DeleteSequence(Database.currentUserID, seqID))
             ((LinearLayout) findViewById(R.id.mySequencesLayout)).removeView(findViewById(100 + seqID));
         else
-            Log.e("onDelete", "Could not delete sequence " + seqID);
+            Log.e("onDialogPositiveClick", "Failed to delete sequence");
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog)
+    {
+        Log.i("onDialogNegativeClick", "User cancelled delete");
     }
 }

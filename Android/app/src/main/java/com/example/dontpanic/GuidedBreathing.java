@@ -1,6 +1,7 @@
 // MS: 2/27/22 - initial code
 // MS: 2/28/22 - added very basic haptic effect
 // MS: 3/4/22 - added audio instructions, text scaling, and basic lifecycle persistence
+// MS: 3/18/22 - fixed error where the maximum haptic amplitude exceeded 255
 
 package com.example.dontpanic;
 
@@ -150,8 +151,8 @@ public class GuidedBreathing extends AppCompatActivity
             final int DURATION = 500;
             // Find how many 500ms steps are needed for the user's desired breath duration
             final int STEPS = (int) ((breathDuration * 1000) / DURATION);
-            // Calculate the maximum haptic amplitude based on the user's desired strength
-            final int AMPLITUDE_MAX = (int) (200 * hapticStrength);
+            // Calculate the maximum haptic amplitude based on the user's desired strength (not exceeding 255)
+            final int AMPLITUDE_MAX = (int) ((255.0 / 2.0) * hapticStrength);
             // Then calculate the delta in haptic strength for each step
             final int AMPLITUDE_STEP = AMPLITUDE_MAX / STEPS;
             Log.i("Haptic Steps", "Should go from 0-200 in " + breathDuration + " seconds");
