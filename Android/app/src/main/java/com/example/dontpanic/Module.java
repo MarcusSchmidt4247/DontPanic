@@ -12,9 +12,9 @@ public enum Module
     APP_ACTIVITIES ("Activities", 3, GuidedBreathing.class), // needs update once activities module exists
     HAPTIC_HEARTBEAT ("Haptic Heartbeat", 4, GuidedBreathing.class); // needs update once haptics module exists
 
-    public final String name;
+    public String name;
     public final int id;
-    public final Class<?> type;
+    public Class<?> type;
 
     Module(String name, int id, Class<?> type)
     {
@@ -23,9 +23,32 @@ public enum Module
         this.type = type;
     }
 
-    public Class<?> GetClass()
+    public static ModuleReference GetModule(int _id) {
+        for (Module module : Module.values())
+        {
+            if (module.id == _id)
+                return new ModuleReference(module.name, module.id, module.type);
+        }
+        return null;
+    }
+    public static ModuleReference GetModule(String _name) {
+        for (Module module : Module.values())
+        {
+            if (module.name.equals(_name))
+                return new ModuleReference(module.name, module.id, module.type);
+        }
+        return null;
+    }
+
+
+    public static Class<?> GetClass(int _id)
     {
-        return type;
+        for (Module module : Module.values())
+        {
+            if (module.id == _id)
+                return module.type;
+        }
+        return null;
     }
 
     //*******************
@@ -52,27 +75,5 @@ public enum Module
         }
 
         return "";
-    }
-
-    public static Module InstanceOf(String _name)
-    {
-        for (Module module : Module.values())
-        {
-            if (module.name.equals(_name))
-                return module;
-        }
-
-        return null;
-    }
-
-    public static Module InstanceOf(int _id)
-    {
-        for (Module module : Module.values())
-        {
-            if (module.id == _id)
-                return module;
-        }
-
-        return null;
     }
 }

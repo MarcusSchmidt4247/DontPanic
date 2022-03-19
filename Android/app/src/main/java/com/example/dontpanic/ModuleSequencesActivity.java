@@ -87,10 +87,13 @@ public class ModuleSequencesActivity extends AppCompatActivity implements Confir
         //**************************************************************************************************************************
         // Needs to be replaced / augmented with a back-end control scheme for the sequence that goes from one module to the next. *
         // This is just a very simply intent to launch whatever the first module in the sequence is, and then it's done.           *
+        //
+        // Edit by Stephen, original: sequence.GetModules().get(0).GetClass(Module.GetID())
         //**************************************************************************************************************************
         if (!sequence.GetModules().isEmpty())
         {
-            Intent moduleIntent = new Intent(this, sequence.GetModules().get(0).GetClass());
+            ModuleReference firstModule = sequence.GetModules().get(0);
+            Intent moduleIntent = new Intent(this, firstModule.getType());
             startActivity(moduleIntent);
             finish();
         }

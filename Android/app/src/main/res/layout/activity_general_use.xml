@@ -91,7 +91,7 @@
 
         android:background="@drawable/rectangle_btn"
         android:fontFamily="sans-serif-light"
-        android:onClick="switchToModulesActivity"
+        android:onClick="switchToModuleInterfaceActivity"
         android:text="@string/modulesGeneral"
         android:textAlignment="center"
         android:textColor="@color/white"

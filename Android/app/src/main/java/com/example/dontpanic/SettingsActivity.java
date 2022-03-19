@@ -61,8 +61,9 @@ public class SettingsActivity extends AppCompatActivity
                         Feel free to delete these two comments when done
 
                         float val = (float) seekBar.getProgress() / (float) (seekBar.getMax() / 2);
-                        Database.SetPreference(Preferences.AUDIO_VOLUME_FLOAT, val);  //needs to update the preference, rather than set (?) - SC
-
+                        Database.SetPreference(Preferences.AUDIO_VOLUME_FLOAT, val);
+                        Update, alright, it works
+                        default is 1.0, with range between 0.0 - 2.0
                          */
                     }
                 }
