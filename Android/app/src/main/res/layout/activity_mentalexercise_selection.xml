@@ -31,17 +31,18 @@
         android:layout_height="59dp"
 
         android:fontFamily="sans-serif-black"
-        android:text="Select from the list below to begin."
+        android:text="These exercises are meant to help you work through your panic or anxiety attacks"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textFontWeight="500"
         android:textSize="40px"
+        android:textStyle="italic"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mentalView"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.014" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/mentalButton"
@@ -61,7 +62,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mentalView2"
-        app:layout_constraintVertical_bias="0.019" />
+        app:layout_constraintVertical_bias="0.069" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/mentalButton2"

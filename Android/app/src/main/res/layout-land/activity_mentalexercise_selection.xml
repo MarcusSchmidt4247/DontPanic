@@ -27,15 +27,16 @@
 
     <TextView
         android:id="@+id/mentalView2"
-        android:layout_width="265dp"
-        android:layout_height="59dp"
+        android:layout_width="293dp"
+        android:layout_height="54dp"
 
         android:fontFamily="sans-serif-black"
-        android:text="Select from the list below to begin."
+        android:text="These exercises are meant to help you work through your panic or anxiety attacks"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textFontWeight="500"
-        android:textSize="40px"
+        android:textSize="38px"
+        android:textStyle="italic"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
