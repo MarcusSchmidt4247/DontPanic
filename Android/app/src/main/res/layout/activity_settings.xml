@@ -11,7 +11,7 @@
     tools:context=".SettingsActivity">
 
     <TextView
-        android:id="@+id/settingsHeader"
+        android:id="@+id/backButtonSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -36,7 +36,7 @@
         android:text="@string/generalSettings"
         android:theme="@style/HeaderLevelTwo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settingsHeader" />
+        app:layout_constraintTop_toBottomOf="@id/backButtonSettings" />
 
     <!--
     Accessibility settings items

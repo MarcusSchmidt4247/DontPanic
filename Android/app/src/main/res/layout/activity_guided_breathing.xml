@@ -11,6 +11,24 @@
     android:background="@color/dark_purple"
     tools:context=".GuidedBreathing">
 
+    <!-- The text instruction is marked unimportant for accessibility because
+         the instruction to breathe in or out changes regularly and needs to be
+         communicated some other way than a content description (likely either audio
+         or haptics), so for consistency it's disabled. -->
+    <TextView
+        android:id="@+id/breathInstruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:importantForAccessibility="no"
+        android:text="@string/breatheInstructionIn"
+        android:textColor="@color/white"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/breathVisual"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <ImageView
         android:id="@+id/breathVisual"
         android:layout_width="178dp"
@@ -32,26 +50,9 @@
         android:onClick="onBack"
         android:text="@string/backButtonLabel"
         android:textSize="20sp"
+        android:textColor="@color/black"
         android:background="@drawable/rectangle_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
-
-    <!-- The text instruction is marked unimportant for accessibility because
-         the instruction to breathe in or out changes regularly and needs to be
-         communicated some other way than a content description (likely either audio
-         or haptics), so for consistency it's disabled. -->
-    <TextView
-        android:id="@+id/breathInstruction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:importantForAccessibility="no"
-        android:text="@string/breatheInstructionIn"
-        android:textColor="@color/white"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/breathVisual"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

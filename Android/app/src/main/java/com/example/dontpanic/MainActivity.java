@@ -4,14 +4,19 @@
 // DB: 2/24/22 - Modified this file to be the splash screen of the app
 // MS: 2/27/22 - Modified so that the splash screen will send the user to the appropriate screen after a few seconds
 // SC & MA: 3/2/22 - full rebuild of MainActivity, introduction of Splash.java, and full redirection between screens
+// MS: 3/20/22 - added text scaling
 
 package com.example.dontpanic;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -38,7 +43,25 @@ public class MainActivity extends AppCompatActivity {
             destinationIntent[0] = new Intent(this, FirstActivity.class);
             startActivity(destinationIntent[0]);
         } else {
+            //********************************************************
+            // To-do: check the database for the last logged in user *
+            //********************************************************
             Database.currentUserID = 1;
+
+            // Scale the text according to the user's preferences
+            float textScale;
+            Object preference = Database.GetPreference(Preferences.TEXT_SCALING_FLOAT);
+            if (preference == null)
+            {
+                Log.e("Database Error", "Preference returned null");
+                textScale = 1.0f;
+            }
+            else
+                textScale = (Float) preference;
+            AppCompatButton emergencyButton = findViewById(R.id.emerB);
+            emergencyButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, emergencyButton.getTextSize() * textScale);
+            AppCompatButton generalButton = findViewById(R.id.genB);
+            generalButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, generalButton.getTextSize() * textScale);
         }
     }
 

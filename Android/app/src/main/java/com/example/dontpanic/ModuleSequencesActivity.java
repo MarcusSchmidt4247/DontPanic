@@ -1,16 +1,20 @@
 // MS: 3/17/22 - initial code with first GUI iteration and basic LayoutInflater
 // MS: 3/18/22 - onLaunch() starts first module in sequence, onDelete() launches confirmation popup
-// MS: 3/20/22 - added onBack() and divided functions into categories
+// MS: 3/20/22 - added onBack(), divided functions into categories, and added text scaling
 
 package com.example.dontpanic;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.DialogFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -25,6 +29,42 @@ public class ModuleSequencesActivity extends AppCompatActivity implements Confir
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_module_sequences);
+
+        // Scale the text according to the user's preferences
+        float textScale;
+        Object preference = Database.GetPreference(Preferences.TEXT_SCALING_FLOAT);
+        if (preference == null)
+        {
+            Log.e("Database Error", "Preference returned null");
+            textScale = 1.0f;
+        }
+        else
+            textScale = (Float) preference;
+        if (textScale != 1.0f)
+        {
+            // Cap the size of text scaling a *little* bit lower than 2.0 to keep the UI usable without a ton of work
+            if (textScale > 1.8f)
+                textScale = 1.8f;
+
+            // Set the header ("My Sequences:")
+            TextView headerText = findViewById(R.id.mySequencesHeader);
+            headerText.setTextSize(TypedValue.COMPLEX_UNIT_PX, headerText.getTextSize() * textScale);
+            // Set the no new sequences text
+            TextView noSequencesText = findViewById(R.id.noSequencesText);
+            noSequencesText.setTextSize(TypedValue.COMPLEX_UNIT_PX, noSequencesText.getTextSize() * textScale);
+            // Set the Create Sequence button
+            AppCompatButton createSequenceButton = findViewById(R.id.createSequenceButton);
+            createSequenceButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, createSequenceButton.getTextSize() * textScale);
+            // Set the back button
+            AppCompatButton backButton = findViewById(R.id.backButton);
+            backButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, backButton.getTextSize() * textScale);
+            if (textScale > 1.6f)
+            {
+                // Set the padding in px to be 10dp
+                int padding = (int) (10 * getResources().getDisplayMetrics().density);
+                backButton.setPadding(padding, padding, padding, padding);
+            }
+        }
 
         ArrayList<Integer> sequences = Database.GetUserSequenceIDs();
         if (sequences != null && !sequences.isEmpty())
@@ -76,6 +116,19 @@ public class ModuleSequencesActivity extends AppCompatActivity implements Confir
                     TextView sequenceName = inflatedLayout.findViewById(R.id.sequenceName);
                     sequenceName.setText(sequence.GetName());
                     sequencesLayout.addView(inflatedLayout);
+
+                    // Finally, scale the text inside this layout
+                    if (textScale != 1.0f)
+                    {
+                        TextView nameText = findViewById(R.id.sequenceName);
+                        nameText.setTextSize(TypedValue.COMPLEX_UNIT_PX, nameText.getTextSize() * textScale);
+                        AppCompatButton launch = findViewById(R.id.launchSequenceButton);
+                        launch.setTextSize(TypedValue.COMPLEX_UNIT_PX, launch.getTextSize() * textScale);
+                        AppCompatButton edit = findViewById(R.id.editSequenceButton);
+                        edit.setTextSize(TypedValue.COMPLEX_UNIT_PX, edit.getTextSize() * textScale);
+                        AppCompatButton delete = findViewById(R.id.deleteSequenceButton);
+                        delete.setTextSize(TypedValue.COMPLEX_UNIT_PX, delete.getTextSize() * textScale);
+                    }
                 }
                 else
                     Log.e("Sequence Error", "ModuleSequencesActivity could not retrieve sequence data to inflate layout");

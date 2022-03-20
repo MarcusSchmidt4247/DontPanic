@@ -1,6 +1,6 @@
 // MS: 3/6/22 - initial code, plus setting sliders and switches to match database values
 // MS: 3/10/22 - SeekBar listener pushes new value to the database
-// MS: 3/20/22 - added more listeners and a back button
+// MS: 3/20/22 - added more listeners, a back button, text scaling, and changed text size seek bar to be 1-2 rather than 0.5-2.0
 
 package com.example.dontpanic;
 
@@ -13,15 +13,19 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.method.KeyListener;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 public class SettingsActivity extends AppCompatActivity
 {
     SeekBar masterVolume, hapticStrength, textScale;
+    float textScaleRatio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -29,6 +33,18 @@ public class SettingsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         setContentView(R.layout.activity_settings);
+
+        // Scale the text according to the user's preferences
+        Object preference = Database.GetPreference(Preferences.TEXT_SCALING_FLOAT);
+        if (preference == null)
+        {
+            Log.e("Database Error", "Preference returned null");
+            textScaleRatio = 1.0f;
+        }
+        else
+            textScaleRatio = (Float) preference;
+        if (textScaleRatio != 1.0f)
+            ScaleAppSettingsText();
     }
 
     @Override
@@ -51,6 +67,18 @@ public class SettingsActivity extends AppCompatActivity
 
         this.masterVolume = findViewById(R.id.VolumeBar);
         this.hapticStrength = findViewById(R.id.HapticStrengthBar);
+        SwitchCompat hapticSwitch = findViewById(R.id.HapticSwitch);
+
+        if (textScaleRatio != 1.0f)
+        {
+            TextView volumeText = findViewById(R.id.volumeLabel);
+            volumeText.setTextSize(TypedValue.COMPLEX_UNIT_PX, volumeText.getTextSize() * textScaleRatio);
+            hapticSwitch.setTextSize(TypedValue.COMPLEX_UNIT_PX, hapticSwitch.getTextSize() * textScaleRatio);
+            TextView hapticText = findViewById(R.id.hapticLabel);
+            hapticText.setTextSize(TypedValue.COMPLEX_UNIT_PX, hapticText.getTextSize() * textScaleRatio);
+            Button backButton = findViewById(R.id.backButtonSettings);
+            backButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, backButton.getTextSize() * textScaleRatio);
+        }
 
         try {
             AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
@@ -138,7 +166,6 @@ public class SettingsActivity extends AppCompatActivity
         }
         else
             on = (boolean) preference;
-        SwitchCompat hapticSwitch = findViewById(R.id.HapticSwitch);
         hapticSwitch.setChecked(on);
         hapticSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
@@ -154,6 +181,9 @@ public class SettingsActivity extends AppCompatActivity
         setContentView(R.layout.activity_settings_accessibility);
         this.textScale = findViewById(R.id.TextScaleBar);
 
+        if (textScaleRatio != 1.0f)
+            ScaleAccessibilitySettingsText();
+
         float val;
         Object preference = Database.GetPreference(Preferences.TEXT_SCALING_FLOAT);
         if (preference == null)
@@ -163,7 +193,7 @@ public class SettingsActivity extends AppCompatActivity
         }
         else
             val = (Float) preference;
-        textScale.setProgress((int) ((textScale.getMax() / 2) * val));
+        textScale.setProgress((int) Math.round((val - 1) * 10));
         try {
             textScale.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
@@ -172,8 +202,10 @@ public class SettingsActivity extends AppCompatActivity
                 @Override public void onStartTrackingTouch(SeekBar seekBar) { }
 
                 @Override public void onStopTrackingTouch(SeekBar seekBar) {
-                    float val = (float) seekBar.getProgress() / (float) (seekBar.getMax() / 2);
+                    float val = 1 + ((float) seekBar.getProgress() / seekBar.getMax());
                     Database.SetPreference(Preferences.TEXT_SCALING_FLOAT, val);
+                    textScaleRatio = val;
+                    ScaleAccessibilitySettingsText();
                 }
             });
         } catch (Exception e) {
@@ -183,10 +215,35 @@ public class SettingsActivity extends AppCompatActivity
 
     public void switchToAppSettings(View view) {
         setContentView(R.layout.activity_settings);
+        ScaleAppSettingsText();
     }
 
     public void onBack(View view)
     {
         finish();
+    }
+
+    private void ScaleAppSettingsText()
+    {
+        Button generalButton = findViewById(R.id.generalSettingsButton);
+        generalButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, generalButton.getTextSize() * textScaleRatio);
+        Button accessibilityButton = findViewById(R.id.accessibilitySettingsButton);
+        accessibilityButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, accessibilityButton.getTextSize() * textScaleRatio);
+        Button backButton = findViewById(R.id.backButton);
+        backButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, backButton.getTextSize() * textScaleRatio);
+        if (textScaleRatio > 1.6f)
+        {
+            // Set the padding in px to be 10dp
+            int padding = (int) (10 * getResources().getDisplayMetrics().density);
+            backButton.setPadding(padding, padding, padding, padding);
+        }
+    }
+
+    private void ScaleAccessibilitySettingsText()
+    {
+        TextView scaleText = findViewById(R.id.textSizeLabel);
+        scaleText.setTextSize(TypedValue.COMPLEX_UNIT_PX, 55 * textScaleRatio);
+        Button backButton = findViewById(R.id.backButtonSettings);
+        backButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, 55 * textScaleRatio);
     }
 }
