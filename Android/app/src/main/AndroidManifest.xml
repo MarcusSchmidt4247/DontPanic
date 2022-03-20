@@ -39,6 +39,15 @@
         <activity
             android:name=".ModuleSequencesActivity"
             android:exported="false" />
+        <activity
+            android:name=".ModuleInterfaceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NotificationsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HelpActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
