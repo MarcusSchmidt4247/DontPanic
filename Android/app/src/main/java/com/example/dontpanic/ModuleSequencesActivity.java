@@ -1,5 +1,6 @@
 // MS: 3/17/22 - initial code with first GUI iteration and basic LayoutInflater
 // MS: 3/18/22 - onLaunch() starts first module in sequence, onDelete() launches confirmation popup
+// MS: 3/20/22 - added onBack() and divided functions into categories
 
 package com.example.dontpanic;
 
@@ -82,6 +83,10 @@ public class ModuleSequencesActivity extends AppCompatActivity implements Confir
         }
     }
 
+    //*************************
+    // Button press functions *
+    //*************************
+
     public void onLaunch(Sequence sequence)
     {
         //**************************************************************************************************************************
@@ -109,6 +114,15 @@ public class ModuleSequencesActivity extends AppCompatActivity implements Confir
         ConfirmationDialog confirmationDialog = ConfirmationDialog.newInstance("Delete " + sequence.GetName() + "?", sequence.GetID());
         confirmationDialog.show(getSupportFragmentManager(), "ConfirmationDialogFragment");
     }
+
+    public void onBack(View view)
+    {
+        finish();
+    }
+
+    //********************************
+    // Confirmation dialog functions *
+    //********************************
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog)

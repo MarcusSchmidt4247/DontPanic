@@ -1,5 +1,6 @@
 // MS: 3/6/22 - initial code, plus setting sliders and switches to match database values
 // MS: 3/10/22 - SeekBar listener pushes new value to the database
+// MS: 3/20/22 - added more listeners and a back button
 
 package com.example.dontpanic;
 
@@ -9,9 +10,13 @@ import androidx.appcompat.widget.SwitchCompat;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.method.KeyListener;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
 
 public class SettingsActivity extends AppCompatActivity
@@ -74,6 +79,8 @@ public class SettingsActivity extends AppCompatActivity
 
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
+                    float val = (float) seekBar.getProgress() / (float) (seekBar.getMax() / 2);
+                    Database.SetPreference(Preferences.AUDIO_VOLUME_FLOAT, val);
                 }
             });
 
@@ -133,6 +140,14 @@ public class SettingsActivity extends AppCompatActivity
             on = (boolean) preference;
         SwitchCompat hapticSwitch = findViewById(R.id.HapticSwitch);
         hapticSwitch.setChecked(on);
+        hapticSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                Database.SetPreference(Preferences.HAPTICS_ENABLED_BOOLEAN, isChecked);
+            }
+        });
     }
 
     public void switchToAccessibilitySettings(View view) {
@@ -149,9 +164,29 @@ public class SettingsActivity extends AppCompatActivity
         else
             val = (Float) preference;
         textScale.setProgress((int) ((textScale.getMax() / 2) * val));
+        try {
+            textScale.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int i, boolean b) { }
+
+                @Override public void onStartTrackingTouch(SeekBar seekBar) { }
+
+                @Override public void onStopTrackingTouch(SeekBar seekBar) {
+                    float val = (float) seekBar.getProgress() / (float) (seekBar.getMax() / 2);
+                    Database.SetPreference(Preferences.TEXT_SCALING_FLOAT, val);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void switchToAppSettings(View view) {
         setContentView(R.layout.activity_settings);
+    }
+
+    public void onBack(View view)
+    {
+        finish();
     }
 }
