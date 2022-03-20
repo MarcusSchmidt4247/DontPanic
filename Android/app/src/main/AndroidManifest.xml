@@ -40,6 +40,9 @@
             android:name=".ModuleSequencesActivity"
             android:exported="false" />
         <activity
+            android:name=".ModulesActivity"
+            android:exported="false"/>
+        <activity
             android:name=".ModuleInterfaceActivity"
             android:exported="false" />
         <activity

@@ -76,4 +76,26 @@ public enum Module
 
         return "";
     }
+
+    public static Module InstanceOf(String _name)
+    {
+        for (Module module : Module.values())
+        {
+            if (module.name.equals(_name))
+                return module;
+        }
+
+        return null;
+    }
+
+    public static Module InstanceOf(int _id)
+    {
+        for (Module module : Module.values())
+        {
+            if (module.id == _id)
+                return module;
+        }
+
+        return null;
+    }
 }

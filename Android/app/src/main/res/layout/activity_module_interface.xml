@@ -74,12 +74,13 @@
 
         android:background="@drawable/rectangle_btn"
         android:fontFamily="sans-serif-light"
+        android:onClick="switchToModulesActivity"
         android:text="@string/sellAllModulesButton"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textFontWeight="300"
-        android:textSize="32px"
 
+        android:textSize="32px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
