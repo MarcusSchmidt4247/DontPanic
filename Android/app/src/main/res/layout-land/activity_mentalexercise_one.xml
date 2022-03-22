@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/exerciseOneView"
         app:layout_constraintVertical_bias="0.8" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <Button
         android:id="@+id/exerciseOneButton"
         android:layout_width="141dp"
         android:layout_height="48dp"
