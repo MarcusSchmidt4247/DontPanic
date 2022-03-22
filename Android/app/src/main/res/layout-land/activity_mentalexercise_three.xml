@@ -71,7 +71,7 @@
         app:layout_constraintBottom_toTopOf="@+id/exerciseThreeView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/exercise_3"
+        app:srcCompat="@drawable/exercise_three"
         tools:ignore="MissingConstraints" />
 
 
