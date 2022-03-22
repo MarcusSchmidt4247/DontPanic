@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/exerciseFourView"
         app:layout_constraintVertical_bias="0.521" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <Button
         android:id="@+id/exerciseFourButton"
         android:layout_width="165dp"
         android:layout_height="56dp"
@@ -71,7 +71,7 @@
         app:layout_constraintBottom_toTopOf="@+id/exerciseFourView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/exercise_4"
+        app:srcCompat="@drawable/exercise_four"
         tools:ignore="MissingConstraints" />
 
 

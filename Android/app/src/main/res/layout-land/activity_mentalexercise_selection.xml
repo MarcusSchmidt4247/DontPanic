@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/mentalView"
         app:layout_constraintVertical_bias="0.023" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <Button
         android:id="@+id/mentalButton"
         android:layout_width="252dp"
         android:layout_height="79dp"
@@ -64,7 +64,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.584" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <Button
         android:id="@+id/mentalButton2"
         android:layout_width="252dp"
         android:layout_height="79dp"
@@ -84,7 +84,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.584" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <Button
         android:id="@+id/mentalButton3"
         android:layout_width="252dp"
         android:layout_height="79dp"
@@ -104,7 +104,7 @@
         app:layout_constraintTop_toBottomOf="@+id/mentalButton"
         app:layout_constraintVertical_bias="0.237" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <Button
         android:id="@+id/mentalButton4"
         android:layout_width="252dp"
         android:layout_height="79dp"
