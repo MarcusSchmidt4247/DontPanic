@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:id="@+id/tvmName"
+        android:id="@+id/txttvmName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="176dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvmID"
+        android:id="@+id/txttvmID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="176dp"
@@ -28,10 +28,10 @@
         android:text="TextView"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvmName" />
+        app:layout_constraintTop_toBottomOf="@+id/txttvmName" />
 
     <TextView
-        android:id="@+id/tvmClass"
+        android:id="@+id/txttvmClass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="176dp"
@@ -39,5 +39,26 @@
         android:text="TextView"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvmID" />
+        app:layout_constraintTop_toBottomOf="@+id/txttvmID" />
+
+    <Button
+        android:id="@+id/btnModule0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="82dp"
+        android:layout_marginBottom="166dp"
+        android:text="Module 0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnModule1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="82dp"
+        android:layout_marginBottom="166dp"
+        android:text="Module 1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
