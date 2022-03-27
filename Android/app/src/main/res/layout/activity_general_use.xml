@@ -1,172 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- MS: 3/27/22 - redid constraints, changed light button text to black, created button style -->
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/dark_purple"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_purple"
     tools:context=".GeneralUseActivity">
 
-    <TextView
-        android:id="@+id/MainView"
-        android:layout_width="212dp"
-        android:layout_height="73dp"
-
-        android:fontFamily="sans-serif-black"
-        android:text="@string/title"
-        android:textColor="@color/white"
-        android:textFontWeight="800"
-        android:textSize="80px"
-        app:layout_constraintBottom_toBottomOf="parent"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.206"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.178" />
-
-    <TextView
-        android:id="@+id/MainView2"
-        android:layout_width="184dp"
-        android:layout_height="50dp"
-
-        android:fontFamily="sans-serif-black"
-        android:text="@string/thought"
-        android:textColor="@color/white"
-        android:textFontWeight="500"
-        android:textSize="50px"
-        app:layout_constraintBottom_toBottomOf="parent"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.18"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.237" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/mainButton"
-        android:layout_width="329dp"
-        android:layout_height="184dp"
-
-        android:background="@drawable/rectangle_btn"
-        android:fontFamily="sans-serif-light"
-        android:gravity="left|center_vertical"
-        android:paddingLeft="100px"
-        android:paddingTop="1px"
-        android:text="@string/wellBeing"
-        android:textColor="@color/white"
-        android:textFontWeight="300"
-        android:textSize="40px"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:maxWidth="370dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.366" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/mainButton2"
-        android:layout_width="124dp"
-        android:layout_height="37dp"
+        <TextView
+            android:id="@+id/MainView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-        android:background="@drawable/roundblack_btn"
-        android:fontFamily="sans-serif-light"
-        android:text="@string/readMore"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textFontWeight="300"
-        android:textSize="25px"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/title"
+            android:textColor="@color/white"
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.745"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.451" />
+            android:textFontWeight="800"
+            android:textSize="80px"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonModules"
-        android:layout_width="163dp"
-        android:layout_height="69dp"
+        <TextView
+            android:id="@+id/MainView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/thought"
+            android:textColor="@color/white"
+            android:textFontWeight="500"
+            android:textSize="50px"
+            app:layout_constraintStart_toStartOf="@+id/MainView"
+            app:layout_constraintTop_toBottomOf="@+id/MainView" />
 
-        android:background="@drawable/rectangle_btn"
-        android:fontFamily="sans-serif-light"
-        android:onClick="switchToModuleInterfaceActivity"
-        android:text="@string/modulesGeneral"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textFontWeight="300"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/mainButton"
+            android:layout_width="0dp"
+            android:layout_height="185dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rectangle_btn"
+            android:theme="@style/LightButton"
+            android:text="@string/wellBeing"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/MainView2"
+            app:layout_constraintTop_toBottomOf="@+id/MainView2" />
 
-        android:textSize="32px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.143"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.581" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/mainButton2"
+            android:layout_width="124dp"
+            android:layout_height="48dp"
 
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/roundblack_btn"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/readMore"
+            android:textAlignment="center"
+            android:textColor="@color/white"
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonSettings"
-        android:layout_width="163dp"
-        android:layout_height="69dp"
+            android:textFontWeight="300"
+            android:textSize="25px"
+            app:layout_constraintBottom_toBottomOf="@+id/mainButton"
+            app:layout_constraintEnd_toEndOf="@+id/mainButton" />
 
-        android:background="@drawable/rectangle_btn"
-        android:fontFamily="sans-serif-light"
-        android:onClick="switchToSettingsActivity"
-        android:text="@string/settingsButton"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textFontWeight="300"
-        android:textSize="32px"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonModules"
+            android:layout_width="165dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/rectangle_btn"
+            android:theme="@style/LightButton"
+            android:onClick="switchToModuleInterfaceActivity"
+            android:text="@string/modulesGeneral"
+            app:layout_constraintStart_toStartOf="@+id/mainButton"
+            app:layout_constraintTop_toBottomOf="@+id/mainButton" />
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.862"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.581" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonSettings"
+            android:layout_height="70dp"
+            android:layout_width="165dp"
+            android:background="@drawable/rectangle_btn"
+            android:theme="@style/LightButton"
+            android:onClick="switchToSettingsActivity"
+            android:text="@string/settingsButton"
+            app:layout_constraintEnd_toEndOf="@+id/mainButton"
+            app:layout_constraintTop_toTopOf="@+id/buttonModules" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonNotifications"
-        android:layout_width="163dp"
-        android:layout_height="69dp"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonNotifications"
+            android:layout_width="165dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/rectangle_btn"
+            android:theme="@style/LightButton"
+            android:onClick="switchToNotificationsActivity"
+            android:text="@string/notificationsButton"
+            app:layout_constraintStart_toStartOf="@+id/buttonModules"
+            app:layout_constraintTop_toBottomOf="@+id/buttonModules" />
 
-        android:background="@drawable/rectangle_btn"
-        android:fontFamily="sans-serif-light"
-        android:onClick="switchToNotificationsActivity"
-        android:text="@string/notificationsButton"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textFontWeight="300"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonHelp"
+            android:layout_width="165dp"
+            android:layout_height="70dp"
+            android:background="@drawable/rectangle_btn"
+            android:theme="@style/LightButton"
+            android:onClick="switchToHelpActivity"
+            android:text="@string/helpButton"
+            app:layout_constraintEnd_toEndOf="@+id/buttonSettings"
+            app:layout_constraintTop_toTopOf="@+id/buttonNotifications" />
 
-        android:textSize="32px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.145"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.695" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonHelp"
-        android:layout_width="163dp"
-        android:layout_height="69dp"
-
-        android:background="@drawable/rectangle_btn"
-        android:fontFamily="sans-serif-light"
-        android:onClick="switchToHelpActivity"
-        android:text="@string/helpButton"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textFontWeight="300"
-
-        android:textSize="32px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.862"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.694" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

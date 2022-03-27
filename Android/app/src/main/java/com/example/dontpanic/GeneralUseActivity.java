@@ -1,3 +1,5 @@
+// MS: 3/25/22 - added text scaling
+
 package com.example.dontpanic;
 
 import android.content.Intent;

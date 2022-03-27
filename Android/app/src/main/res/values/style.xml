@@ -35,4 +35,12 @@
         <item name="android:progressTint">@color/white</item>
         <item name="android:thumbTint">@color/white</item>
     </style>
+
+    <style name="LightButton">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">28sp</item>
+    </style>
 </resources>

@@ -21,18 +21,18 @@
     <string name="modulesButton">MODULES</string>
     <string name="lastCompletedModuleButton">Last Completed Module: \nHaptic Heartbeat</string>
     <string name="launchModuleButton">Launch</string>
-    <string name="sellAllModulesButton">Sell All Modules</string>
+    <string name="seeAllModulesButton">See All Modules</string>
     <string name="moduleSequencesButton">MODULES SEQUENCES</string>
     <string name="lastCompletedSequenceButton">Last Completed Sequences: \nMy Favorite Sequence</string>
     <string name="launchModuleSequencesButton">Launch</string>
     <string name="editButton">Edit</string>
     <string name="deleteButton">Delete</string>
-    <string name="sellAllSequencesButton">Sell All Sequences</string>
+    <string name="seeAllSequencesButton">See All Sequences</string>
 
     <!-- String resources for the General Use Screen -->
     <string name="title">DON\'T PANIC</string>
     <string name="thought">THOUGHT OF THE DAY</string>
-    <string name="wellBeing">The building blocks of \nwellbeing</string>
+    <string name="wellBeing">The building blocks of well-being</string>
     <string name="readMore">Read more</string>
     <string name="modulesGeneral">MODULES</string>
     <string name="settingsButton">SETTINGS</string>
@@ -51,7 +51,6 @@
 
     <!-- String resources for Settings -->
     <string name="appSettings">SETTINGS</string>
-    <string name="settingsBack">Back to Settings</string>
 
     <string name="generalSettings">GENERAL</string>
     <string name="volumeSettings">Master Volume</string>
