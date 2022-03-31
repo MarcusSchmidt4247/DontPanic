@@ -55,11 +55,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:background="@drawable/round_btn"
+        android:onClick="createSequence"
+        android:padding="10dp"
         android:text="@string/createSequenceButton"
         android:textSize="20sp"
-        android:padding="10dp"
-        app:layout_constraintTop_toBottomOf="@id/mySequencesLayout"
-        app:layout_constraintStart_toStartOf="@id/mySequencesLayout"/>
+        app:layout_constraintStart_toStartOf="@id/mySequencesLayout"
+        app:layout_constraintTop_toBottomOf="@id/mySequencesLayout" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/backButton"

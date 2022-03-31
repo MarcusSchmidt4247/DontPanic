@@ -8,9 +8,9 @@ public class Sequence
 {
     private final int id;
     private final String name;
-    private ArrayList<ModuleReference> modules;
+    private ArrayList<Module> modules;
 
-    public Sequence(int id, String name, ArrayList<ModuleReference> modules)
+    public Sequence(int id, String name, ArrayList<Module> modules)
     {
         this.id = id;
         this.name = name;
@@ -21,7 +21,11 @@ public class Sequence
 
     public String GetName() { return name; }
 
-    public ArrayList<ModuleReference> GetModules() { return modules; }
+    public ArrayList<Module> GetModules() { return modules; }
 
-    public void SetModules(ArrayList<ModuleReference> modules) { this.modules = modules; }
+    public void SetModules(ArrayList<Module> modules) { this.modules = modules; }
+    public void addModule(Module module) {
+        modules.add(module);
+    }
+    public Class<?> getType(Module module) { return module.type;}
 }
