@@ -57,30 +57,17 @@
         <activity
             android:name=".MentalExerciseFourActivity"
             android:exported="false"/>
-
         <activity
             android:name=".ModuleInterfaceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ModuleSelectionActivity"
             android:exported="false" />
         <activity
             android:name=".NotificationsActivity"
             android:exported="false" />
         <activity
             android:name=".HelpActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MentalExerciseSelectionActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MentalExerciseOneActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MentalExerciseTwoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MentalExerciseThreeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MentalExerciseFourActivity"
             android:exported="false" />
     </application>
 

@@ -4,8 +4,6 @@
 
 package com.example.dontpanic;
 
-import androidx.annotation.Nullable;
-
 public enum Module
 {
     GUIDED_BREATHING ("Guided Breathing", 0, GuidedBreathing.class),
@@ -25,19 +23,19 @@ public enum Module
         this.type = type;
     }
 
-    public static ModuleReference GetModule(int _id) {
+    public static Module GetModule(int _id) {
         for (Module module : Module.values())
         {
             if (module.id == _id)
-                return new ModuleReference(module.name, module.id, module.type);
+                return module;
         }
         return null;
     }
-    public static ModuleReference GetModule(String _name) {
+    public static Module GetModule(String _name) {
         for (Module module : Module.values())
         {
             if (module.name.equals(_name))
-                return new ModuleReference(module.name, module.id, module.type);
+                return module;
         }
         return null;
     }

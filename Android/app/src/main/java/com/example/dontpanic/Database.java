@@ -367,7 +367,7 @@ public final class Database
         if (!DatabaseConnected())
             return null;
 
-        ArrayList<ModuleReference> modules = new ArrayList<>();
+        ArrayList<Module> modules = new ArrayList<>();
         try
         {
             // Query the database for the module ID's in the sequence, in order
@@ -378,8 +378,9 @@ public final class Database
                 // Extract the ID of the next module in the sequence
                 modID = results.getInt(results.getColumnIndex("modID"));
                 // Then add an instance of this type of module to the sequence
-                ModuleReference addingModule = Module.GetModule(modID);
-                modules.add(addingModule);
+
+                //ModuleReference addingModule = Module.GetModule(modID);       Deprecated, no need for Module Reference anymore
+                modules.add(Module.GetModule(modID));
             }
             results.close();
 

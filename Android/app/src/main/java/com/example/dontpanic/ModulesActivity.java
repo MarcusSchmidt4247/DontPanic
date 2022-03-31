@@ -61,8 +61,6 @@ public class ModulesActivity extends AppCompatActivity {
                 switchToModule(v);
             }
         });
-        // register for intent
-
     }
 
     public void switchToModule(View view) {

@@ -10,8 +10,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.DialogFragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.util.TypedValue;
@@ -21,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ModuleSequencesActivity extends AppCompatActivity implements ConfirmationDialog.ConfirmationDialogListener
 {
@@ -150,16 +153,29 @@ public class ModuleSequencesActivity extends AppCompatActivity implements Confir
         //**************************************************************************************************************************
         if (!sequence.GetModules().isEmpty())
         {
-            ModuleReference firstModule = sequence.GetModules().get(0);
-            Intent moduleIntent = new Intent(this, firstModule.getType());
+            //Write an iterator here, to iterate over the whole module of sequences - SC
+            // ModuleReference firstModule = sequence.GetModules().get(0);      deprecated, no need for Module Reference og: this, firstModule.getType() down below
+            Intent moduleIntent = new Intent(this, sequence.getType(sequence.GetModules().get(0)));
             startActivity(moduleIntent);
-            finish();
+            /*
+            Iterator<Module> iterator = (Iterator<Module>) sequence.GetModules();
+            while(iterator.hasNext()) {
+                Intent moduleIntent = new Intent(this, sequence.getType(sequence.GetModules().get(0)));
+                startActivity(moduleIntent);
+                // Do we call finish inside all of our Modules - SC, as we want them to be off of the Activity stack once they are done occurring
+                // The finish down below will remove ModuleSequencesActivity off of the Activity stack, so I dunno if we would want that necessarily, though would make sense since we are importing all Sequences from the DB each time
+                finish();
+            }
+            */
         }
     }
 
     public void onEdit(Sequence sequence)
     {
         Log.i("onEdit", "Called by " + sequence.GetID());
+
+        Intent intent = ModuleSelectionActivity.createIntent(this, sequence);
+        startActivity(intent);
     }
 
     public void onDelete(Sequence sequence)
@@ -173,6 +189,10 @@ public class ModuleSequencesActivity extends AppCompatActivity implements Confir
         finish();
     }
 
+    public void createSequence(View view) {
+        Intent intent = new Intent(this, ModuleSelectionActivity.class);
+        startActivity(intent);
+    }
     //********************************
     // Confirmation dialog functions *
     //********************************
