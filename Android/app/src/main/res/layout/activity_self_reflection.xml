@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_purple"
+    tools:context=".SelfReflectionActivity">
+
+    <TextView
+        android:id="@+id/selfReflectionView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="240dp"
+        android:text="Self-Reflection"
+        android:textAlignment="center"
+        android:textSize="120px"
+        android:theme="@style/HeaderLevelOne"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/generalSettingsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:text="Have you experienced changes in sleeping or eating habits?"
+        android:textSize="75px"
+        android:textAlignment="center"
+        android:paddingRight="40px"
+        android:theme="@style/HeaderLevelTwo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selfReflectionView" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonYes"
+        android:layout_width="165dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="184dp"
+        android:background="@drawable/rectangle_btn"
+        android:text="Yes"
+        android:textAlignment="center"
+        android:textSize="70px"
+        android:theme="@style/LightButton"
+        app:layout_constraintStart_toStartOf="@+id/selfReflectionView"
+        app:layout_constraintTop_toBottomOf="@+id/selfReflectionView" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonNo"
+        android:layout_width="165dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="84dp"
+        android:background="@drawable/rectangle_btn"
+        android:text="No"
+        android:textAlignment="center"
+        android:textSize="70px"
+        android:theme="@style/LightButton"
+        app:layout_constraintEnd_toEndOf="@id/buttonYes"
+        app:layout_constraintTop_toTopOf="@+id/buttonYes" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
