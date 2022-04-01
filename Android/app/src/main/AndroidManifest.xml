@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DontPanic">
         <activity
+            android:name=".SequenceSelectionActivity"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -41,22 +44,22 @@
             android:exported="false" />
         <activity
             android:name=".ModulesActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".MentalExerciseSelectionActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".MentalExerciseOneActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".MentalExerciseTwoActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".MentalExerciseThreeActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".MentalExerciseFourActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ModuleInterfaceActivity"
             android:exported="false" />

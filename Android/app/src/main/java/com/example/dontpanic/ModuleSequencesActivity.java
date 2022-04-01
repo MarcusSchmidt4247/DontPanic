@@ -1,6 +1,7 @@
 // MS: 3/17/22 - initial code with first GUI iteration and basic LayoutInflater
 // MS: 3/18/22 - onLaunch() starts first module in sequence, onDelete() launches confirmation popup
 // MS: 3/20/22 - added onBack(), divided functions into categories, and added text scaling
+// MS: 4/1/22 - fixed text scaling error
 
 package com.example.dontpanic;
 
@@ -123,13 +124,14 @@ public class ModuleSequencesActivity extends AppCompatActivity implements Confir
                     // Finally, scale the text inside this layout
                     if (textScale != 1.0f)
                     {
-                        TextView nameText = findViewById(R.id.sequenceName);
+                        ConstraintLayout seqLayout = findViewById(inflatedLayout.getId());
+                        TextView nameText = seqLayout.findViewById(R.id.sequenceName);
                         nameText.setTextSize(TypedValue.COMPLEX_UNIT_PX, nameText.getTextSize() * textScale);
-                        AppCompatButton launch = findViewById(R.id.launchSequenceButton);
+                        AppCompatButton launch = seqLayout.findViewById(R.id.launchSequenceButton);
                         launch.setTextSize(TypedValue.COMPLEX_UNIT_PX, launch.getTextSize() * textScale);
-                        AppCompatButton edit = findViewById(R.id.editSequenceButton);
+                        AppCompatButton edit = seqLayout.findViewById(R.id.editSequenceButton);
                         edit.setTextSize(TypedValue.COMPLEX_UNIT_PX, edit.getTextSize() * textScale);
-                        AppCompatButton delete = findViewById(R.id.deleteSequenceButton);
+                        AppCompatButton delete = seqLayout.findViewById(R.id.deleteSequenceButton);
                         delete.setTextSize(TypedValue.COMPLEX_UNIT_PX, delete.getTextSize() * textScale);
                     }
                 }

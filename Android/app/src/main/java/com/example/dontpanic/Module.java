@@ -7,8 +7,8 @@ package com.example.dontpanic;
 public enum Module
 {
     GUIDED_BREATHING ("Guided Breathing", 0, GuidedBreathing.class),
-    SELF_REFLECTION ("Reflection", 1, GuidedBreathing.class), // needs update once reflection module exists
-    MENTAL_EXERCISES ("Exercises", 2, MentalExerciseSelectionActivity.class), // needs update once exercises module exists
+    SELF_REFLECTION ("Reflection", 1, SelfReflectionActivity.class),
+    MENTAL_EXERCISES ("Exercises", 2, MentalExerciseSelectionActivity.class),
     APP_ACTIVITIES ("Activities", 3, GuidedBreathing.class), // needs update once activities module exists
     HAPTIC_HEARTBEAT ("Haptic Heartbeat", 4, GuidedBreathing.class); // needs update once haptics module exists
 

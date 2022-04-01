@@ -5,6 +5,7 @@
 // MS: 2/27/22 - Modified so that the splash screen will send the user to the appropriate screen after a few seconds
 // SC & MA: 3/2/22 - full rebuild of MainActivity, introduction of Splash.java, and full redirection between screens
 // MS: 3/20/22 - added text scaling
+// MS: 4/1/22 - Emergency button now searches for default sequence to launch
 
 package com.example.dontpanic;
 
@@ -16,7 +17,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -66,9 +69,72 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void switchToEmergencyMode(View view) {
-        Intent intent = new Intent(this, GuidedBreathing.class);
-        startActivity(intent);
+        boolean failedToLaunchPreference = true;
+        ArrayList<Integer> sequences = Database.GetUserSequenceIDs();
+        if (sequences != null && sequences.size() == 1) {
+            // If the user has only one sequence, launch it regardless of the database setting
+            Sequence sequence = Database.GetSequence(sequences.get(0));
+            if (sequence != null) {
+                //*********************************************
+                // To-do: Replace with proper sequence launch *
+                //*********************************************
+                ArrayList<Module> modules = sequence.GetModules();
+                if (modules != null) {
+                    failedToLaunchPreference = false;
+                    Intent intent = new Intent(this, Module.GetClass(modules.get(0).id));
+                    startActivity(intent);
+                }
+            }
+        }
+        else if (sequences != null && sequences.size() > 1) {
+            // If the user has more than one sequence, launch the one indicated by the database setting, or randomly if none is chosen
+            int seqID;
+            Object preference = Database.GetPreference(Preferences.LAUNCH_SEQUENCE_INT);
+            if (preference == null) {
+                Log.e("Database Error", "Preference returned null");
+                seqID = -1;
+            }
+            else
+                seqID = (Integer) preference;
+
+            Sequence sequence = null;
+            if (seqID != -1 && sequences.contains(seqID)) {
+                // If a preference was found and it's in the list of this user's sequences, select it to be launched
+                sequence = Database.GetSequence(seqID);
+            }
+            else {
+                // If no preference was found or if this sequence doesn't belong to the user, pick a random sequence instead
+                Random random = new Random();
+                int index = random.nextInt(sequences.size());
+                sequence = Database.GetSequence(sequences.get(index));
+            }
+
+            if (sequence != null) {
+                //*********************************************
+                // To-do: Replace with proper sequence launch *
+                //*********************************************
+                ArrayList<Module> modules = sequence.GetModules();
+                if (modules != null && !modules.isEmpty())
+                {
+                    failedToLaunchPreference = false;
+                    Intent intent = new Intent(this, Module.GetClass(modules.get(0).id));
+                    startActivity(intent);
+                }
+            }
+        }
+
+        if (failedToLaunchPreference)
+        {
+            /* If the user's preference or a random sequence can't be launched for any reason,
+               launch the highest rated module instead (for now, just pick one randomly) */
+            Random random = new Random();
+            int modID = random.nextInt(5);
+
+            Intent intent = new Intent(this, Module.GetClass(modID));
+            startActivity(intent);
+        }
     }
+
     public void switchToGeneralUse(View view) {
         Intent intent = new Intent(this, GeneralUseActivity.class);
         startActivity(intent);

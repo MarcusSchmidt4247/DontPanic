@@ -38,16 +38,18 @@
     <string name="settingsButton">SETTINGS</string>
     <string name="notificationsButton">NOTIFICATIONS</string>
     <string name="helpButton">HELP</string>
-    
+
     <!-- String resources for Module Sequences -->
     <string name="sequencesHeader">SEQUENCES</string>
     <string name="mySequencesHeader">My Sequences:</string>
     <string name="noSequencesText">No sequences. Create one below!</string>
+    <string name="noSequencesTextShort">No sequences.</string>
     <string name="defaultSequenceName">Default Sequence</string>
     <string name="launchSequenceButton">Launch</string>
     <string name="editSequenceButton">Edit</string>
     <string name="deleteSequenceButton">Delete</string>
     <string name="createSequenceButton">Create Sequence</string>
+    <string name="cancelButton">Cancel</string>
 
     <!-- String resources for Settings -->
     <string name="appSettings">SETTINGS</string>
@@ -59,5 +61,10 @@
 
     <string name="accessibilitySettings">ACCESSIBILITY</string>
     <string name="textScale">Text Scale</string>
+
+    <string name="default_sequence_settings_header">Default Sequence</string>
+    <string name="default_sequence_explanation">The default sequence will be launched when the Emergency button is pressed.</string>
+    <string name="current_label">Current:</string>
+    <string name="select_label">Select</string>
 
 </resources>

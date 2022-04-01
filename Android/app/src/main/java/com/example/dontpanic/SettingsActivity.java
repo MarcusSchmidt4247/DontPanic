@@ -1,24 +1,25 @@
 // MS: 3/6/22 - initial code, plus setting sliders and switches to match database values
 // MS: 3/10/22 - SeekBar listener pushes new value to the database
 // MS: 3/20/22 - added more listeners, a back button, text scaling, and changed text size seek bar to be 1-2 rather than 0.5-2.0
+// MS: 4/1/22 - added Default Sequence section with dynamic sequence name, text scaling, and button to select sequence
 
 package com.example.dontpanic;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.method.KeyListener;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -69,6 +70,24 @@ public class SettingsActivity extends AppCompatActivity
         this.hapticStrength = findViewById(R.id.HapticStrengthBar);
         SwitchCompat hapticSwitch = findViewById(R.id.HapticSwitch);
 
+        // Update the name of the sequence that's been chosen as the default
+        TextView defSeqName = findViewById(R.id.defSeqName);
+        int seqID;
+        Object preference = Database.GetPreference(Preferences.LAUNCH_SEQUENCE_INT);
+        if (preference == null)
+        {
+            Log.e("Database Error", "Preference returned null");
+            seqID = -1;
+        }
+        else
+            seqID = (Integer) preference;
+        if (seqID != -1)
+        {
+            Sequence sequence = Database.GetSequence(seqID);
+            if (sequence != null)
+                defSeqName.setText(sequence.GetName());
+        }
+
         if (textScaleRatio != 1.0f)
         {
             TextView volumeText = findViewById(R.id.volumeLabel);
@@ -78,6 +97,16 @@ public class SettingsActivity extends AppCompatActivity
             hapticText.setTextSize(TypedValue.COMPLEX_UNIT_PX, hapticText.getTextSize() * textScaleRatio);
             Button backButton = findViewById(R.id.backButtonSettings);
             backButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, backButton.getTextSize() * textScaleRatio);
+            // Grow the Default Sequence header by half speed
+            TextView defSeqHeader = findViewById(R.id.sequenceHeader);
+            defSeqHeader.setTextSize(TypedValue.COMPLEX_UNIT_PX, defSeqHeader.getTextSize() * (textScaleRatio + ((textScaleRatio - 1) / 2)));
+            TextView defSeqExplanation = findViewById(R.id.defSeqExplanation);
+            defSeqExplanation.setTextSize(TypedValue.COMPLEX_UNIT_PX, defSeqExplanation.getTextSize() * textScaleRatio);
+            TextView defSeqLabel = findViewById(R.id.currentLabel);
+            defSeqLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX, defSeqLabel.getTextSize() * textScaleRatio);
+            defSeqName.setTextSize(TypedValue.COMPLEX_UNIT_PX, defSeqName.getTextSize() * textScaleRatio);
+            Button selectButton = findViewById(R.id.selectButton);
+            selectButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, selectButton.getTextSize() * textScaleRatio);
         }
 
         try {
@@ -132,7 +161,7 @@ public class SettingsActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-        Object preference = Database.GetPreference(Preferences.AUDIO_VOLUME_FLOAT);
+        preference = Database.GetPreference(Preferences.AUDIO_VOLUME_FLOAT);
         float val;
         if (preference == null)
         {
@@ -216,6 +245,36 @@ public class SettingsActivity extends AppCompatActivity
     public void switchToAppSettings(View view) {
         setContentView(R.layout.activity_settings);
         ScaleAppSettingsText();
+    }
+
+    ActivityResultLauncher<Intent> selectSequenceLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result ->
+            {
+                if (result.getResultCode() == RESULT_OK)
+                {
+                    Intent resultIntent = result.getData();
+                    if (resultIntent != null)
+                    {
+                        int seqID = resultIntent.getIntExtra("seqID", -1);
+                        if (seqID != -1)
+                        {
+                            Database.SetPreference(Preferences.LAUNCH_SEQUENCE_INT, seqID);
+                            Sequence selectedSequence = Database.GetSequence(seqID);
+                            if (selectedSequence != null)
+                            {
+                                TextView defSeqName = findViewById(R.id.defSeqName);
+                                defSeqName.setText(selectedSequence.GetName());
+                            }
+                        }
+                    }
+                }
+            }
+    );
+
+    public void onSelectSequence(View view) {
+        Intent selectSequenceIntent = new Intent(this, SequenceSelectionActivity.class);
+        selectSequenceLauncher.launch(selectSequenceIntent);
     }
 
     public void onBack(View view)

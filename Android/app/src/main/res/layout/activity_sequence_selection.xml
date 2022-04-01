@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/dark_purple"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SequenceSelectionActivity">
+
+    <TextView
+        android:id="@+id/mySequencesHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="32dp"
+        android:text="@string/mySequencesHeader"
+        android:theme="@style/HeaderLevelTwo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/mySequencesLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:orientation="vertical"
+        android:showDividers="middle"
+        android:divider="@drawable/rectangle_divider"
+        app:layout_constraintStart_toStartOf="@id/mySequencesHeader"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mySequencesHeader" >
+
+        <TextView
+            android:id="@+id/noSequencesText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_btn"
+            android:text="@string/noSequencesTextShort"
+            android:textColor="@color/black"
+            android:theme="@style/BodyText"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            />
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/rectangle_btn"
+        android:text="@string/cancelButton"
+        android:textSize="20sp"
+        android:onClick="onCancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
