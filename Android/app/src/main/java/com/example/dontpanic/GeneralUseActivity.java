@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.lang.reflect.Type;
+
 public class GeneralUseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,19 +43,19 @@ public class GeneralUseActivity extends AppCompatActivity {
 
         TextView dailyThoughtHeader = findViewById(R.id.MainView2);
         dailyThoughtHeader.setTextSize(TypedValue.COMPLEX_UNIT_PX, 50 * textScale);
-        Button dailyThoughtButton = findViewById(R.id.mainButton);
-        dailyThoughtButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, 40 * textScale);
+        TextView dailyThought = findViewById(R.id.dailyThought);
+        dailyThought.setTextSize(TypedValue.COMPLEX_UNIT_PX, 40 * textScale);
         Button readMoreButton = findViewById(R.id.mainButton2);
-        readMoreButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, 25 * textScale);
+        readMoreButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, 30 * textScale);
 
         Button moduleButton = findViewById(R.id.buttonModules);
-        moduleButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, 32 * textScale);
+        moduleButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, 35 * textScale);
         Button settingsButton = findViewById(R.id.buttonSettings);
-        settingsButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, 32 * textScale);
+        settingsButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, 35 * textScale);
         Button notificationButton = findViewById(R.id.buttonNotifications);
-        notificationButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, 32 * textScale);
+        notificationButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, 35 * textScale);
         Button helpButton = findViewById(R.id.buttonHelp);
-        helpButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, 32 * textScale);
+        helpButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, 35 * textScale);
     }
 
     public void switchToModuleInterfaceActivity(View view) {

@@ -46,17 +46,31 @@
             app:layout_constraintStart_toStartOf="@+id/MainView"
             app:layout_constraintTop_toBottomOf="@+id/MainView" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/mainButton"
+        <!-- MS: 4/3/22 - changed button to an ImageView and TextView -->
+        <ImageView
+            android:id="@+id/dailyThoughtBackdrop"
             android:layout_width="0dp"
             android:layout_height="185dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/rectangle_btn"
-            android:theme="@style/LightButton"
-            android:text="@string/wellBeing"
+            android:importantForAccessibility="no"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/MainView2"
-            app:layout_constraintTop_toBottomOf="@+id/MainView2" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/MainView2"
+            app:srcCompat="@drawable/rectangle_btn" />
+
+        <TextView
+            android:id="@+id/dailyThought"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wellBeing"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/dailyThoughtBackdrop"
+            app:layout_constraintEnd_toEndOf="@+id/dailyThoughtBackdrop"
+            app:layout_constraintStart_toStartOf="@+id/dailyThoughtBackdrop"
+            app:layout_constraintTop_toTopOf="@+id/dailyThoughtBackdrop" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/mainButton2"
@@ -68,13 +82,13 @@
             android:background="@drawable/roundblack_btn"
             android:fontFamily="sans-serif-light"
             android:text="@string/readMore"
+
             android:textAlignment="center"
             android:textColor="@color/white"
-
             android:textFontWeight="300"
             android:textSize="25px"
-            app:layout_constraintBottom_toBottomOf="@+id/mainButton"
-            app:layout_constraintEnd_toEndOf="@+id/mainButton" />
+            app:layout_constraintBottom_toBottomOf="@+id/dailyThoughtBackdrop"
+            app:layout_constraintEnd_toEndOf="@+id/dailyThoughtBackdrop" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonModules"
@@ -82,21 +96,21 @@
             android:layout_height="70dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/rectangle_btn"
-            android:theme="@style/LightButton"
             android:onClick="switchToModuleInterfaceActivity"
             android:text="@string/modulesGeneral"
-            app:layout_constraintStart_toStartOf="@+id/mainButton"
-            app:layout_constraintTop_toBottomOf="@+id/mainButton" />
+            android:theme="@style/LightButton"
+            app:layout_constraintStart_toStartOf="@+id/dailyThoughtBackdrop"
+            app:layout_constraintTop_toBottomOf="@+id/dailyThoughtBackdrop" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonSettings"
-            android:layout_height="70dp"
             android:layout_width="165dp"
+            android:layout_height="70dp"
             android:background="@drawable/rectangle_btn"
-            android:theme="@style/LightButton"
             android:onClick="switchToSettingsActivity"
             android:text="@string/settingsButton"
-            app:layout_constraintEnd_toEndOf="@+id/mainButton"
+            android:theme="@style/LightButton"
+            app:layout_constraintEnd_toEndOf="@+id/dailyThoughtBackdrop"
             app:layout_constraintTop_toTopOf="@+id/buttonModules" />
 
         <androidx.appcompat.widget.AppCompatButton

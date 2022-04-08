@@ -3,6 +3,7 @@
     <string name="emergencyLabel">Emergency</string>
     <string name="generalLabel">General</string>
     <string name="backButtonLabel">Back</string>
+    <string name="defaultLabel">Default</string>
 
     <!-- String resources for confirmation pop-up dialog -->
     <string name="yesButton">Yes</string>
@@ -19,11 +20,11 @@
 
     <!-- String resources for the Modules Screen -->
     <string name="modulesButton">MODULES</string>
-    <string name="lastCompletedModuleButton">Last Completed Module: \nHaptic Heartbeat</string>
+    <string name="lastCompletedModuleButton">Last Completed Module:</string>
     <string name="launchModuleButton">Launch</string>
     <string name="seeAllModulesButton">See All Modules</string>
-    <string name="moduleSequencesButton">MODULES SEQUENCES</string>
-    <string name="lastCompletedSequenceButton">Last Completed Sequences: \nMy Favorite Sequence</string>
+    <string name="moduleSequencesButton">MODULE SEQUENCES</string>
+    <string name="lastCompletedSequenceButton">Last Completed Sequences:</string>
     <string name="launchModuleSequencesButton">Launch</string>
     <string name="editButton">Edit</string>
     <string name="deleteButton">Delete</string>
@@ -62,7 +63,6 @@
     <string name="accessibilitySettings">ACCESSIBILITY</string>
     <string name="textScale">Text Scale</string>
 
-    <string name="default_sequence_settings_header">Default Sequence</string>
     <string name="default_sequence_explanation">The default sequence will be launched when the Emergency button is pressed.</string>
     <string name="current_label">Current:</string>
     <string name="select_label">Select</string>

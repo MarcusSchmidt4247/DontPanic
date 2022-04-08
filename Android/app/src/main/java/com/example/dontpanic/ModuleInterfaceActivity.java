@@ -1,3 +1,5 @@
+// MS: 4/7/22 - added back button function
+
 package com.example.dontpanic;
 
 import android.content.Intent;
@@ -20,5 +22,8 @@ public class ModuleInterfaceActivity extends AppCompatActivity {
     public void switchToModuleSequencesActivity(View view) {
         Intent intent = new Intent(this, ModuleSequencesActivity.class);
         startActivity(intent);
+    }
+    public void onBack(View view) {
+        finish();
     }
 }

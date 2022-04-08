@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- MS: 4/7/22 - first accessibility pass adding constraints, changing text size/color, etc. -->
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,206 +9,219 @@
     android:background="@color/dark_purple"
     tools:context=".Module">
 
-
-    <TextView
-        android:id="@+id/ModuleView"
-        android:layout_width="155dp"
-        android:layout_height="47dp"
-
-        android:fontFamily="sans-serif-black"
-        android:text="@string/modulesButton"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textFontWeight="800"
-        android:textSize="80px"
-
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/backToGenButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.14" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/moduleButton"
-        android:layout_width="329dp"
-        android:layout_height="184dp"
+        <TextView
+            android:id="@+id/ModuleView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/modulesButton"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="33sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/lastModuleBackdrop"
+            android:layout_width="329dp"
+            android:layout_height="184dp"
+            android:background="@drawable/rectangle_btn"
+            android:importantForAccessibility="no"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ModuleView" />
+
+        <TextView
+            android:id="@+id/lastModuleStatic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/lastCompletedModuleButton"
+            android:textSize="23sp"
+            android:theme="@style/LightButton"
+            android:importantForAccessibility="no"
+            app:layout_constraintBottom_toTopOf="@id/lastModuleDynamic"
+            app:layout_constraintEnd_toEndOf="@id/lastModuleBackdrop"
+            app:layout_constraintStart_toStartOf="@id/lastModuleBackdrop"
+            app:layout_constraintTop_toTopOf="@id/lastModuleBackdrop" />
+
+        <TextView
+            android:id="@+id/lastModuleDynamic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/defaultLabel"
+            android:textSize="23sp"
+            android:theme="@style/LightButton"
+            android:contentDescription="The last completed module"
+            app:layout_constraintBottom_toTopOf="@id/moduleButton2"
+            app:layout_constraintEnd_toEndOf="@id/lastModuleBackdrop"
+            app:layout_constraintStart_toStartOf="@id/lastModuleBackdrop"
+            app:layout_constraintTop_toBottomOf="@id/lastModuleStatic" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/moduleButton2"
+            android:layout_width="124dp"
+            android:layout_height="44dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/roundblack_btn"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/launchModuleButton"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:contentDescription="Launches last completed module"
+            app:layout_constraintBottom_toBottomOf="@+id/lastModuleBackdrop"
+            app:layout_constraintEnd_toEndOf="@+id/lastModuleBackdrop"
+            app:layout_constraintStart_toStartOf="@+id/lastModuleBackdrop" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/moduleButton3"
+            android:layout_width="219dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rectangle_btn"
+            android:onClick="switchToModulesActivity"
+            android:text="@string/seeAllModulesButton"
+            android:textSize="17sp"
+            android:theme="@style/LightButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lastModuleBackdrop" />
+
+        <TextView
+            android:id="@+id/ModuleView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/moduleSequencesButton"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="33sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/moduleButton3" />
+
+        <ImageView
+            android:id="@+id/lastSequenceBackdrop"
+            android:layout_width="329dp"
+            android:layout_height="184dp"
+            android:background="@drawable/rectangle_btn"
+            android:importantForAccessibility="no"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ModuleView2" />
+
+        <TextView
+            android:id="@+id/lastSequenceStatic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/lastCompletedSequenceButton"
+            android:textSize="23sp"
+            android:theme="@style/LightButton"
+            android:importantForAccessibility="no"
+            app:layout_constraintBottom_toTopOf="@id/lastSequenceDynamic"
+            app:layout_constraintEnd_toEndOf="@id/lastSequenceBackdrop"
+            app:layout_constraintStart_toStartOf="@id/lastSequenceBackdrop"
+            app:layout_constraintTop_toTopOf="@id/lastSequenceBackdrop" />
+
+        <TextView
+            android:id="@+id/lastSequenceDynamic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/defaultLabel"
+            android:textSize="23sp"
+            android:theme="@style/LightButton"
+            android:contentDescription="The last completed sequence"
+            app:layout_constraintBottom_toTopOf="@id/moduleButton5"
+            app:layout_constraintEnd_toEndOf="@id/lastSequenceBackdrop"
+            app:layout_constraintStart_toStartOf="@id/lastSequenceBackdrop"
+            app:layout_constraintTop_toBottomOf="@id/lastSequenceStatic" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/moduleButton5"
+            android:layout_width="86dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/roundblack_btn"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/launchModuleSequencesButton"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:contentDescription="Launches last completed sequence"
+            app:layout_constraintBottom_toBottomOf="@+id/lastSequenceBackdrop"
+            app:layout_constraintStart_toStartOf="@+id/lastSequenceBackdrop" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/moduleButton6"
+            android:layout_width="86dp"
+            android:layout_height="44dp"
+            android:background="@drawable/roundblack_btn"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/editButton"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/moduleButton7"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toEndOf="@+id/moduleButton5"
+            app:layout_constraintTop_toTopOf="@+id/moduleButton5" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/moduleButton7"
+            android:layout_width="86dp"
+            android:layout_height="44dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/roundblack_btn"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/deleteButton"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/moduleButton6"
+            app:layout_constraintEnd_toEndOf="@+id/lastSequenceBackdrop" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/moduleButton8"
+            android:layout_width="219dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rectangle_btn"
+            android:onClick="switchToModuleSequencesActivity"
+            android:text="@string/seeAllSequencesButton"
+            android:textSize="17sp"
+            android:theme="@style/LightButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lastSequenceBackdrop" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/backToGenButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/rectangle_btn"
-        android:fontFamily="sans-serif-light"
-        android:paddingLeft="100px"
-        android:paddingRight="100px"
-        android:paddingBottom="70px"
-        android:text="@string/lastCompletedModuleButton"
-        android:textColor="@color/white"
-        android:textFontWeight="300"
-        android:textSize="42px"
+        android:onClick="onBack"
+        android:text="@string/backButtonLabel"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:theme="@style/LightButton"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.247" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/moduleButton2"
-        android:layout_width="124dp"
-        android:layout_height="37dp"
-
-        android:background="@drawable/roundblack_btn"
-        android:fontFamily="sans-serif-light"
-        android:text="@string/launchModuleButton"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textFontWeight="300"
-        android:textSize="30px"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.352" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/moduleButton3"
-        android:layout_width="219dp"
-        android:layout_height="52dp"
-
-        android:background="@drawable/rectangle_btn"
-        android:fontFamily="sans-serif-light"
-        android:onClick="switchToModulesActivity"
-        android:text="@string/seeAllModulesButton"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textFontWeight="300"
-
-        android:textSize="32px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.451" />
-
-    <TextView
-        android:id="@+id/ModuleView2"
-        android:layout_width="270dp"
-        android:layout_height="84dp"
-
-        android:fontFamily="sans-serif-black"
-        android:text="@string/moduleSequencesButton"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-
-        android:textFontWeight="800"
-        android:textSize="80px"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.574" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/moduleButton4"
-        android:layout_width="329dp"
-        android:layout_height="184dp"
-
-        android:background="@drawable/rectangle_btn"
-        android:fontFamily="sans-serif-light"
-        android:paddingLeft="100px"
-        android:paddingRight="100px"
-        android:paddingBottom="70px"
-        android:text="@string/lastCompletedSequenceButton"
-        android:textColor="@color/white"
-        android:textFontWeight="300"
-        android:textSize="42px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.787" />
-
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/moduleButton5"
-        android:layout_width="86dp"
-        android:layout_height="35dp"
-
-        android:background="@drawable/roundblack_btn"
-        android:fontFamily="sans-serif-light"
-        android:text="@string/launchModuleSequencesButton"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textFontWeight="300"
-        android:textSize="30px"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.215"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.789" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/moduleButton6"
-        android:layout_width="86dp"
-        android:layout_height="35dp"
-
-        android:background="@drawable/roundblack_btn"
-        android:fontFamily="sans-serif-light"
-        android:text="@string/editButton"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textFontWeight="300"
-        android:textSize="30px"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.789" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/moduleButton7"
-        android:layout_width="86dp"
-        android:layout_height="35dp"
-
-        android:background="@drawable/roundblack_btn"
-        android:fontFamily="sans-serif-light"
-        android:text="@string/deleteButton"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textFontWeight="300"
-        android:textSize="30px"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.781"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.788" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/moduleButton8"
-        android:layout_width="219dp"
-        android:layout_height="52dp"
-
-        android:background="@drawable/rectangle_btn"
-        android:fontFamily="sans-serif-light"
-        android:onClick="switchToModuleSequencesActivity"
-        android:text="@string/seeAllSequencesButton"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textFontWeight="300"
-        android:textSize="32px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.904" />
-
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
