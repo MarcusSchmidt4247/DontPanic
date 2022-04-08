@@ -157,9 +157,6 @@ public class ModuleSequencesActivity extends AppCompatActivity implements Confir
         {
             //Write an iterator here, to iterate over the whole module of sequences - SC
             // ModuleReference firstModule = sequence.GetModules().get(0);      deprecated, no need for Module Reference og: this, firstModule.getType() down below
-            Intent moduleIntent = new Intent(this, sequence.getType(sequence.GetModules().get(0)));
-            startActivity(moduleIntent);
-            /*
             Iterator<Module> iterator = (Iterator<Module>) sequence.GetModules();
             while(iterator.hasNext()) {
                 Intent moduleIntent = new Intent(this, sequence.getType(sequence.GetModules().get(0)));
@@ -168,7 +165,6 @@ public class ModuleSequencesActivity extends AppCompatActivity implements Confir
                 // The finish down below will remove ModuleSequencesActivity off of the Activity stack, so I dunno if we would want that necessarily, though would make sense since we are importing all Sequences from the DB each time
                 finish();
             }
-            */
         }
     }
 
@@ -178,6 +174,8 @@ public class ModuleSequencesActivity extends AppCompatActivity implements Confir
 
         Intent intent = ModuleSelectionActivity.createIntent(this, sequence);
         startActivity(intent);
+
+        //WIP, and is optional
     }
 
     public void onDelete(Sequence sequence)

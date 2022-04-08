@@ -51,7 +51,7 @@ public class ModuleSelectionActivity extends AppCompatActivity {
         btnModule1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Module tempModule = Module.InstanceOf(0);
+                Module tempModule = Module.InstanceOf(1);
                 sequence.addModule(tempModule);
                 printSequence();
             }
@@ -84,6 +84,7 @@ public class ModuleSelectionActivity extends AppCompatActivity {
 
     public void onBack(View view) {
         sequence.GetModules().clear();          //This is temporary.  either whenever the user presses onBack, I feel that we should still save this sequence as a new sequence, just in case. - SC
+        //Need to save sequence to DB - SC
         finish();
     }
 }
