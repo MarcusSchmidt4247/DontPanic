@@ -27,6 +27,7 @@ import java.util.ArrayList;
    mimic a top-level static class, which for some reason is not allowed in Java. */
 public final class Database
 {
+    public static final float DEFAULT_BREATH_DURATION = 6.5f;
     private Database() { }
 
     //*****************************
@@ -159,7 +160,8 @@ public final class Database
                 return val;
             }
             // Check if this preference is any of the ones with boolean values (which are stored in the database as integers)
-            else if (preference.equals(Preferences.HAPTICS_ENABLED_BOOLEAN) || preference.equals(Preferences.BREATHING_AUDIO_ENABLED_BOOLEAN))
+            else if (preference.equals(Preferences.HAPTICS_ENABLED_BOOLEAN) || preference.equals(Preferences.BREATHING_AUDIO_ENABLED_BOOLEAN) ||
+                     preference.equals(Preferences.BREATHING_HAPTICS_ENABLED_BOOLEAN))
             {
                 // If so, query the User table for this preference and return the boolean value
                 SQLiteCursor result = (SQLiteCursor) db.rawQuery(query, null);
@@ -224,7 +226,8 @@ public final class Database
             return false;
 
         // Verify this is a valid preference to receive a boolean
-        if (preference.equals(Preferences.HAPTICS_ENABLED_BOOLEAN) || preference.equals(Preferences.BREATHING_AUDIO_ENABLED_BOOLEAN))
+        if (preference.equals(Preferences.HAPTICS_ENABLED_BOOLEAN) || preference.equals(Preferences.BREATHING_AUDIO_ENABLED_BOOLEAN) ||
+            preference.equals(Preferences.BREATHING_HAPTICS_ENABLED_BOOLEAN))
         {
             ContentValues cv = new ContentValues();
             cv.put(preference, value);
@@ -557,8 +560,9 @@ public final class Database
                         Preferences.AUDIO_VOLUME_FLOAT + " REAL NOT NULL DEFAULT 1.0," +
                         Preferences.LAUNCH_SEQUENCE_INT + " INTEGER DEFAULT NULL," +
                         Preferences.TEXT_SCALING_FLOAT + " INTEGER DEFAULT 1.0," +
-                        Preferences.BREATHING_DURATION_FLOAT + " REAL NOT NULL DEFAULT 6.5," +
+                        Preferences.BREATHING_DURATION_FLOAT + " REAL NOT NULL DEFAULT " + DEFAULT_BREATH_DURATION + "," +
                         Preferences.BREATHING_AUDIO_ENABLED_BOOLEAN + " INTEGER NOT NULL DEFAULT 0," +
+                        Preferences.BREATHING_HAPTICS_ENABLED_BOOLEAN + " INTEGER NOT NULL DEFAULT 0," +
                         Preferences.BREATHING_CYCLES_INT + " INTEGER DEFAULT NULL)");
 
                 db.execSQL("CREATE TABLE IF NOT EXISTS Module (" +

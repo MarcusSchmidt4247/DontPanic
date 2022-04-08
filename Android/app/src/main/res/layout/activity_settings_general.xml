@@ -94,7 +94,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/HapticSwitch">
 
                 <TextView
-                    android:id="@+id/hapticLabel"
+                    android:id="@+id/breathDurationLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -103,7 +103,7 @@
                     android:theme="@style/BodyText" />
 
                 <SeekBar
-                    android:id="@+id/HapticStrengthBar"
+                    android:id="@+id/breathDurationBar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

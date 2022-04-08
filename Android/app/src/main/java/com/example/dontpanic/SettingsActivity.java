@@ -2,6 +2,8 @@
 // MS: 3/10/22 - SeekBar listener pushes new value to the database
 // MS: 3/20/22 - added more listeners, a back button, text scaling, and changed text size seek bar to be 1-2 rather than 0.5-2.0
 // MS: 4/1/22 - added Default Sequence section with dynamic sequence name, text scaling, and button to select sequence
+// MS: 4/7/22 - added switchToGuidedBreathingSettings
+// MS: 4/8/22 - added Guided Breathing setting initialization and updates to/from the database, plus text scaling for new layout
 
 package com.example.dontpanic;
 
@@ -67,7 +69,7 @@ public class SettingsActivity extends AppCompatActivity
         setContentView(R.layout.activity_settings_general);
 
         this.masterVolume = findViewById(R.id.VolumeBar);
-        this.hapticStrength = findViewById(R.id.HapticStrengthBar);
+        this.hapticStrength = findViewById(R.id.breathDurationBar);
         SwitchCompat hapticSwitch = findViewById(R.id.HapticSwitch);
 
         // Update the name of the sequence that's been chosen as the default
@@ -93,7 +95,7 @@ public class SettingsActivity extends AppCompatActivity
             TextView volumeText = findViewById(R.id.volumeLabel);
             volumeText.setTextSize(TypedValue.COMPLEX_UNIT_PX, volumeText.getTextSize() * textScaleRatio);
             hapticSwitch.setTextSize(TypedValue.COMPLEX_UNIT_PX, hapticSwitch.getTextSize() * textScaleRatio);
-            TextView hapticText = findViewById(R.id.hapticLabel);
+            TextView hapticText = findViewById(R.id.breathDurationLabel);
             hapticText.setTextSize(TypedValue.COMPLEX_UNIT_PX, hapticText.getTextSize() * textScaleRatio);
             Button backButton = findViewById(R.id.backButtonSettings);
             backButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, backButton.getTextSize() * textScaleRatio);
@@ -247,6 +249,94 @@ public class SettingsActivity extends AppCompatActivity
         ScaleAppSettingsText();
     }
 
+    public void switchToGuidedBreathingSettings(View view) {
+        setContentView(R.layout.activity_settings_guided_breathing);
+
+        // Initialize the audio switch to its proper value and set a listener to update the database
+        Object preference = Database.GetPreference(Preferences.BREATHING_AUDIO_ENABLED_BOOLEAN);
+        boolean on;
+        if (preference == null)
+        {
+            Log.e("Database Error", "Could not retrieve preference");
+            on = false;
+        }
+        else
+            on = (boolean) preference;
+        SwitchCompat audioSwitch = findViewById(R.id.AudioSwitch);
+        audioSwitch.setChecked(on);
+        audioSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                Database.SetPreference(Preferences.BREATHING_AUDIO_ENABLED_BOOLEAN, isChecked);
+            }
+        });
+
+        // Initialize the haptic switch to its proper value and set a listener to update the database
+        preference = Database.GetPreference(Preferences.BREATHING_HAPTICS_ENABLED_BOOLEAN);
+        if (preference == null)
+        {
+            Log.e("Database Error", "Could not retrieve preference");
+            on = false;
+        }
+        else
+            on = (boolean) preference;
+        SwitchCompat hapticSwitch = findViewById(R.id.HapticSwitch);
+        hapticSwitch.setChecked(on);
+        hapticSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                Database.SetPreference(Preferences.BREATHING_HAPTICS_ENABLED_BOOLEAN, isChecked);
+            }
+        });
+
+        // Initialize the breath duration seek bar to its proper value and set a listener to update the database
+        preference = Database.GetPreference(Preferences.BREATHING_DURATION_FLOAT);
+        float val;
+        if (preference == null)
+        {
+            Log.e("Database Error", "Could not retrieve preference");
+            val = Database.DEFAULT_BREATH_DURATION;
+        }
+        else
+            val = (Float) preference;
+        SeekBar breathDuration = findViewById(R.id.breathDurationBar);
+        float midpoint = (float) Math.ceil(breathDuration.getMax() / 2.0f);
+        float maxVariation = 2.0f;
+        float step = maxVariation / (breathDuration.getMax() - midpoint);
+        breathDuration.setProgress(Math.round((val - (Database.DEFAULT_BREATH_DURATION - maxVariation)) / step));
+        try {
+            breathDuration.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int i, boolean b) { }
+
+                @Override public void onStartTrackingTouch(SeekBar seekBar) { }
+
+                @Override public void onStopTrackingTouch(SeekBar seekBar) {
+                    // Create a float value that is plus or minus 2 seconds of the default breath duration
+                    float val = Database.DEFAULT_BREATH_DURATION + (((float) seekBar.getProgress() - midpoint) * step);
+                    Database.SetPreference(Preferences.BREATHING_DURATION_FLOAT, val);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Scale GUI elements if necessary
+        if (textScaleRatio != 1.0f)
+        {
+            audioSwitch.setTextSize(TypedValue.COMPLEX_UNIT_PX, audioSwitch.getTextSize() * textScaleRatio);
+            hapticSwitch.setTextSize(TypedValue.COMPLEX_UNIT_PX, hapticSwitch.getTextSize() * textScaleRatio);
+            TextView breathLabel = findViewById(R.id.breathDurationLabel);
+            breathLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX, breathLabel.getTextSize() * textScaleRatio);
+            Button backButton = findViewById(R.id.backButtonSettings);
+            backButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, backButton.getTextSize() * textScaleRatio);
+        }
+    }
+
     ActivityResultLauncher<Intent> selectSequenceLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result ->
@@ -288,6 +378,8 @@ public class SettingsActivity extends AppCompatActivity
         generalButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, generalButton.getTextSize() * textScaleRatio);
         Button accessibilityButton = findViewById(R.id.accessibilitySettingsButton);
         accessibilityButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, accessibilityButton.getTextSize() * textScaleRatio);
+        Button guidedBreathingButton = findViewById(R.id.guidedBreathingSettingsButton);
+        guidedBreathingButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, guidedBreathingButton.getTextSize() * textScaleRatio);
         Button backButton = findViewById(R.id.backButton);
         backButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, backButton.getTextSize() * textScaleRatio);
         if (textScaleRatio > 1.6f)

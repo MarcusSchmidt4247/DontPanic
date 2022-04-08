@@ -21,10 +21,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--
-    General settings items
-    -->
-
     <Button
         android:id="@+id/generalSettingsButton"
         android:layout_width="wrap_content"
@@ -38,10 +34,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/backButtonSettings" />
 
-    <!--
-    Accessibility settings items
-    -->
-
     <Button
         android:id="@+id/accessibilitySettingsButton"
         android:layout_width="wrap_content"
@@ -54,6 +46,19 @@
         android:background="?android:attr/selectableItemBackground"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/generalSettingsButton" />
+
+    <Button
+        android:id="@+id/guidedBreathingSettingsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:onClick="switchToGuidedBreathingSettings"
+        android:text="@string/guidedBreathingSettings"
+        android:theme="@style/HeaderLevelTwo"
+        android:background="?android:attr/selectableItemBackground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accessibilitySettingsButton" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/backButton"

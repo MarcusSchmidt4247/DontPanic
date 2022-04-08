@@ -20,5 +20,6 @@ public class Preferences
     // Preferences for the guided breathing module
     public static final String BREATHING_DURATION_FLOAT = "breath_duration";
     public static final String BREATHING_AUDIO_ENABLED_BOOLEAN = "breath_audio";
+    public static final String BREATHING_HAPTICS_ENABLED_BOOLEAN = "breath_haptics";
     public static final String BREATHING_CYCLES_INT = "breath_repetition"; // how long the module lasts before ending, or null if infinite
 }
