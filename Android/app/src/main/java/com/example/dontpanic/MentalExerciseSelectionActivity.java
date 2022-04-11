@@ -1,5 +1,6 @@
 // DB: 3/18/22 - Created Java file for Mental Exercise Selection Screen
 // DB: 3/21/22 - Added functionality to the buttons to show the different exercises
+// MS: 4/11/22 - added string literal for module name
 
 package com.example.dontpanic;
 
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 public class MentalExerciseSelectionActivity extends AppCompatActivity {
+    public static final String NAME = "Mental Exercises";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -80,6 +80,7 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:contentDescription="Launches last completed module"
+            android:onClick="onLaunchModule"
             app:layout_constraintBottom_toBottomOf="@+id/lastModuleBackdrop"
             app:layout_constraintEnd_toEndOf="@+id/lastModuleBackdrop"
             app:layout_constraintStart_toStartOf="@+id/lastModuleBackdrop" />
@@ -164,6 +165,7 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:contentDescription="Launches last completed sequence"
+            android:onClick="onLaunchSequence"
             app:layout_constraintBottom_toBottomOf="@+id/lastSequenceBackdrop"
             app:layout_constraintStart_toStartOf="@+id/lastSequenceBackdrop" />
 

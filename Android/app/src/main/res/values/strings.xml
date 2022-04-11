@@ -20,15 +20,16 @@
 
     <!-- String resources for the Modules Screen -->
     <string name="modulesButton">MODULES</string>
-    <string name="lastCompletedModuleButton">Last Completed Module:</string>
+    <string name="lastCompletedModuleButton">Recommended Module:</string>
     <string name="launchModuleButton">Launch</string>
     <string name="seeAllModulesButton">See All Modules</string>
     <string name="moduleSequencesButton">MODULE SEQUENCES</string>
-    <string name="lastCompletedSequenceButton">Last Completed Sequences:</string>
+    <string name="lastCompletedSequenceButton">Recommended Sequence:</string>
     <string name="launchModuleSequencesButton">Launch</string>
     <string name="editButton">Edit</string>
     <string name="deleteButton">Delete</string>
     <string name="seeAllSequencesButton">See All Sequences</string>
+    <string name="noRecommendation">No recommendation</string>
 
     <!-- String resources for the General Use Screen -->
     <string name="title">DON\'T PANIC</string>

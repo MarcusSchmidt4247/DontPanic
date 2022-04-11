@@ -9,6 +9,7 @@
 // MS: 2/27/22 - a few minor improvements to safety and/or efficiency, wrote PrintTable() function for testing purposes
 // MS: 2/28/22 - added two new preferences, SetPreference(), and UserExists()
 // MS: 3/17/22 - added GetUserSequenceIDs() and converted GetModulesInSequence() to GetSequence() using new Sequence object
+// MS: 4/11/22 - added functions to write and retrieve data from the CompletedModule table
 
 package com.example.dontpanic;
 
@@ -20,8 +21,13 @@ import android.database.sqlite.*;
 import android.util.Log;
 
 // Miscellaneous imports
+import androidx.annotation.Nullable;
+
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 /* The class is final with a private constructor and only defines static member functions in order to
    mimic a top-level static class, which for some reason is not allowed in Java. */
@@ -381,9 +387,7 @@ public final class Database
                 // Extract the ID of the next module in the sequence
                 modID = results.getInt(results.getColumnIndex("modID"));
                 // Then add an instance of this type of module to the sequence
-
-                //ModuleReference addingModule = Module.GetModule(modID);       Deprecated, no need for Module Reference anymore
-                modules.add(Module.GetModule(modID));
+                modules.add(Module.InstanceOf(modID));
             }
             results.close();
 
@@ -409,6 +413,30 @@ public final class Database
     // Functions that have to do with modules inside of a module sequence *
     //*********************************************************************
 
+    public static boolean CompletedModule(int modID)
+    {
+        if (!DatabaseConnected() || currentUserID == -1)
+            return false;
+
+        try
+        {
+            ContentValues cv = new ContentValues();
+            cv.put("usrID", currentUserID);
+            cv.put("modID", modID);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            String date = sdf.format(Calendar.getInstance().getTime());
+            cv.put("Date", date);
+            db.insert("CompletedModule", null, cv);
+            return true;
+        }
+        catch (SQLException e)
+        {
+            Log.e("Database Error", e.getMessage());
+        }
+
+        return false;
+    }
+
     // Return the success of the module insertion
     public static boolean InsertModuleIntoSequence(int seqID, int modID, int index)
     {
@@ -430,6 +458,7 @@ public final class Database
                 cv.put("modID", modID);
                 cv.put("modOrder", index);
                 db.insert("SequenceOrder", null, cv);
+                return true;
             }
             catch (SQLException e)
             {
@@ -483,6 +512,31 @@ public final class Database
     public static void DeleteModuleFromSequence()
     {
 
+    }
+
+    // Return the last module that the current user completed, or null
+    @Nullable public static Module LastCompletedModule()
+    {
+        // Ensure that there is a valid connection to the database
+        if (!DatabaseConnected() || currentUserID == -1)
+            return null;
+
+        Module module = null;
+        try
+        {
+            SQLiteCursor results = (SQLiteCursor) db.rawQuery("SELECT modID FROM CompletedModule WHERE usrID = ? ORDER BY Date DESC LIMIT 1", new String[] { String.valueOf(currentUserID) });
+            if (results.moveToNext())
+            {
+                module = Module.InstanceOf(results.getInt(results.getColumnIndex("modID")));
+            }
+            results.close();
+            return module;
+        }
+        catch (SQLException e)
+        {
+            Log.e("Database Error", e.getMessage());
+            return null;
+        }
     }
 
     //************************************************************************

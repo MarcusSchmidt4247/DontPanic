@@ -25,6 +25,8 @@ import java.io.IOException;
 
 public class GuidedBreathing extends AppCompatActivity
 {
+    public static final String NAME = "Guided Breathing";
+
     // All user preferences that relate to this module
     private boolean haptics;
     private float hapticStrength;
@@ -228,6 +230,7 @@ public class GuidedBreathing extends AppCompatActivity
 
     public void onBack(View view)
     {
+        Database.CompletedModule(Module.GetID(NAME));
         finish();
     }
 
