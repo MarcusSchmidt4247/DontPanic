@@ -11,33 +11,32 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SelfReflectionActivity extends AppCompatActivity {
+public class SelfReflectionThreeActivity extends AppCompatActivity {
     public static final String NAME = "Self-Reflection";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_self_reflection);
+        setContentView(R.layout.activity_self_reflection_three);
 
         // yes button takes you to the second self reflection screen
-        Button selfReflectionButton1 = findViewById(R.id.selfReflectionButton1);
-        selfReflectionButton1.setOnClickListener(new View.OnClickListener() {
+        Button selfReflectionButton5 = findViewById(R.id.selfReflectionButton5);
+        selfReflectionButton5.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 System.out.println("Button Clicked");
-                Intent selfReflectionExercise1 = new Intent(getApplicationContext(), SelfReflectionTwoActivity.class);
-                startActivity(selfReflectionExercise1);
+                Intent selfReflectionExercise5 = new Intent(getApplicationContext(), SelfReflectionFourActivity.class);
+                startActivity(selfReflectionExercise5);
             }
         });
 
         // no button takes you to the second self reflection screen
-        Button selfReflectionButton2 = findViewById(R.id.selfReflectionButton2);
-        selfReflectionButton2.setOnClickListener(new View.OnClickListener() {
+        Button selfReflectionButton6 = findViewById(R.id.selfReflectionButton6);
+        selfReflectionButton6.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 System.out.println("Button Clicked");
-                Intent selfReflectionExercise2 = new Intent(getApplicationContext(), SelfReflectionTwoActivity.class);
-                startActivity(selfReflectionExercise2);
+                Intent selfReflectionExercise6 = new Intent(getApplicationContext(), SelfReflectionFourActivity.class);
+                startActivity(selfReflectionExercise6);
             }
         });
     }
 }
-
