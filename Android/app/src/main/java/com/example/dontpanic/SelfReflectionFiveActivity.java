@@ -12,23 +12,23 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SelfReflectionFourActivity extends AppCompatActivity {
+public class SelfReflectionFiveActivity extends AppCompatActivity {
     public static final String NAME = "Self-Reflection";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_self_reflection_four);
+        setContentView(R.layout.activity_self_reflection_five);
 
-        EditText selfReflectionText7 = (EditText) findViewById(R.id.selfReflectionText7);
+        EditText selfReflectionText9 = (EditText) findViewById(R.id.selfReflectionText9);
 
-        // next button takes you to the fifth self reflection screen
-        Button selfReflectionButton8 = findViewById(R.id.selfReflectionButton8);
-        selfReflectionButton8.setOnClickListener(new View.OnClickListener() {
+        // next button takes you to the sixth self reflection screen
+        Button selfReflectionButton10 = findViewById(R.id.selfReflectionButton10);
+        selfReflectionButton10.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 System.out.println("Button Clicked");
-                Intent selfReflectionExercise8 = new Intent(getApplicationContext(), SelfReflectionFiveActivity.class);
-                startActivity(selfReflectionExercise8);
+                Intent selfReflectionExercise10 = new Intent(getApplicationContext(), SelfReflectionSixActivity.class);
+                startActivity(selfReflectionExercise10);
             }
         });
     }

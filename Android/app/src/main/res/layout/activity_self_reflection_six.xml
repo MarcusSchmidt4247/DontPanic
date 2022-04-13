@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_purple"
-    tools:context=".SelfReflectionThreeActivity">
+    tools:context=".SelfReflectionSixActivity">
 
     <TextView
-        android:id="@+id/selfReflectionView5"
+        android:id="@+id/selfReflectionView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="240dp"
@@ -21,44 +21,45 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/selfReflectionView6"
-        android:layout_width="380dp"
-        android:layout_height="117dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+        android:id="@+id/selfReflectionView12"
+        android:layout_width="309dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="24dp"
         android:paddingRight="40px"
-        android:text="Have you experienced feeling tired or having little energy?"
+        android:text="From your past experiences, how likely this worry will come true?"
         android:textAlignment="center"
-        android:textSize="75px"
+        android:textSize="70px"
         android:theme="@style/HeaderLevelTwo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selfReflectionView5" />
+        app:layout_constraintTop_toBottomOf="@+id/selfReflectionView11" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/selfReflectionButton5"
-        android:layout_width="165dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="184dp"
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/selfReflectionText11"
+        android:layout_width="304dp"
+        android:layout_height="107dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="188dp"
         android:background="@drawable/rectangle_btn"
-        android:text="Yes"
+        android:inputType="textCapSentences|textMultiLine"
         android:textAlignment="center"
         android:textSize="70px"
         android:theme="@style/LightButton"
-        app:layout_constraintStart_toStartOf="@+id/selfReflectionView5"
-        app:layout_constraintTop_toBottomOf="@+id/selfReflectionView5" />
+        app:layout_constraintStart_toStartOf="@+id/selfReflectionView11"
+        app:layout_constraintTop_toBottomOf="@+id/selfReflectionView11" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/selfReflectionButton6"
+        android:id="@+id/selfReflectionButton12"
         android:layout_width="165dp"
         android:layout_height="70dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="72dp"
         android:background="@drawable/rectangle_btn"
-        android:text="No"
+        android:text="Next"
         android:textAlignment="center"
-        android:textSize="70px"
+        android:textSize="65px"
         android:theme="@style/LightButton"
-        app:layout_constraintEnd_toEndOf="@id/selfReflectionButton5"
-        app:layout_constraintTop_toTopOf="@+id/selfReflectionButton5" />
+        app:layout_constraintEnd_toEndOf="@id/selfReflectionText11"
+        app:layout_constraintTop_toTopOf="@+id/selfReflectionText11" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

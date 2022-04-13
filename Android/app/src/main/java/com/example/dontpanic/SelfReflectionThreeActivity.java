@@ -19,7 +19,7 @@ public class SelfReflectionThreeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_self_reflection_three);
 
-        // yes button takes you to the second self reflection screen
+        // yes button takes you to the fourth self reflection screen
         Button selfReflectionButton5 = findViewById(R.id.selfReflectionButton5);
         selfReflectionButton5.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -29,7 +29,7 @@ public class SelfReflectionThreeActivity extends AppCompatActivity {
             }
         });
 
-        // no button takes you to the second self reflection screen
+        // no button takes you to the fourth self reflection screen
         Button selfReflectionButton6 = findViewById(R.id.selfReflectionButton6);
         selfReflectionButton6.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
