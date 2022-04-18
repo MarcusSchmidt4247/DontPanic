@@ -72,6 +72,24 @@
         <activity
             android:name=".HelpActivity"
             android:exported="false" />
+        <activity
+            android:name=".SelfReflectionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SelfReflectionTwoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SelfReflectionThreeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SelfReflectionFourActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SelfReflectionFiveActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SelfReflectionSixActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
