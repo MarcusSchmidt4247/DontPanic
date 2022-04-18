@@ -24,6 +24,15 @@ public enum Module
         this.type = type;
     }
 
+    public Class<?> GetClass()
+    {
+        return type;
+    }
+
+    //*******************
+    // Static functions *
+    //*******************
+
     public static Class<?> GetClass(int _id)
     {
         for (Module module : Module.values())
@@ -33,10 +42,6 @@ public enum Module
         }
         return null;
     }
-
-    //*******************
-    // Static functions *
-    //*******************
 
     public static int GetID(String _name)
     {

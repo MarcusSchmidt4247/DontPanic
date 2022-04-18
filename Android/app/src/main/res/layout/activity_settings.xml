@@ -23,44 +23,53 @@
 
     <Button
         android:id="@+id/generalSettingsButton"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
         android:background="?android:attr/selectableItemBackground"
         android:onClick="switchToGeneralSettings"
         android:text="@string/generalSettings"
+        android:textAlignment="textStart"
         android:theme="@style/HeaderLevelTwo"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/backButtonSettings" />
 
     <Button
         android:id="@+id/accessibilitySettingsButton"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="?android:attr/selectableItemBackground"
         android:onClick="switchToAccessibilitySettings"
         android:text="@string/accessibilitySettings"
+        android:textAlignment="textStart"
         android:theme="@style/HeaderLevelTwo"
-        android:background="?android:attr/selectableItemBackground"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/generalSettingsButton" />
 
     <Button
         android:id="@+id/guidedBreathingSettingsButton"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="?android:attr/selectableItemBackground"
         android:onClick="switchToGuidedBreathingSettings"
         android:text="@string/guidedBreathingSettings"
+        android:textAlignment="textStart"
         android:theme="@style/HeaderLevelTwo"
-        android:background="?android:attr/selectableItemBackground"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/accessibilitySettingsButton" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <Button
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -70,6 +79,7 @@
         android:text="@string/backButtonLabel"
         android:textSize="20sp"
         android:onClick="onBack"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

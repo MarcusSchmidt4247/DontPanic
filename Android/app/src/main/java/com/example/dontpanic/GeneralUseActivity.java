@@ -38,6 +38,8 @@ public class GeneralUseActivity extends AppCompatActivity {
         else
             textScale = (Float) preference;
 
+        textScale = Math.min(textScale, 1.8f);
+
         TextView appName = findViewById(R.id.MainView);
         appName.setTextSize(TypedValue.COMPLEX_UNIT_PX, 80 * textScale);
 

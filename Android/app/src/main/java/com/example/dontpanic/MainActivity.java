@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<Module> modules = sequence.GetModules();
                 if (modules != null) {
                     failedToLaunchPreference = false;
-                    Intent intent = new Intent(this, Module.GetClass(modules.get(0).id));
+                    Intent intent = new Intent(this, modules.get(0).GetClass());
                     startActivity(intent);
                 }
             }
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                 if (modules != null && !modules.isEmpty())
                 {
                     failedToLaunchPreference = false;
-                    Intent intent = new Intent(this, Module.GetClass(modules.get(0).id));
+                    Intent intent = new Intent(this, modules.get(0).GetClass());
                     startActivity(intent);
                 }
             }

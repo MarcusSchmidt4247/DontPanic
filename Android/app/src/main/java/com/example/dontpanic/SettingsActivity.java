@@ -374,20 +374,15 @@ public class SettingsActivity extends AppCompatActivity
 
     private void ScaleAppSettingsText()
     {
+        float realScale = Math.min(textScaleRatio, 1.6f);
         Button generalButton = findViewById(R.id.generalSettingsButton);
-        generalButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, generalButton.getTextSize() * textScaleRatio);
+        generalButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, generalButton.getTextSize() * realScale);
         Button accessibilityButton = findViewById(R.id.accessibilitySettingsButton);
-        accessibilityButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, accessibilityButton.getTextSize() * textScaleRatio);
+        accessibilityButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, accessibilityButton.getTextSize() * realScale);
         Button guidedBreathingButton = findViewById(R.id.guidedBreathingSettingsButton);
-        guidedBreathingButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, guidedBreathingButton.getTextSize() * textScaleRatio);
+        guidedBreathingButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, guidedBreathingButton.getTextSize() * realScale);
         Button backButton = findViewById(R.id.backButton);
-        backButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, backButton.getTextSize() * textScaleRatio);
-        if (textScaleRatio > 1.6f)
-        {
-            // Set the padding in px to be 10dp
-            int padding = (int) (10 * getResources().getDisplayMetrics().density);
-            backButton.setPadding(padding, padding, padding, padding);
-        }
+        backButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, backButton.getTextSize() * realScale);
     }
 
     private void ScaleAccessibilitySettingsText()

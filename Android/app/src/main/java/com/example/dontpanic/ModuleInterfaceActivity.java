@@ -1,11 +1,15 @@
 // MS: 4/7/22 - added back button function
 // MS: 4/11/22 - added functionality to recommended modules and sequences
+// MS: 4/18/22 - added text scaling
 
 package com.example.dontpanic;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,6 +52,37 @@ public class ModuleInterfaceActivity extends AppCompatActivity {
             if (recommendedSequence != null)
                 recommendedSequenceLabel.setText(recommendedSequence.GetName());
         }
+
+        // Scale text
+        float textScale;
+        Object preference = Database.GetPreference(Preferences.TEXT_SCALING_FLOAT);
+        if (preference == null)
+        {
+            Log.e("Database Error", "Preference returned null");
+            textScale = 1.0f;
+        }
+        else
+            textScale = (Float) preference;
+        if (textScale != 1.0f)
+        {
+            float realScale = Math.min(textScale, 1.7f);
+            TextView moduleLabel = findViewById(R.id.lastModuleStatic);
+            moduleLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX, moduleLabel.getTextSize() * realScale);
+            recommendedModuleLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX, recommendedModuleLabel.getTextSize() * realScale);
+            Button launchModule = findViewById(R.id.moduleButton2);
+            launchModule.setTextSize(TypedValue.COMPLEX_UNIT_PX, launchModule.getTextSize() * realScale);
+            Button allModules = findViewById(R.id.moduleButton3);
+            allModules.setTextSize(TypedValue.COMPLEX_UNIT_PX, allModules.getTextSize() * realScale);
+            TextView sequenceLabel = findViewById(R.id.lastSequenceStatic);
+            sequenceLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX, sequenceLabel.getTextSize() * realScale);
+            recommendedSequenceLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX, recommendedSequenceLabel.getTextSize() * realScale);
+            Button launchSequence = findViewById(R.id.moduleButton5);
+            launchSequence.setTextSize(TypedValue.COMPLEX_UNIT_PX, launchSequence.getTextSize() * realScale);
+            Button allSequences = findViewById(R.id.moduleButton8);
+            allSequences.setTextSize(TypedValue.COMPLEX_UNIT_PX, allSequences.getTextSize() * realScale);
+            Button back = findViewById(R.id.backToGenButton);
+            back.setTextSize(TypedValue.COMPLEX_UNIT_PX, back.getTextSize() * realScale);
+        }
     }
 
     public void switchToModulesActivity(View view) {
@@ -62,7 +97,7 @@ public class ModuleInterfaceActivity extends AppCompatActivity {
     public void onLaunchModule(View view) {
         if (recommendedModule != null)
         {
-            Intent intent = new Intent(this, recommendedModule.getClass());
+            Intent intent = new Intent(this, recommendedModule.GetClass());
             startActivity(intent);
         }
     }
@@ -73,7 +108,7 @@ public class ModuleInterfaceActivity extends AppCompatActivity {
         //***********************************************
         if (recommendedSequence != null && !recommendedSequence.GetModules().isEmpty())
         {
-            Intent intent = new Intent(this, recommendedSequence.GetModules().get(0).getClass());
+            Intent intent = new Intent(this, recommendedSequence.GetModules().get(0).GetClass());
             startActivity(intent);
         }
     }
