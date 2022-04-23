@@ -157,6 +157,8 @@ public class ModuleSequencesActivity extends AppCompatActivity implements Confir
         {
             //Write an iterator here, to iterate over the whole module of sequences - SC
             // ModuleReference firstModule = sequence.GetModules().get(0);      deprecated, no need for Module Reference og: this, firstModule.getType() down below
+
+            // Issue with launching a sequence and crashes the app
             Iterator<Module> iterator = (Iterator<Module>) sequence.GetModules();
             while(iterator.hasNext()) {
                 Intent moduleIntent = new Intent(this, sequence.getType(sequence.GetModules().get(0)));

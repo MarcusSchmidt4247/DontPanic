@@ -30,6 +30,14 @@
     <string name="deleteButton">Delete</string>
     <string name="seeAllSequencesButton">See All Sequences</string>
     <string name="noRecommendation">No recommendation</string>
+    <string name="finish">Finish</string>
+
+    <!-- String Resources for Module names -->
+    <string name="guidedBreathing">Guided Breathing</string>
+    <string name="mentalExercises">Mental Exercises</string>
+    <string name="selfReflection">Self Reflection</string>
+    <string name="appActivities">Activities</string>
+    <string name="hapticHeartbeat">Haptic Heartbeat</string>
 
     <!-- String resources for the General Use Screen -->
     <string name="title">DON\'T PANIC</string>

@@ -8,57 +8,65 @@
     tools:context=".ModulesActivity">
 
 
-    <TextView
-        android:id="@+id/txttvmName"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/btnModule2"
+        android:layout_width="224dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="269dp"
-        android:text="TextView"
-        android:textColor="@color/white"
+        android:layout_marginTop="32dp"
+        android:text="@string/selfReflection"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txttvmID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="36dp"
-        android:text="TextView"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txttvmName" />
-
-    <TextView
-        android:id="@+id/txttvmClass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="33dp"
-        android:text="TextView"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txttvmID" />
+        app:layout_constraintTop_toBottomOf="@+id/btnModule1" />
 
     <Button
         android:id="@+id/btnModule0"
-        android:layout_width="wrap_content"
+        android:layout_width="224dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="82dp"
-        android:layout_marginBottom="166dp"
-        android:text="Module 0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginTop="128dp"
+        android:text="@string/guidedBreathing"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnModule1"
+        android:layout_width="224dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/mentalExercises"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnModule0" />
+
+    <Button
+        android:id="@+id/btnFinish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="82dp"
-        android:layout_marginBottom="166dp"
-        android:text="Module 1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginTop="128dp"
+        android:layout_marginEnd="48dp"
+        android:text="@string/finish"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnModule4" />
+
+    <Button
+        android:id="@+id/btnModule4"
+        android:layout_width="224dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/hapticHeartbeat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnModule3" />
+
+    <Button
+        android:id="@+id/btnModule3"
+        android:layout_width="224dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/appActivities"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnModule2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
