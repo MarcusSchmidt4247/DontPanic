@@ -179,9 +179,11 @@ public class ModuleSequencesActivity extends AppCompatActivity implements Confir
             // ModuleReference firstModule = sequence.GetModules().get(0);      deprecated, no need for Module Reference og: this, firstModule.getType() down below
 
             // Issue with launching a sequence and crashes the app
-            Iterator<Module> iterator = (Iterator<Module>) sequence.GetModules();
-            while(iterator.hasNext()) {
-                Intent moduleIntent = new Intent(this, sequence.getType(sequence.GetModules().get(0)));
+            ArrayList<Module> seqList = sequence.GetModules();
+            Iterator<Module> iter = seqList.iterator();
+            while(iter.hasNext()) {
+                Module temp = iter.next();
+                Intent moduleIntent = new Intent(this, temp.GetClass());
                 startActivity(moduleIntent);
                 // Do we call finish inside all of our Modules - SC, as we want them to be off of the Activity stack once they are done occurring
                 // The finish down below will remove ModuleSequencesActivity off of the Activity stack, so I dunno if we would want that necessarily, though would make sense since we are importing all Sequences from the DB each time

@@ -15,6 +15,9 @@ public class HapticHB extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //start a sound file stating to bring the device over the recipient's heart, or hold the phone and close their eyes
+        //have a display of the BPM, possibly have a slider between 60-100 BPM
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_haptic_hb);
 
