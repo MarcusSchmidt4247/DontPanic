@@ -1,6 +1,7 @@
 // DB: 3/18/22 - Created Java file for Mental Exercise Selection Screen
 // DB: 3/21/22 - Added functionality to the buttons to show the different exercises
 // MS: 4/11/22 - added string literal for module name
+// MS: 4/24/22 - added back button that logs the completion of this module in the database
 
 package com.example.dontpanic;
 
@@ -60,5 +61,11 @@ public class MentalExerciseSelectionActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void onBack(View view)
+    {
+        Database.CompletedModule(Module.GetID(NAME));
+        finish();
     }
 }

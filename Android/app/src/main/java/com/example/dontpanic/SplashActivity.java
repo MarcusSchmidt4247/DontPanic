@@ -2,6 +2,7 @@
 // MS: 2/18/22 - Overrided onCreate() to interact with the database
 // SC: 2/22/22 - Port-over of old code to new repo
 // DB: 2/24/22 - Modified this file to be the splash screen of the app
+// MS: 4/24/22 - reduced the wait time before redirecting to MainActivity
 
 package com.example.dontpanic;
 
@@ -29,7 +30,7 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 3000);
+        }, 2000);
     }
 
 }

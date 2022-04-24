@@ -1,6 +1,7 @@
 // DB: 4/01/22 - Created Java file for Self Reflection Screen
 // DB: 4/13/22 - Added functionality to the buttons to show the different exercises
 // DB: 4/13/22 - Added string literal for module name
+// MS: 4/24/22 - Added finish statement
 
 package com.example.dontpanic;
 
@@ -29,6 +30,7 @@ public class SelfReflectionFourActivity extends AppCompatActivity {
                 System.out.println("Button Clicked");
                 Intent selfReflectionExercise8 = new Intent(getApplicationContext(), SelfReflectionFiveActivity.class);
                 startActivity(selfReflectionExercise8);
+                finish();
             }
         });
     }

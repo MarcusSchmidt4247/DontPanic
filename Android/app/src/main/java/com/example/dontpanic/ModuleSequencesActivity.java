@@ -2,6 +2,7 @@
 // MS: 3/18/22 - onLaunch() starts first module in sequence, onDelete() launches confirmation popup
 // MS: 3/20/22 - added onBack(), divided functions into categories, and added text scaling
 // MS: 4/1/22 - fixed text scaling error
+// MS: 4/24/22 - updates list of sequences every time the screen is returned to without being completely finished first
 
 package com.example.dontpanic;
 
@@ -28,6 +29,8 @@ import java.util.Iterator;
 
 public class ModuleSequencesActivity extends AppCompatActivity implements ConfirmationDialog.ConfirmationDialogListener
 {
+    private float textScale = 1.0f;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -35,12 +38,10 @@ public class ModuleSequencesActivity extends AppCompatActivity implements Confir
         setContentView(R.layout.activity_module_sequences);
 
         // Scale the text according to the user's preferences
-        float textScale;
         Object preference = Database.GetPreference(Preferences.TEXT_SCALING_FLOAT);
         if (preference == null)
         {
             Log.e("Database Error", "Preference returned null");
-            textScale = 1.0f;
         }
         else
             textScale = (Float) preference;
@@ -69,13 +70,22 @@ public class ModuleSequencesActivity extends AppCompatActivity implements Confir
                 backButton.setPadding(padding, padding, padding, padding);
             }
         }
+    }
 
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+
+        // Add the GUI for each sequence that this user has created
         ArrayList<Integer> sequences = Database.GetUserSequenceIDs();
         if (sequences != null && !sequences.isEmpty())
         {
-            // Remove the "no sequences" text because at least one sequence was found
-            LinearLayout sequencesLayout = (LinearLayout) findViewById(R.id.mySequencesLayout);
-            sequencesLayout.removeView(findViewById(R.id.noSequencesText));
+            // Remove the "no sequences" (if it still exists) text because at least one sequence was found
+            LinearLayout sequencesLayout = findViewById(R.id.mySequencesLayout);
+            TextView noSequencesText = findViewById(R.id.noSequencesText);
+            if (noSequencesText != null)
+                sequencesLayout.removeView(noSequencesText);
 
             // Then, for each sequence found, inflate the sequence layout with the proper UI
             // Source: https://stackoverflow.com/questions/3477422/what-does-layoutinflater-in-android-do
@@ -139,6 +149,16 @@ public class ModuleSequencesActivity extends AppCompatActivity implements Confir
                     Log.e("Sequence Error", "ModuleSequencesActivity could not retrieve sequence data to inflate layout");
             }
         }
+    }
+
+    @Override
+    protected void onStop()
+    {
+        // Clear the GUI for all the sequences so they can be updated and recreated when the activity is started again
+        LinearLayout sequencesLayout = findViewById(R.id.mySequencesLayout);
+        sequencesLayout.removeAllViews();
+
+        super.onStop();
     }
 
     //*************************

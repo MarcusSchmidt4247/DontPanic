@@ -29,6 +29,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!-- MS: 4/24/22 - replaced image drawable with vector to eliminate pixelation -->
     <ImageView
         android:id="@+id/breathVisual"
         android:layout_width="178dp"
@@ -38,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/circle"
+        app:srcCompat="@drawable/circle_vector"
         android:contentDescription="@string/guidedBreathingVisualDescription" />
 
     <Button

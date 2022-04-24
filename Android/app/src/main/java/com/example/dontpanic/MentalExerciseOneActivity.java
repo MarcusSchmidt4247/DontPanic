@@ -1,10 +1,9 @@
 // DB: 3/18/22 - Created Java file for Mental Exercise One Screen
 // DB: 3/21/22 - Added functionality to the button to go back to the exercise selection
+// MS: 4/24/22 - changed intent to finish statement for proper app flow
 
 package com.example.dontpanic;
 
-import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,8 +22,7 @@ public class MentalExerciseOneActivity extends AppCompatActivity {
         exerciseOneButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 System.out.println("Button Clicked");
-                Intent exerciseOneSelection = new Intent(getApplicationContext(), MentalExerciseSelectionActivity.class);
-                startActivity(exerciseOneSelection);
+                finish();
             }
         });
 

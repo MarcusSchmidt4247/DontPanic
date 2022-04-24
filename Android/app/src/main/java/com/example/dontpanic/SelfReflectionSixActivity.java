@@ -1,10 +1,10 @@
 // DB: 4/01/22 - Created Java file for Self Reflection Screen
 // DB: 4/13/22 - Added functionality to the buttons to show the different exercises
 // DB: 4/13/22 - Added string literal for module name
+// MS: 4/24/22 - Changed intent to a finish statement for proper app flow and logged completion in database
 
 package com.example.dontpanic;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,8 +27,8 @@ public class SelfReflectionSixActivity extends AppCompatActivity {
         selfReflectionButton12.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 System.out.println("Button Clicked");
-                Intent selfReflectionExercise12 = new Intent(getApplicationContext(), MentalExerciseSelectionActivity.class);
-                startActivity(selfReflectionExercise12);
+                Database.CompletedModule(Module.GetID(NAME));
+                finish();
             }
         });
     }
