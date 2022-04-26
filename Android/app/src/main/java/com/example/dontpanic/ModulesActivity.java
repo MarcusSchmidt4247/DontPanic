@@ -75,7 +75,7 @@ public class ModulesActivity extends AppCompatActivity {
         btnFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBack(v);
+                finish();
             }
         });
     }
@@ -83,9 +83,5 @@ public class ModulesActivity extends AppCompatActivity {
     public void switchToModule(View view) {
         Intent intent = new Intent(this, tempModule.type);
         startActivity(intent);
-    }
-
-    public void onBack(View view) {
-        finish();
     }
 }
