@@ -83,6 +83,7 @@
 
         android:background="@drawable/rectangle_btn"
         android:fontFamily="sans-serif-light"
+        android:onClick="onBack"
         android:text="@string/backButtonLabel"
         android:textAlignment="center"
         android:textColor="@color/white"

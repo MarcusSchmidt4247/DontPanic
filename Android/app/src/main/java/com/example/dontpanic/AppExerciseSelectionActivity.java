@@ -8,8 +8,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AppExerciseSelectionActivity extends AppCompatActivity {
-
-    private Button appButton, appButton2, appBack;
+    public static final String NAME = "App Activities";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,40 +20,26 @@ public class AppExerciseSelectionActivity extends AppCompatActivity {
         appButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 System.out.println("Button Clicked");
-                openActivity();
+                Intent appExerciseOne = new Intent(getApplicationContext(), AppExerciseOneActivity.class);
+                startActivity(appExerciseOne);
             }
         });
 
         // Second Exercise Button - Click Circles
         Button appButton2 = findViewById(R.id.appButton2);
         appButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
                 System.out.println("Button Clicked");
-                openActivity2();
+                Intent appExerciseTwo = new Intent(getApplicationContext(), AppExerciseTwoActivity.class);
+                startActivity(appExerciseTwo);
             }
         });
 
-        Button appBack = findViewById(R.id.back_button);
-        appBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("Button Clicked");
-                finish();
-            }
-        });
     }
 
-
-    public void openActivity() {
-        Intent appExerciseOne = new Intent(getApplicationContext(), AppExerciseOneActivity.class);
-        startActivity(appExerciseOne);
+    public void onBack(View view)
+    {
+        Database.CompletedModule(Module.GetID(NAME));
+        finish();
     }
-
-    public void openActivity2() {
-        Intent appExerciseTwo = new Intent(getApplicationContext(), AppExerciseTwoActivity.class);
-        startActivity(appExerciseTwo);
-    }
-
-
 }

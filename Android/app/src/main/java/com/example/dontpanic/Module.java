@@ -10,7 +10,7 @@ public enum Module
     GUIDED_BREATHING (GuidedBreathing.NAME, 0, GuidedBreathing.class),
     SELF_REFLECTION (SelfReflectionActivity.NAME, 1, SelfReflectionActivity.class),
     MENTAL_EXERCISES (MentalExerciseSelectionActivity.NAME, 2, MentalExerciseSelectionActivity.class),
-    APP_ACTIVITIES ("Activities", 3, GuidedBreathing.class), // needs update once activities module exists
+    APP_ACTIVITIES (AppExerciseSelectionActivity.NAME, 3, AppExerciseSelectionActivity.class), // needs update once activities module exists
     HAPTIC_HEARTBEAT (HapticHB.NAME, 4, HapticHB.class); // needs update once haptics module exists
 
     public final String name;

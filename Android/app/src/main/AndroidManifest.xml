@@ -93,6 +93,15 @@
         <activity
             android:name=".SelfReflectionSixActivity"
             android:exported="false" />
+        <activity
+            android:name=".AppExerciseSelectionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AppExerciseOneActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AppExerciseTwoActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
