@@ -80,4 +80,13 @@
     <string name="current_label">Current:</string>
     <string name="select_label">Select</string>
 
+    <!-- String resources for App Activities -->
+    <string name="activityTitle">App Activities.</string>
+    <string name="activityLabel">Activity 1</string>
+    <string name="activityLabel2">Activity 2</string>
+    <string name="activityOverview">These activities are meant to help you keep your mind off from your worries.</string>
+
+    <string name="activityDescription">Follow the circle.</string>
+    <string name="activityDescription2">Tap the circles.</string>
+
 </resources>
