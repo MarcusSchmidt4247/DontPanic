@@ -33,7 +33,7 @@ public class HapticHB extends AppCompatActivity {
         try {
             MediaPlayer audioPlayer = MediaPlayer.create(this, R.raw.haptic_hb_startup);
             audioPlayer.start();
-            TimeUnit.SECONDS.sleep(3);
+            TimeUnit.SECONDS.sleep(8);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -46,9 +46,9 @@ public class HapticHB extends AppCompatActivity {
         final long[] pattern = {550, 125, 125};     // 75 BPM  Maybe go 60?  Lower BPM definitely is more soothing, but average resting BPM of 75 is nice
         final int[] strength = {0, 100, 50 };       // Upbeat : 100, downbeat: 50
 
-
         VibrationEffect waveForm = VibrationEffect.createWaveform(pattern, strength, 1);
         vib.vibrate(waveForm);
+        btnVibrate.setText("Stop");
 
         btnVibrate.setOnClickListener(new View.OnClickListener() {
             @Override

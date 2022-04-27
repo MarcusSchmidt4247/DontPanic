@@ -24,7 +24,9 @@ public class ModuleSelectionActivity extends AppCompatActivity {
 
         //we need an incrementer for this
         //sequence = new Sequence(1, "Test Sequence", new ArrayList<Module>());
-        sequenceID = Database.CreateSequence(Database.currentUserID, "Test Sequence");
+        int seqID = Database.GetUserSequenceIDs().size() + 1;
+        String sequence_name = "Sequence " + seqID;
+        sequenceID = Database.CreateSequence(Database.currentUserID, sequence_name);
         
         this.btnModule0 = findViewById(R.id.btnModule0);
         this.btnModule1 = findViewById(R.id.btnModule1);
