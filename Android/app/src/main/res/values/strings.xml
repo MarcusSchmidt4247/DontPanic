@@ -59,6 +59,7 @@
     <string name="editSequenceButton">Edit</string>
     <string name="deleteSequenceButton">Delete</string>
     <string name="createSequenceButton">Create Sequence</string>
+    <string name="insertSequenceName">New Sequence Name</string>
     <string name="cancelButton">Cancel</string>
 
     <!-- String resources for Settings -->

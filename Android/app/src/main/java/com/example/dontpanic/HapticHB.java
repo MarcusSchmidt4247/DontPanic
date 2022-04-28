@@ -18,6 +18,7 @@ public class HapticHB extends AppCompatActivity {
     private float hapticStrength;
     public Vibrator vib;
     public Button btnVibrate;
+    public MediaPlayer audioPlayer;
 
 
     @Override
@@ -31,7 +32,7 @@ public class HapticHB extends AppCompatActivity {
         vib = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
         try {
-            MediaPlayer audioPlayer = MediaPlayer.create(this, R.raw.haptic_hb_startup);
+            audioPlayer = MediaPlayer.create(this, R.raw.haptic_hb_startup);
             audioPlayer.start();
             TimeUnit.SECONDS.sleep(8);
         } catch (InterruptedException e) {
@@ -79,6 +80,7 @@ public class HapticHB extends AppCompatActivity {
     public void onBack(View view) {
         Database.CompletedModule(Module.GetID(NAME));
         vib.cancel();
+        audioPlayer.stop();
         finish();
     }
 }
