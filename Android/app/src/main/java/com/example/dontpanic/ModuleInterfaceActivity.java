@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 public class ModuleInterfaceActivity extends AppCompatActivity {
@@ -117,8 +118,13 @@ public class ModuleInterfaceActivity extends AppCompatActivity {
         //***********************************************
         if (recommendedSequence != null && !recommendedSequence.GetModules().isEmpty())
         {
-            Intent intent = new Intent(this, recommendedSequence.GetModules().get(0).GetClass());
-            startActivity(intent);
+            ArrayList<Module> seqList = recommendedSequence.GetModules();
+            Iterator<Module> iter = seqList.iterator();
+            while(iter.hasNext()) {
+                Module temp = iter.next();
+                Intent moduleIntent = new Intent(this, temp.GetClass());
+                startActivity(moduleIntent);
+            }
         }
     }
 

@@ -19,6 +19,7 @@ import android.util.TypedValue;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -110,15 +111,14 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if (sequence != null) {
-                //*********************************************
-                // To-do: Replace with proper sequence launch *
-                //*********************************************
-                ArrayList<Module> modules = sequence.GetModules();
-                if (modules != null && !modules.isEmpty())
-                {
+                ArrayList<Module> seqList = sequence.GetModules();
+                if (!seqList.isEmpty())
                     failedToLaunchPreference = false;
-                    Intent intent = new Intent(this, modules.get(0).GetClass());
-                    startActivity(intent);
+                Iterator<Module> iter = seqList.iterator();
+                while(iter.hasNext()) {
+                    Module temp = iter.next();
+                    Intent moduleIntent = new Intent(this, temp.GetClass());
+                    startActivity(moduleIntent);
                 }
             }
         }
