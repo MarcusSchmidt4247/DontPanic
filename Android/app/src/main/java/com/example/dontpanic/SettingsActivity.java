@@ -4,6 +4,7 @@
 // MS: 4/1/22 - added Default Sequence section with dynamic sequence name, text scaling, and button to select sequence
 // MS: 4/7/22 - added switchToGuidedBreathingSettings
 // MS: 4/8/22 - added Guided Breathing setting initialization and updates to/from the database, plus text scaling for new layout
+// MS: 4/29/22 - fixed back buttons not scaling the same across different layouts
 
 package com.example.dontpanic;
 
@@ -28,6 +29,7 @@ import android.widget.TextView;
 public class SettingsActivity extends AppCompatActivity
 {
     SeekBar masterVolume, hapticStrength, textScale;
+    Float buttonTextSize = null;
     float textScaleRatio;
 
     @Override
@@ -390,6 +392,8 @@ public class SettingsActivity extends AppCompatActivity
         TextView scaleText = findViewById(R.id.textSizeLabel);
         scaleText.setTextSize(TypedValue.COMPLEX_UNIT_PX, 55 * textScaleRatio);
         Button backButton = findViewById(R.id.backButtonSettings);
-        backButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, 55 * Math.min(textScaleRatio, 1.6f));
+        if (buttonTextSize == null)
+            buttonTextSize = backButton.getTextSize();
+        backButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, buttonTextSize * Math.min(textScaleRatio, 1.6f));
     }
 }
