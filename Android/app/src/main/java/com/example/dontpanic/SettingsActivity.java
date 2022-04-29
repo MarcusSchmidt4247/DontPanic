@@ -390,6 +390,6 @@ public class SettingsActivity extends AppCompatActivity
         TextView scaleText = findViewById(R.id.textSizeLabel);
         scaleText.setTextSize(TypedValue.COMPLEX_UNIT_PX, 55 * textScaleRatio);
         Button backButton = findViewById(R.id.backButtonSettings);
-        backButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, 55 * textScaleRatio);
+        backButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, 55 * Math.min(textScaleRatio, 1.6f));
     }
 }
