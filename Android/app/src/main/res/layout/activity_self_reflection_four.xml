@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- MS: 4/29/22 - updated constraints to work on more devices -->
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,59 +9,68 @@
     android:background="@color/dark_purple"
     tools:context=".SelfReflectionFourActivity">
 
-    <TextView
-        android:id="@+id/selfReflectionView7"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="240dp"
-        android:text="Self-Reflection"
-        android:textAlignment="center"
-        android:textSize="120px"
-        android:theme="@style/HeaderLevelOne"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <TextView
-        android:id="@+id/selfReflectionView8"
-        android:layout_width="329dp"
-        android:layout_height="89dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="24dp"
-        android:paddingRight="40px"
-        android:text="What are you currently worried about?"
-        android:textAlignment="center"
-        android:textSize="75px"
-        android:theme="@style/HeaderLevelTwo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selfReflectionView7" />
+        <TextView
+            android:id="@+id/selfReflectionView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Self-Reflection"
+            android:textAlignment="center"
+            android:textSize="120px"
+            android:theme="@style/HeaderLevelOne"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/selfReflectionText7"
-        android:layout_width="304dp"
-        android:layout_height="107dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="140dp"
-        android:inputType="textCapSentences|textMultiLine"
-        android:background="@drawable/rectangle_btn"
-        android:textAlignment="center"
-        android:textSize="70px"
-        android:theme="@style/LightButton"
-        app:layout_constraintStart_toStartOf="@+id/selfReflectionView7"
-        app:layout_constraintTop_toBottomOf="@+id/selfReflectionView7" />
+        <TextView
+            android:id="@+id/selfReflectionView8"
+            android:layout_width="329dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:paddingRight="40px"
+            android:text="What are you currently worried about?"
+            android:textAlignment="center"
+            android:textSize="75px"
+            android:theme="@style/HeaderLevelTwo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selfReflectionView7" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/selfReflectionButton8"
-        android:layout_width="165dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="148dp"
-        android:layout_marginEnd="76dp"
-        android:background="@drawable/rectangle_btn"
-        android:text="Next"
-        android:textAlignment="center"
-        android:textSize="65px"
-        android:theme="@style/LightButton"
-        app:layout_constraintEnd_toEndOf="@id/selfReflectionText7"
-        app:layout_constraintTop_toTopOf="@+id/selfReflectionText7" />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/selfReflectionText7"
+            android:layout_width="304dp"
+            android:layout_height="107dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/rectangle_btn"
+            android:inputType="textCapSentences|textMultiLine"
+            android:textAlignment="center"
+            android:textSize="70px"
+            android:theme="@style/LightButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selfReflectionView8" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/selfReflectionButton8"
+            android:layout_width="165dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/rectangle_btn"
+            android:text="Next"
+            android:textAlignment="center"
+            android:textSize="65px"
+            android:theme="@style/LightButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selfReflectionText7" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

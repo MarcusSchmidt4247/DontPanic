@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- MS: 4/29/22 - updated constraints to work on more devices -->
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,59 +9,68 @@
     android:background="@color/dark_purple"
     tools:context=".SelfReflectionSixActivity">
 
-    <TextView
-        android:id="@+id/selfReflectionView11"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="240dp"
-        android:text="Self-Reflection"
-        android:textAlignment="center"
-        android:textSize="120px"
-        android:theme="@style/HeaderLevelOne"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <TextView
-        android:id="@+id/selfReflectionView12"
-        android:layout_width="309dp"
-        android:layout_height="140dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="24dp"
-        android:paddingRight="40px"
-        android:text="From your past experiences, how likely this worry will come true?"
-        android:textAlignment="center"
-        android:textSize="70px"
-        android:theme="@style/HeaderLevelTwo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selfReflectionView11" />
+        <TextView
+            android:id="@+id/selfReflectionView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Self-Reflection"
+            android:textAlignment="center"
+            android:textSize="120px"
+            android:theme="@style/HeaderLevelOne"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/selfReflectionText11"
-        android:layout_width="304dp"
-        android:layout_height="107dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="188dp"
-        android:background="@drawable/rectangle_btn"
-        android:inputType="textCapSentences|textMultiLine"
-        android:textAlignment="center"
-        android:textSize="70px"
-        android:theme="@style/LightButton"
-        app:layout_constraintStart_toStartOf="@+id/selfReflectionView11"
-        app:layout_constraintTop_toBottomOf="@+id/selfReflectionView11" />
+        <TextView
+            android:id="@+id/selfReflectionView12"
+            android:layout_width="309dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="24dp"
+            android:paddingRight="40px"
+            android:text="From your past experiences, how likely this worry will come true?"
+            android:textAlignment="center"
+            android:textSize="70px"
+            android:theme="@style/HeaderLevelTwo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selfReflectionView11" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/selfReflectionButton12"
-        android:layout_width="165dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="160dp"
-        android:layout_marginEnd="72dp"
-        android:background="@drawable/rectangle_btn"
-        android:text="Next"
-        android:textAlignment="center"
-        android:textSize="65px"
-        android:theme="@style/LightButton"
-        app:layout_constraintEnd_toEndOf="@id/selfReflectionText11"
-        app:layout_constraintTop_toTopOf="@+id/selfReflectionText11" />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/selfReflectionText11"
+            android:layout_width="304dp"
+            android:layout_height="107dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/rectangle_btn"
+            android:inputType="textCapSentences|textMultiLine"
+            android:textAlignment="center"
+            android:textSize="70px"
+            android:theme="@style/LightButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selfReflectionView12" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/selfReflectionButton12"
+            android:layout_width="165dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/rectangle_btn"
+            android:text="Next"
+            android:textAlignment="center"
+            android:textSize="65px"
+            android:theme="@style/LightButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selfReflectionText11" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
