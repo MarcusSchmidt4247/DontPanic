@@ -23,6 +23,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.05" />
 
+    <com.example.dontpanic.CircleView
+        android:id="@+id/circle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="The target circle" />
+
     <Button
         android:id="@+id/twoBackButton"
         android:layout_width="wrap_content"
@@ -32,7 +38,8 @@
         android:fontFamily="sans-serif-light"
         android:text="@string/backButtonLabel"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
+        android:textStyle="bold"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,11 +47,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.937" />
-
-    <com.example.dontpanic.CircleView
-        android:id="@+id/circle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

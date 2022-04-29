@@ -23,6 +23,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.05" />
 
+    <ImageView
+        android:id="@+id/activityCircle"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:contentDescription="The target circle"
+        app:tint="@color/light_purple"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/circle_vector" />
+
     <Button
         android:id="@+id/oneBackButton"
         android:layout_width="wrap_content"
@@ -32,7 +44,8 @@
         android:fontFamily="sans-serif-light"
         android:text="@string/backButtonLabel"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
+        android:textStyle="bold"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,17 +53,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.937" />
-
-    <ImageView
-        android:id="@+id/activityCircle"
-        android:layout_width="125dp"
-        android:layout_height="125dp"
-        app:tint="@color/light_purple"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/circle_vector" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
