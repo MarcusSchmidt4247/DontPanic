@@ -65,6 +65,8 @@ public class HapticHB extends AppCompatActivity {
                 }
             }
         });
+
+        //There is a bug in which the vibrations continue to play
     }
 
     @Override

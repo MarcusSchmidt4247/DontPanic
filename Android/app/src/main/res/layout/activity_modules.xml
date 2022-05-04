@@ -10,18 +10,6 @@
     tools:context=".ModulesActivity">
 
     <Button
-        android:id="@+id/btnModule2"
-        android:layout_width="224dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/rectangle_btn"
-        android:text="@string/mentalExercises"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnModule1" />
-
-    <Button
         android:id="@+id/btnModule0"
         android:layout_width="224dp"
         android:layout_height="wrap_content"
@@ -46,16 +34,28 @@
         app:layout_constraintTop_toBottomOf="@+id/btnModule0" />
 
     <Button
-        android:id="@+id/btnFinish"
-        android:layout_width="wrap_content"
+        android:id="@+id/btnModule2"
+        android:layout_width="224dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/rectangle_btn"
-        android:text="@string/finish"
+        android:text="@string/mentalExercises"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnModule4" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnModule1" />
+
+    <Button
+        android:id="@+id/btnModule3"
+        android:layout_width="224dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/rectangle_btn"
+        android:text="@string/appActivities"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnModule2" />
 
     <Button
         android:id="@+id/btnModule4"
@@ -71,17 +71,16 @@
         app:layout_constraintTop_toBottomOf="@+id/btnModule3" />
 
     <Button
-        android:id="@+id/btnModule3"
-        android:layout_width="224dp"
+        android:id="@+id/btnFinish"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="128dp"
+        android:layout_marginEnd="24dp"
         android:background="@drawable/rectangle_btn"
-        android:text="@string/appActivities"
+        android:text="@string/finish"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnModule2" />
-
+        app:layout_constraintTop_toBottomOf="@+id/btnModule4" />
     <EditText
         android:id="@+id/sqNameEdit"
         android:layout_width="0dp"
@@ -100,5 +99,60 @@
         app:layout_constraintEnd_toStartOf="@+id/btnFinish"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnModule4" />
+
+    <TextView
+        android:id="@+id/txtList0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:textColor="@color/light_green"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnModule0"
+        app:layout_constraintStart_toEndOf="@+id/btnModule0"
+        app:layout_constraintTop_toTopOf="@+id/btnModule0" />
+
+    <TextView
+        android:id="@+id/txtList1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:textColor="@color/light_green"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnModule1"
+        app:layout_constraintStart_toEndOf="@+id/btnModule1"
+        app:layout_constraintTop_toTopOf="@+id/btnModule1" />
+
+    <TextView
+        android:id="@+id/txtList2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:textColor="@color/light_green"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnModule2"
+        app:layout_constraintStart_toEndOf="@+id/btnModule2"
+        app:layout_constraintTop_toTopOf="@+id/btnModule2" />
+
+    <TextView
+        android:id="@+id/txtList3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:textColor="@color/light_green"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnModule3"
+        app:layout_constraintStart_toEndOf="@+id/btnModule3"
+        app:layout_constraintTop_toTopOf="@+id/btnModule3" />
+
+    <TextView
+        android:id="@+id/txtList4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:textColor="@color/light_green"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnModule4"
+        app:layout_constraintStart_toEndOf="@+id/btnModule4"
+        app:layout_constraintTop_toTopOf="@+id/btnModule4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
